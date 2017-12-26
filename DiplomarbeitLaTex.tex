@@ -13,13 +13,15 @@
 \usepackage{listings, color}	% for source code
 \usepackage{subfig}						% two figures next to each other (example: figure 3a), figure 3b)
 \usepackage{scrpage2}					% header and footer line
+\usepackage{ulem}
 
 % header and footer line - no header & footer line on pages where a new chapter starts
 \pagestyle{scrheadings}
-\ohead{Design and Implementation of X}
-\ihead{Your Name}
+\ohead{Designing Recurrent Neural Networks for Explainability}
+\ihead{Pattarawat Chormai}
 \ofoot[]{\thepage}
-\ifoot{Diploma Thesis, TU Berlin, Fachgebiet AV, 2009}
+%TODO : Footer : What is Fachgebiet? and 
+%\ifoot{Master Thesis, TU Berlin, Fachgebiet ML, 2018}
 
 % set path where images are stored
 \graphicspath{{./img/}}
@@ -46,6 +48,7 @@
     \thispagestyle{empty}
     \cleardoublepage
     
+   % TODO German abstract?
     \include{./misc/abstract_de}
     \thispagestyle{empty}
     
