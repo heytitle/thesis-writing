@@ -3,9 +3,17 @@
 % use this declaration to set specific page margins
 %\usepackage[a4paper , lmargin = {2.7cm} , rmargin = {2.9cm} , tmargin = {2.7cm} , bmargin = {4.6cm} ]{geometry}
 \usepackage[a4paper]{geometry}
+\usepackage{amsfonts}
+\usepackage{amsmath}
 
 \usepackage[ngerman, english]{babel}
-\usepackage{bibgerm}       		% german references
+%\usepackage{bibgerm}       		% german references
+%\usepackage{natbib}
+
+\usepackage{amsthm}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+
 \usepackage[latin1]{inputenc} % german characters
 \usepackage{graphicx} 				% it's recommended to use PDF images but you can use JPG or PNG as well
 \usepackage{url}           		% format URLs
@@ -14,18 +22,51 @@
 \usepackage{subfig}						% two figures next to each other (example: figure 3a), figure 3b)
 \usepackage{scrpage2}					% header and footer line
 \usepackage{ulem}
+\usepackage{bbm}
+\usepackage[ruled]{algorithm2e}
+\usepackage{afterpage}
+
+\usepackage{nomencl}
+\makenomenclature
+
+\usepackage{mfirstuc}
+
+
+
 
 % header and footer line - no header & footer line on pages where a new chapter starts
 \pagestyle{scrheadings}
 \ohead{Designing Recurrent Neural Networks for Explainability}
 \ihead{Pattarawat Chormai}
 \ofoot[]{\thepage}
+\usepackage{tikz}
+
 %TODO : Footer : What is Fachgebiet? and 
 %\ifoot{Master Thesis, TU Berlin, Fachgebiet ML, 2018}
 
 % set path where images are stored
 \graphicspath{{./img/}}
 
+
+\addto{\captionsenglish}{%
+  \renewcommand{\bibname}{References}
+}
+
+%TODO: Define commands
+\newcommand{\addfigure}[1] {Figure #1}
+\newcommand{\patmatrix}[1]{\boldsymbol{\uppercase{#1}}}
+\newcommand{\patvector}[1]{\boldsymbol{\lowercase{#1}}}
+
+\newcommand{\patarg}[2]{ \underset{#2}{\text{arg#1}}\   }
+
+
+\newcommand*\circled[1]{\tikz[baseline=(char.base)]{
+            \node[shape=circle,draw,inner sep=2pt, white, fill=red,minimum size=1em] (char) {\textbf{\footnotesize{#1}}};}}
+            
+\newcommand{\rnncellseq}[2]{\capitalisewords{#1}-#2}
+\newcommand{\rnncell}[1]{\capitalisewords{#1}}
+
+  
 \input{./misc/hyphenation} 					% use this file to set explicit hyphenations (doesn't seem to work correctly)
 
 \begin{document}
@@ -53,8 +94,12 @@
     \thispagestyle{empty}
     
     
+    
+    
     \tableofcontents
     \thispagestyle{empty}
+    
+    \include{./misc/notation}
     
     \listoffigures
     \thispagestyle{empty}
@@ -62,27 +107,32 @@
     \listoftables
     \thispagestyle{empty}
     
+
+    
 % --------------------------------------------------------------
 
 \mainmatter % comment single chapters for faster compilation
 
     \input{./chapters/chapter1}
-    \input{./chapters/chapter2}
+      \input{./chapters/chapter2}
+
     \input{./chapters/chapter3}
     \input{./chapters/chapter4}
-    \input{./chapters/chapter5}
-    \input{./chapters/chapter6}
-    \input{./chapters/chapter7}
+%    \input{./chapters/chapter5}
+%    \input{./chapters/chapter6}
+%    \input{./chapters/chapter7}
 
 % ---------------------------------------------------------------
 \backmatter % no page numbering from here
-    \input{./misc/acronyms}
+%    \input{./misc/acronyms}
 		
 		% if you want to provide a glossary with explanations of important terms put it in here
 
-    \bibliographystyle{geralpha}
+%    \bibliographystyle{geralpha}
+    \bibliographystyle{IEEEtran}
     \bibliography{./bib/references}
     
-    \input{./misc/annex}
+%    \input{./misc/annex}
 
 \end{document}
+x

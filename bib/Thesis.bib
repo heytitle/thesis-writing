@@ -1,0 +1,335 @@
+
+@article{arras_what_2016,
+	title = {"{What} is {Relevant} in a {Text} {Document}?": {An} {Interpretable} {Machine} {Learning} {Approach}},
+	shorttitle = {"{What} is {Relevant} in a {Text} {Document}?},
+	url = {http://arxiv.org/abs/1612.07843},
+	abstract = {Text documents can be described by a number of abstract concepts such as semantic category, writing style, or sentiment. Machine learning (ML) models have been trained to automatically map documents to these abstract concepts, allowing to annotate very large text collections, more than could be processed by a human in a lifetime. Besides predicting the text's category very accurately, it is also highly desirable to understand how and why the categorization process takes place. In this paper, we demonstrate that such understanding can be achieved by tracing the classification decision back to individual words using layer-wise relevance propagation (LRP), a recently developed technique for explaining predictions of complex non-linear classifiers. We train two word-based ML models, a convolutional neural network (CNN) and a bag-of-words SVM classifier, on a topic categorization task and adapt the LRP method to decompose the predictions of these models onto words. Resulting scores indicate how much individual words contribute to the overall classification decision. This enables one to distill relevant information from text documents without an explicit semantic information extraction step. We further use the word-wise relevance scores for generating novel vector-based document representations which capture semantic information. Based on these document vectors, we introduce a measure of model explanatory power and show that, although the SVM and CNN models perform similarly in terms of classification accuracy, the latter exhibits a higher level of explainability which makes it more comprehensible for humans and potentially more useful for other applications.},
+	urldate = {2017-07-19},
+	journal = {arXiv:1612.07843 [cs, stat]},
+	author = {Arras, Leila and Horn, Franziska and Montavon, Grégoire and Müller, Klaus-Robert and Samek, Wojciech},
+	month = dec,
+	year = {2016},
+	note = {arXiv: 1612.07843},
+	keywords = {Computer Science - Computation and Language, Computer Science - Information Retrieval, Computer Science - Learning, Statistics - Machine Learning},
+	annote = {Comment: 19 pages, 7 figures},
+	file = {arXiv\:1612.07843 PDF:/Users/heytitle/Zotero/storage/7AKZETAH/Arras et al. - 2016 - What is Relevant in a Text Document An Interpr.pdf:application/pdf;arXiv.org Snapshot:/Users/heytitle/Zotero/storage/ZUWJYIHN/1612.html:text/html}
+}
+
+@article{montavon_explaining_2017,
+	title = {Explaining nonlinear classification decisions with deep {Taylor} decomposition},
+	volume = {65},
+	issn = {0031-3203},
+	url = {http://www.sciencedirect.com/science/article/pii/S0031320316303582},
+	doi = {10.1016/j.patcog.2016.11.008},
+	abstract = {Nonlinear methods such as Deep Neural Networks (DNNs) are the gold standard for various challenging machine learning problems such as image recognition. Although these methods perform impressively well, they have a significant disadvantage, the lack of transparency, limiting the interpretability of the solution and thus the scope of application in practice. Especially DNNs act as black boxes due to their multilayer nonlinear structure. In this paper we introduce a novel methodology for interpreting generic multilayer neural networks by decomposing the network classification decision into contributions of its input elements. Although our focus is on image classification, the method is applicable to a broad set of input data, learning tasks and network architectures. Our method called deep Taylor decomposition efficiently utilizes the structure of the network by backpropagating the explanations from the output to the input layer. We evaluate the proposed method empirically on the MNIST and ILSVRC data sets.},
+	urldate = {2017-07-23},
+	journal = {Pattern Recognition},
+	author = {Montavon, Grégoire and Lapuschkin, Sebastian and Binder, Alexander and Samek, Wojciech and Müller, Klaus-Robert},
+	month = may,
+	year = {2017},
+	keywords = {Deep neural networks, Heatmapping, Image recognition, Relevance propagation, Taylor decomposition},
+	pages = {211--222},
+	file = {ScienceDirect Snapshot:/Users/heytitle/Zotero/storage/ZRJN2CBI/S0031320316303582.html:text/html}
+}
+
+@article{montavon_methods_2017,
+	title = {Methods for {Interpreting} and {Understanding} {Deep} {Neural} {Networks}},
+	url = {http://arxiv.org/abs/1706.07979},
+	abstract = {This paper provides an entry point to the problem of interpreting a deep neural network model and explaining its predictions. It is based on a tutorial given at ICASSP 2017. It introduces some recently proposed techniques of interpretation, along with theory, tricks and recommendations, to make most efficient use of these techniques on real data. It also discusses a number of practical applications.},
+	urldate = {2017-07-24},
+	journal = {arXiv:1706.07979 [cs, stat]},
+	author = {Montavon, Grégoire and Samek, Wojciech and Müller, Klaus-Robert},
+	month = jun,
+	year = {2017},
+	note = {arXiv: 1706.07979},
+	keywords = {Computer Science - Learning, Statistics - Machine Learning},
+	annote = {Comment: 14 pages, 10 figures},
+	file = {arXiv\:1706.07979 PDF:/Users/heytitle/Zotero/storage/DE3B5ZN9/Montavon et al. - 2017 - Methods for Interpreting and Understanding Deep Ne.pdf:application/pdf;arXiv.org Snapshot:/Users/heytitle/Zotero/storage/LVET2A5I/1706.html:text/html}
+}
+
+@article{kindermans_patternnet_2017,
+	title = {{PatternNet} and {PatternLRP} -- {Improving} the interpretability of neural networks},
+	url = {http://arxiv.org/abs/1705.05598},
+	abstract = {Deep learning has significantly advanced the state of the art in machine learning. However, neural networks are often considered black boxes. There is significant effort to develop techniques that explain a classifier's decisions. Although some of these approaches have resulted in compelling visualisations, there is a lack of theory of what is actually explained. Here we present an analysis of these methods and formulate a quality criterion for explanation methods. On this ground, we propose an improved method that may serve as an extension for existing back-projection and decomposition techniques.},
+	urldate = {2017-07-24},
+	journal = {arXiv:1705.05598 [cs, stat]},
+	author = {Kindermans, Pieter-Jan and Schütt, Kristof T. and Alber, Maximilian and Müller, Klaus-Robert and Dähne, Sven},
+	month = may,
+	year = {2017},
+	note = {arXiv: 1705.05598},
+	keywords = {Computer Science - Learning, Statistics - Machine Learning},
+	file = {arXiv\:1705.05598 PDF:/Users/heytitle/Zotero/storage/C3AJYV3A/Kindermans et al. - 2017 - PatternNet and PatternLRP -- Improving the interpr.pdf:application/pdf;arXiv.org Snapshot:/Users/heytitle/Zotero/storage/PQPY6K78/1705.html:text/html}
+}
+
+@article{wieschollek_learning_2017,
+	title = {Learning {Blind} {Motion} {Deblurring}},
+	url = {http://arxiv.org/abs/1708.04208v1},
+	abstract = {As handheld video cameras are now commonplace and available in every
+smartphone, images and videos can be recorded almost everywhere at anytime.
+However, taking a quick shot frequently yields a blurry result due to unwanted
+camera shake during recording or moving objects in the scene. Removing these
+artifacts from the blurry recordings is a highly ill-posed problem as neither
+the sharp image nor the motion blur kernel is known. Propagating information
+between multiple consecutive blurry observations can help restore the desired
+sharp image or video. Solutions for blind deconvolution based on neural
+networks rely on a massive amount of ground-truth data which is hard to
+acquire. In this work, we propose an efficient approach to produce a
+significant amount of realistic training data and introduce a novel recurrent
+network architecture to deblur frames taking temporal information into account,
+which can efficiently handle arbitrary spatial and temporal input sizes. We
+demonstrate the versatility of our approach in a comprehensive comparison on a
+number of challening real-world examples.},
+	journal = {arXiv:1708.04208v1 [cs]},
+	author = {Wieschollek, Patrick and Hirsch, Michael and Schölkopf, Bernhard and Lensch, Hendrik P. A.},
+	month = aug,
+	year = {2017}
+}
+
+@article{binder_layer-wise_2016,
+	title = {Layer-wise {Relevance} {Propagation} for {Neural} {Networks} with {Local}   {Renormalization} {Layers}},
+	url = {http://arxiv.org/abs/1604.00825v1},
+	abstract = {Layer-wise relevance propagation is a framework which allows to decompose the
+prediction of a deep neural network computed over a sample, e.g. an image, down
+to relevance scores for the single input dimensions of the sample such as
+subpixels of an image. While this approach can be applied directly to
+generalized linear mappings, product type non-linearities are not covered. This
+paper proposes an approach to extend layer-wise relevance propagation to neural
+networks with local renormalization layers, which is a very common product-type
+non-linearity in convolutional neural networks. We evaluate the proposed method
+for local renormalization layers on the CIFAR-10, Imagenet and MIT Places
+datasets.},
+	journal = {arXiv:1604.00825v1 [cs]},
+	author = {Binder, Alexander and Montavon, Grégoire and Bach, Sebastian and Müller, Klaus-Robert and Samek, Wojciech},
+	month = apr,
+	year = {2016}
+}
+
+@article{greff_lstm:_2015,
+	title = {{LSTM}: {A} {Search} {Space} {Odyssey}},
+	shorttitle = {{LSTM}},
+	url = {http://arxiv.org/abs/1503.04069},
+	abstract = {Several variants of the Long Short-Term Memory (LSTM) architecture for recurrent neural networks have been proposed since its inception in 1995. In recent years, these networks have become the state-of-the-art models for a variety of machine learning problems. This has led to a renewed interest in understanding the role and utility of various computational components of typical LSTM variants. In this paper, we present the first large-scale analysis of eight LSTM variants on three representative tasks: speech recognition, handwriting recognition, and polyphonic music modeling. The hyperparameters of all LSTM variants for each task were optimized separately using random search and their importance was assessed using the powerful fANOVA framework. In total, we summarize the results of 5400 experimental runs (about 15 years of CPU time), which makes our study the largest of its kind on LSTM networks. Our results show that none of the variants can improve upon the standard LSTM architecture significantly, and demonstrate the forget gate and the output activation function to be its most critical components. We further observe that the studied hyperparameters are virtually independent and derive guidelines for their efficient adjustment.},
+	urldate = {2017-09-03},
+	journal = {arXiv:1503.04069 [cs]},
+	author = {Greff, Klaus and Srivastava, Rupesh Kumar and Koutník, Jan and Steunebrink, Bas R. and Schmidhuber, Jürgen},
+	month = mar,
+	year = {2015},
+	note = {arXiv: 1503.04069},
+	keywords = {Computer Science - Learning, 68T10, Computer Science - Neural and Evolutionary Computing, H.5.5, I.2.6, I.2.7, I.5.1},
+	annote = {Comment: 10 pages, 5 figures plus 8 pages, 6 figures supplementary},
+	file = {arXiv\:1503.04069 PDF:/Users/heytitle/Zotero/storage/FYMC3ZKJ/Greff et al. - 2015 - LSTM A Search Space Odyssey.pdf:application/pdf;arXiv.org Snapshot:/Users/heytitle/Zotero/storage/C3IXJ5B5/1503.html:text/html}
+}
+
+@article{jozefowicz_empirical_2015,
+	title = {An empirical exploration of recurrent network architectures},
+	url = {https://research.google.com/pubs/pub45473.html},
+	author = {Jozefowicz, Rafal and Zaremba, Wojciech and Sutskever, Ilya},
+	year = {2015},
+	file = {Snapshot:/Users/heytitle/Zotero/storage/5HHCCPHG/pub45473.html:text/html}
+}
+
+@article{cho_learning_2014,
+	title = {Learning {Phrase} {Representations} using {RNN} {Encoder}-{Decoder} for {Statistical} {Machine} {Translation}},
+	url = {http://arxiv.org/abs/1406.1078},
+	abstract = {In this paper, we propose a novel neural network model called RNN Encoder-Decoder that consists of two recurrent neural networks (RNN). One RNN encodes a sequence of symbols into a fixed-length vector representation, and the other decodes the representation into another sequence of symbols. The encoder and decoder of the proposed model are jointly trained to maximize the conditional probability of a target sequence given a source sequence. The performance of a statistical machine translation system is empirically found to improve by using the conditional probabilities of phrase pairs computed by the RNN Encoder-Decoder as an additional feature in the existing log-linear model. Qualitatively, we show that the proposed model learns a semantically and syntactically meaningful representation of linguistic phrases.},
+	urldate = {2017-09-03},
+	journal = {arXiv:1406.1078 [cs, stat]},
+	author = {Cho, Kyunghyun and van Merrienboer, Bart and Gulcehre, Caglar and Bahdanau, Dzmitry and Bougares, Fethi and Schwenk, Holger and Bengio, Yoshua},
+	month = jun,
+	year = {2014},
+	note = {arXiv: 1406.1078},
+	keywords = {Computer Science - Computation and Language, Computer Science - Learning, Statistics - Machine Learning, Computer Science - Neural and Evolutionary Computing},
+	annote = {Comment: EMNLP 2014},
+	file = {arXiv\:1406.1078 PDF:/Users/heytitle/Zotero/storage/3N2NJL6J/Cho et al. - 2014 - Learning Phrase Representations using RNN Encoder-.pdf:application/pdf;arXiv.org Snapshot:/Users/heytitle/Zotero/storage/BX9QM3SH/1406.html:text/html}
+}
+
+@article{phan_audio_2017,
+	title = {Audio {Scene} {Classification} with {Deep} {Recurrent} {Neural} {Networks}},
+	url = {http://arxiv.org/abs/1703.04770},
+	abstract = {We introduce in this work an efficient approach for audio scene classification using deep recurrent neural networks. An audio scene is firstly transformed into a sequence of high-level label tree embedding feature vectors. The vector sequence is then divided into multiple subsequences on which a deep GRU-based recurrent neural network is trained for sequence-to-label classification. The global predicted label for the entire sequence is finally obtained via aggregation of subsequence classification outputs. We will show that our approach obtains an F1-score of 97.7\% on the LITIS Rouen dataset, which is the largest dataset publicly available for the task. Compared to the best previously reported result on the dataset, our approach is able to reduce the relative classification error by 35.3\%.},
+	urldate = {2017-09-06},
+	journal = {arXiv:1703.04770 [cs]},
+	author = {Phan, Huy and Koch, Philipp and Katzberg, Fabrice and Maass, Marco and Mazur, Radoslaw and Mertins, Alfred},
+	month = mar,
+	year = {2017},
+	note = {arXiv: 1703.04770},
+	keywords = {Computer Science - Learning, Computer Science - Sound},
+	annote = {Comment: Accepted for Interspeech 2017},
+	file = {arXiv\:1703.04770 PDF:/Users/heytitle/Zotero/storage/YKJIFNU4/Phan et al. - 2017 - Audio Scene Classification with Deep Recurrent Neu.pdf:application/pdf;arXiv.org Snapshot:/Users/heytitle/Zotero/storage/UDEGEVUL/1703.html:text/html}
+}
+
+@article{shahriari_taking_2016,
+	title = {Taking the {Human} {Out} of the {Loop}: {A} {Review} of {Bayesian} {Optimization}},
+	volume = {104},
+	issn = {0018-9219},
+	shorttitle = {Taking the {Human} {Out} of the {Loop}},
+	doi = {10.1109/JPROC.2015.2494218},
+	abstract = {Big Data applications are typically associated with systems involving large numbers of users, massive complex software systems, and large-scale heterogeneous computing and storage architectures. The construction of such systems involves many distributed design choices. The end products (e.g., recommendation systems, medical analysis tools, real-time game engines, speech recognizers) thus involve many tunable configuration parameters. These parameters are often specified and hard-coded into the software by various developers or teams. If optimized jointly, these parameters can result in significant improvements. Bayesian optimization is a powerful tool for the joint optimization of design choices that is gaining great popularity in recent years. It promises greater automation so as to increase both product quality and human productivity. This review paper introduces Bayesian optimization, highlights some of its methodological aspects, and showcases a wide range of applications.},
+	number = {1},
+	journal = {Proceedings of the IEEE},
+	author = {Shahriari, B. and Swersky, K. and Wang, Z. and Adams, R. P. and Freitas, N. de},
+	month = jan,
+	year = {2016},
+	keywords = {Big data, Bayes methods, Bayesian optimization, Big Data, Big data application, decision making, Decision making, design of experiments, Design of experiments, Genomes, genomic medicine, human productivity, large-scale heterogeneous computing, Linear programming, massive complex software system, optimisation, optimization, Optimization, product quality, response surface methodology, Statistical analysis, statistical learning, storage allocation, storage architecture},
+	pages = {148--175},
+	file = {IEEE Xplore Abstract Record:/Users/heytitle/Zotero/storage/78Q9Z5GT/7352306.html:text/html;IEEE Xplore Full Text PDF:/Users/heytitle/Zotero/storage/P8QYT5DV/Shahriari et al. - 2016 - Taking the Human Out of the Loop A Review of Baye.pdf:application/pdf}
+}
+
+@article{shahriari_taking_2016-1,
+	title = {Taking the {Human} {Out} of the {Loop}: {A} {Review} of {Bayesian} {Optimization}},
+	volume = {104},
+	issn = {0018-9219},
+	shorttitle = {Taking the {Human} {Out} of the {Loop}},
+	doi = {10.1109/JPROC.2015.2494218},
+	abstract = {Big Data applications are typically associated with systems involving large numbers of users, massive complex software systems, and large-scale heterogeneous computing and storage architectures. The construction of such systems involves many distributed design choices. The end products (e.g., recommendation systems, medical analysis tools, real-time game engines, speech recognizers) thus involve many tunable configuration parameters. These parameters are often specified and hard-coded into the software by various developers or teams. If optimized jointly, these parameters can result in significant improvements. Bayesian optimization is a powerful tool for the joint optimization of design choices that is gaining great popularity in recent years. It promises greater automation so as to increase both product quality and human productivity. This review paper introduces Bayesian optimization, highlights some of its methodological aspects, and showcases a wide range of applications.},
+	number = {1},
+	journal = {Proceedings of the IEEE},
+	author = {Shahriari, B. and Swersky, K. and Wang, Z. and Adams, R. P. and Freitas, N. de},
+	month = jan,
+	year = {2016},
+	keywords = {Big data, Bayes methods, Bayesian optimization, Big Data, Big data application, decision making, Decision making, design of experiments, Design of experiments, Genomes, genomic medicine, human productivity, large-scale heterogeneous computing, Linear programming, massive complex software system, optimisation, optimization, Optimization, product quality, response surface methodology, Statistical analysis, statistical learning, storage allocation, storage architecture},
+	pages = {148--175},
+	file = {IEEE Xplore Abstract Record:/Users/heytitle/Zotero/storage/HHWVCX3I/7352306.html:text/html}
+}
+
+@article{xiao_fashion-mnist:_2017,
+	title = {Fashion-{MNIST}: a {Novel} {Image} {Dataset} for {Benchmarking} {Machine} {Learning} {Algorithms}},
+	shorttitle = {Fashion-{MNIST}},
+	url = {http://arxiv.org/abs/1708.07747},
+	abstract = {We present Fashion-MNIST, a new dataset comprising of 28x28 grayscale images of 70,000 fashion products from 10 categories, with 7,000 images per category. The training set has 60,000 images and the test set has 10,000 images. Fashion-MNIST is intended to serve as a direct drop-in replacement for the original MNIST dataset for benchmarking machine learning algorithms, as it shares the same image size, data format and the structure of training and testing splits. The dataset is freely available at https://github.com/zalandoresearch/fashion-mnist},
+	urldate = {2017-12-28},
+	journal = {arXiv:1708.07747 [cs, stat]},
+	author = {Xiao, Han and Rasul, Kashif and Vollgraf, Roland},
+	month = aug,
+	year = {2017},
+	note = {arXiv: 1708.07747},
+	keywords = {Computer Science - Learning, Statistics - Machine Learning, Computer Science - Computer Vision and Pattern Recognition},
+	annote = {Comment: Dataset is freely available at https://github.com/zalandoresearch/fashion-mnist Benchmark is available at http://fashion-mnist.s3-website.eu-central-1.amazonaws.com/},
+	file = {arXiv\:1708.07747 PDF:/Users/heytitle/Zotero/storage/8Y9MAPE9/Xiao et al. - 2017 - Fashion-MNIST a Novel Image Dataset for Benchmark.pdf:application/pdf;arXiv.org Snapshot:/Users/heytitle/Zotero/storage/9MPKQEQV/1708.html:text/html}
+}
+
+@article{lecun_mnist_2010,
+	title = {{MNIST} handwritten digit database},
+	url = {http://yann.lecun.com/exdb/mnist/},
+	urldate = {2016-01-14},
+	author = {LeCun, Yann and Cortes, Corinna},
+	year = {2010},
+	keywords = {MSc \_checked character\_recognition mnist network neural}
+}
+
+@article{zagoruyko_wide_2016,
+	title = {Wide {Residual} {Networks}},
+	url = {http://arxiv.org/abs/1605.07146},
+	abstract = {Deep residual networks were shown to be able to scale up to thousands of layers and still have improving performance. However, each fraction of a percent of improved accuracy costs nearly doubling the number of layers, and so training very deep residual networks has a problem of diminishing feature reuse, which makes these networks very slow to train. To tackle these problems, in this paper we conduct a detailed experimental study on the architecture of ResNet blocks, based on which we propose a novel architecture where we decrease depth and increase width of residual networks. We call the resulting network structures wide residual networks (WRNs) and show that these are far superior over their commonly used thin and very deep counterparts. For example, we demonstrate that even a simple 16-layer-deep wide residual network outperforms in accuracy and efficiency all previous deep residual networks, including thousand-layer-deep networks, achieving new state-of-the-art results on CIFAR, SVHN, COCO, and significant improvements on ImageNet. Our code and models are available at https://github.com/szagoruyko/wide-residual-networks},
+	urldate = {2017-12-29},
+	journal = {arXiv:1605.07146 [cs]},
+	author = {Zagoruyko, Sergey and Komodakis, Nikos},
+	month = may,
+	year = {2016},
+	note = {arXiv: 1605.07146},
+	keywords = {Computer Science - Learning, Computer Science - Neural and Evolutionary Computing, Computer Science - Computer Vision and Pattern Recognition},
+	file = {arXiv\:1605.07146 PDF:/Users/heytitle/Zotero/storage/GQ8BZUF6/Zagoruyko and Komodakis - 2016 - Wide Residual Networks.pdf:application/pdf;arXiv.org Snapshot:/Users/heytitle/Zotero/storage/ASDJ8RUP/1605.html:text/html}
+}
+
+@article{kingma_adam:_2014,
+	title = {Adam: {A} {Method} for {Stochastic} {Optimization}},
+	shorttitle = {Adam},
+	url = {http://arxiv.org/abs/1412.6980},
+	abstract = {We introduce Adam, an algorithm for first-order gradient-based optimization of stochastic objective functions, based on adaptive estimates of lower-order moments. The method is straightforward to implement, is computationally efficient, has little memory requirements, is invariant to diagonal rescaling of the gradients, and is well suited for problems that are large in terms of data and/or parameters. The method is also appropriate for non-stationary objectives and problems with very noisy and/or sparse gradients. The hyper-parameters have intuitive interpretations and typically require little tuning. Some connections to related algorithms, on which Adam was inspired, are discussed. We also analyze the theoretical convergence properties of the algorithm and provide a regret bound on the convergence rate that is comparable to the best known results under the online convex optimization framework. Empirical results demonstrate that Adam works well in practice and compares favorably to other stochastic optimization methods. Finally, we discuss AdaMax, a variant of Adam based on the infinity norm.},
+	urldate = {2017-12-29},
+	journal = {arXiv:1412.6980 [cs]},
+	author = {Kingma, Diederik P. and Ba, Jimmy},
+	month = dec,
+	year = {2014},
+	note = {arXiv: 1412.6980},
+	keywords = {Computer Science - Learning},
+	annote = {Comment: Published as a conference paper at the 3rd International Conference for Learning Representations, San Diego, 2015},
+	file = {arXiv\:1412.6980 PDF:/Users/heytitle/Zotero/storage/VZXMDASB/Kingma and Ba - 2014 - Adam A Method for Stochastic Optimization.pdf:application/pdf;arXiv.org Snapshot:/Users/heytitle/Zotero/storage/TSUEKSFG/1412.html:text/html}
+}
+
+@inproceedings{erhan_visualizing_2009,
+	title = {Visualizing {Higher}-{Layer} {Features} of a {Deep} {Network}},
+	abstract = {Deep architectures have demonstrated state-of-the-art results in a variety of settings, especially with vision datasets. Beyond the model definitions and the quantitative analyses, there is a need for qualitative comparisons of the solutions learned by various deep architectures. The goal of this paper is to find good qualitative interpretations of high level features represented by such models. To this end, we contrast and compare several techniques applied on Stacked Denoising Autoencoders and Deep Belief Networks, trained on several vision datasets. We show that, perhaps counter-intuitively, such interpretation is possible at the unit level, that it is simple to accomplish and that the results are consistent across various techniques. We hope that such techniques will allow researchers in deep architectures to understand more of how and why deep architectures work.},
+	author = {Erhan, Dumitru and Bengio, Yoshua and Courville, Aaron C. and Vincent, Pascal},
+	year = {2009},
+	file = {Full Text PDF:/Users/heytitle/Zotero/storage/TJT9A3LN/Erhan et al. - 2009 - Visualizing Higher-Layer Features of a Deep Networ.pdf:application/pdf}
+}
+
+@article{abadi_tensorflow:_2016,
+	title = {{TensorFlow}: {Large}-{Scale} {Machine} {Learning} on {Heterogeneous} {Distributed} {Systems}},
+	shorttitle = {{TensorFlow}},
+	url = {http://arxiv.org/abs/1603.04467},
+	abstract = {TensorFlow is an interface for expressing machine learning algorithms, and an implementation for executing such algorithms. A computation expressed using TensorFlow can be executed with little or no change on a wide variety of heterogeneous systems, ranging from mobile devices such as phones and tablets up to large-scale distributed systems of hundreds of machines and thousands of computational devices such as GPU cards. The system is flexible and can be used to express a wide variety of algorithms, including training and inference algorithms for deep neural network models, and it has been used for conducting research and for deploying machine learning systems into production across more than a dozen areas of computer science and other fields, including speech recognition, computer vision, robotics, information retrieval, natural language processing, geographic information extraction, and computational drug discovery. This paper describes the TensorFlow interface and an implementation of that interface that we have built at Google. The TensorFlow API and a reference implementation were released as an open-source package under the Apache 2.0 license in November, 2015 and are available at www.tensorflow.org.},
+	urldate = {2018-01-03},
+	journal = {arXiv:1603.04467 [cs]},
+	author = {Abadi, Martín and Agarwal, Ashish and Barham, Paul and Brevdo, Eugene and Chen, Zhifeng and Citro, Craig and Corrado, Greg S. and Davis, Andy and Dean, Jeffrey and Devin, Matthieu and Ghemawat, Sanjay and Goodfellow, Ian and Harp, Andrew and Irving, Geoffrey and Isard, Michael and Jia, Yangqing and Jozefowicz, Rafal and Kaiser, Lukasz and Kudlur, Manjunath and Levenberg, Josh and Mane, Dan and Monga, Rajat and Moore, Sherry and Murray, Derek and Olah, Chris and Schuster, Mike and Shlens, Jonathon and Steiner, Benoit and Sutskever, Ilya and Talwar, Kunal and Tucker, Paul and Vanhoucke, Vincent and Vasudevan, Vijay and Viegas, Fernanda and Vinyals, Oriol and Warden, Pete and Wattenberg, Martin and Wicke, Martin and Yu, Yuan and Zheng, Xiaoqiang},
+	month = mar,
+	year = {2016},
+	note = {arXiv: 1603.04467},
+	keywords = {Computer Science - Learning, Computer Science - Distributed, Parallel, and Cluster Computing},
+	annote = {Comment: Version 2 updates only the metadata, to correct the formatting of Mart{\textbackslash}'in Abadi's name},
+	file = {arXiv\:1603.04467 PDF:/Users/heytitle/Zotero/storage/FQVBI7V4/Abadi et al. - 2016 - TensorFlow Large-Scale Machine Learning on Hetero.pdf:application/pdf;arXiv.org Snapshot:/Users/heytitle/Zotero/storage/C72L7DTQ/1603.html:text/html}
+}
+
+@article{bach_pixel-wise_2015,
+	title = {On {Pixel}-{Wise} {Explanations} for {Non}-{Linear} {Classifier} {Decisions} by {Layer}-{Wise} {Relevance} {Propagation}},
+	volume = {10},
+	issn = {1932-6203},
+	url = {https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4498753/},
+	doi = {10.1371/journal.pone.0130140},
+	abstract = {Understanding and interpreting classification decisions of automated image classification systems is of high value in many applications, as it allows to verify the reasoning of the system and provides additional information to the human expert. Although machine learning methods are solving very successfully a plethora of tasks, they have in most cases the disadvantage of acting as a black box, not providing any information about what made them arrive at a particular decision. This work proposes a general solution to the problem of understanding classification decisions by pixel-wise decomposition of nonlinear classifiers. We introduce a methodology that allows to visualize the contributions of single pixels to predictions for kernel-based classifiers over Bag of Words features and for multilayered neural networks. These pixel contributions can be visualized as heatmaps and are provided to a human expert who can intuitively not only verify the validity of the classification decision, but also focus further analysis on regions of potential interest. We evaluate our method for classifiers trained on PASCAL VOC 2009 images, synthetic image data containing geometric shapes, the MNIST handwritten digits data set and for the pre-trained ImageNet model available as part of the Caffe open source package.},
+	number = {7},
+	urldate = {2018-01-04},
+	journal = {PLoS ONE},
+	author = {Bach, Sebastian and Binder, Alexander and Montavon, Grégoire and Klauschen, Frederick and Müller, Klaus-Robert and Samek, Wojciech},
+	month = jul,
+	year = {2015},
+	pmid = {26161953},
+	pmcid = {PMC4498753},
+	file = {PubMed Central Full Text PDF:/Users/heytitle/Zotero/storage/RU4CWF93/Bach et al. - 2015 - On Pixel-Wise Explanations for Non-Linear Classifi.pdf:application/pdf}
+}
+
+@article{talathi_improving_2015,
+	title = {Improving performance of recurrent neural network with relu nonlinearity},
+	url = {http://arxiv.org/abs/1511.03771},
+	abstract = {In recent years significant progress has been made in successfully training recurrent neural networks (RNNs) on sequence learning problems involving long range temporal dependencies. The progress has been made on three fronts: (a) Algorithmic improvements involving sophisticated optimization techniques, (b) network design involving complex hidden layer nodes and specialized recurrent layer connections and (c) weight initialization methods. In this paper, we focus on recently proposed weight initialization with identity matrix for the recurrent weights in a RNN. This initialization is specifically proposed for hidden nodes with Rectified Linear Unit (ReLU) non linearity. We offer a simple dynamical systems perspective on weight initialization process, which allows us to propose a modified weight initialization strategy. We show that this initialization technique leads to successfully training RNNs composed of ReLUs. We demonstrate that our proposal produces comparable or better solution for three toy problems involving long range temporal structure: the addition problem, the multiplication problem and the MNIST classification problem using sequence of pixels. In addition, we present results for a benchmark action recognition problem.},
+	urldate = {2018-01-06},
+	journal = {arXiv:1511.03771 [cs]},
+	author = {Talathi, Sachin S. and Vartak, Aniket},
+	month = nov,
+	year = {2015},
+	note = {arXiv: 1511.03771},
+	keywords = {Computer Science - Learning, Computer Science - Neural and Evolutionary Computing},
+	annote = {Comment: 10 pages 6 figures; under consideration for publication with ICLR 2016},
+	file = {arXiv\:1511.03771 PDF:/Users/heytitle/Zotero/storage/UWMP5FI5/Talathi and Vartak - 2015 - Improving performance of recurrent neural network .pdf:application/pdf;arXiv.org Snapshot:/Users/heytitle/Zotero/storage/G2ZVPXJ9/1511.html:text/html}
+}
+
+@article{bach_analyzing_2015,
+	title = {Analyzing {Classifiers}: {Fisher} {Vectors} and {Deep} {Neural} {Networks}},
+	shorttitle = {Analyzing {Classifiers}},
+	url = {http://arxiv.org/abs/1512.00172},
+	abstract = {Fisher Vector classifiers and Deep Neural Networks (DNNs) are popular and successful algorithms for solving image classification problems. However, both are generally considered `black box' predictors as the non-linear transformations involved have so far prevented transparent and interpretable reasoning. Recently, a principled technique, Layer-wise Relevance Propagation (LRP), has been developed in order to better comprehend the inherent structured reasoning of complex nonlinear classification models such as Bag of Feature models or DNNs. In this paper we (1) extend the LRP framework also for Fisher Vector classifiers and then use it as analysis tool to (2) quantify the importance of context for classification, (3) qualitatively compare DNNs against FV classifiers in terms of important image regions and (4) detect potential flaws and biases in data. All experiments are performed on the PASCAL VOC 2007 data set.},
+	urldate = {2018-01-07},
+	journal = {arXiv:1512.00172 [cs]},
+	author = {Bach, Sebastian and Binder, Alexander and Montavon, Grégoire and Müller, Klaus-Robert and Samek, Wojciech},
+	month = dec,
+	year = {2015},
+	note = {arXiv: 1512.00172},
+	keywords = {Computer Science - Computer Vision and Pattern Recognition},
+	annote = {Comment: 17 pages (10 main document + references , 7 appendix) 1 Table 7 Figures 1 Algorithm submitted to CVPR on 06/11/2025},
+	file = {arXiv\:1512.00172 PDF:/Users/heytitle/Zotero/storage/THNBMRDD/Bach et al. - 2015 - Analyzing Classifiers Fisher Vectors and Deep Neu.pdf:application/pdf;arXiv.org Snapshot:/Users/heytitle/Zotero/storage/QCG7GMKG/1512.html:text/html}
+}
+
+@article{nguyen_synthesizing_2016,
+	title = {Synthesizing the preferred inputs for neurons in neural networks via deep generator networks},
+	url = {http://arxiv.org/abs/1605.09304},
+	abstract = {Deep neural networks (DNNs) have demonstrated state-of-the-art results on many pattern recognition tasks, especially vision classification problems. Understanding the inner workings of such computational brains is both fascinating basic science that is interesting in its own right - similar to why we study the human brain - and will enable researchers to further improve DNNs. One path to understanding how a neural network functions internally is to study what each of its neurons has learned to detect. One such method is called activation maximization (AM), which synthesizes an input (e.g. an image) that highly activates a neuron. Here we dramatically improve the qualitative state of the art of activation maximization by harnessing a powerful, learned prior: a deep generator network (DGN). The algorithm (1) generates qualitatively state-of-the-art synthetic images that look almost real, (2) reveals the features learned by each neuron in an interpretable way, (3) generalizes well to new datasets and somewhat well to different network architectures without requiring the prior to be relearned, and (4) can be considered as a high-quality generative method (in this case, by generating novel, creative, interesting, recognizable images).},
+	urldate = {2018-01-07},
+	journal = {arXiv:1605.09304 [cs]},
+	author = {Nguyen, Anh and Dosovitskiy, Alexey and Yosinski, Jason and Brox, Thomas and Clune, Jeff},
+	month = may,
+	year = {2016},
+	note = {arXiv: 1605.09304},
+	keywords = {Computer Science - Learning, Computer Science - Neural and Evolutionary Computing, Computer Science - Computer Vision and Pattern Recognition, Computer Science - Artificial Intelligence},
+	annote = {Comment: 29 pages, 35 figures, NIPS camera-ready}
+}
