@@ -1,5 +1,6 @@
 \chapter{Experiments \label{cha:chapter4}}
 
+
 \section{Dataset}
 
 
@@ -23,55 +24,11 @@ Xiao et. al.\cite{XiaoFashionMNISTNovelImage2017} propose a novel dataset, calle
 \begin{figure}[h]
 \centering
 \includegraphics[width=0.6\textwidth]{fashion_mnist}
-\caption{Fashion-MNIST Dataset}
+\caption{Fashion-MNIST Dataset\todo{use same size as MNIST figure}}
 \label{fig:mnist_samples}
 \end{figure}
 
-\cite{XiaoFashionMNISTNovelImage2017} also reports benchmarking results of classical machine learning algorithms on Fashion-MNIST. On average, they achieve accuracy between 0.85 to 0.89. According to Fashion-MNIST's page\footnote{https://github.com/zalandoresearch/fashion-mnist}, A. Brock reports the state-of-the-art result  with 0.97 accuracy using Wide Residual Network(WRN)\cite{ZagoruykoWideResidualNetworks2016} and standard data preprocessing and augmentation.
-
-\section{The Problem}
- Because the main objective of the thesis is to demonstrate how well vanilla RNNs can propagate relevant quantity back to input space, we propose an artificial classification problem in which each sample is split into chunks and fed sequentially to the classifier. The classifier needs to summarize information along the sequence to make the final decision at the end. 
- 
- \addfigure{\ref{fig:artificial_problem}} illustrates a general setting to the proposed problem. Here, a MNIST sample $ \patvector{x} \in \mathbb{R}^{28,28}$ is column-wise split into a sequence of $\{ \patvector{x}_t \}_{t=0} ^ 3, \patvector{x}_t \in   \mathbb{R}^{28,7}$. For a step $t$, $\patvector{x}_t$ is fed to a RNN cell, whose parameters denoted by $\patvector{\theta}$, yielding recurrent input $\patvector{r}_{t+1}$ for the next step. For the last step $t_{\text{last}} = 3$, we compute the final decision to the classification problem $\patvector{\hat{y}} \in \mathbb{R}^{10}$. 
- \begin{figure}[!hbt]
-\centering
-\includegraphics[width=0.9\textwidth]{sketch/artificial_problem}
-\caption{General setting of RNN classifiers in this thesis} 
-\label{fig:artificial_problem}
-\end{figure}
-
- Denote $g_r$ and $g_{h}$ a function that a RNN cell uses to compute $\patvector{r}_{t+1}$ and raw output $\patvector{h} \in \mathbb{R}^{10}$ at the last step respectively. The whole computation can be summarized as follows: 
- \begin{align*}
- 	\patvector{r}_{t+1} &= g_r(\patvector{\theta}, \patvector{x_t}, \patvector{r_t}) \\
- 	 &\ \ \vdots\\
- 	 \patvector{h} &= g_{h}(\patvector{\theta}, \patvector{x}_{t_{\text{last}}},  \patvector{r}_{t_{\text{last}}}) \\
- 	\patvector{\hat{y}} &= \text{softmax}(\patvector{h}),
- \end{align*}
- where $\patvector{\hat{y}}$ is the class prediction probabilites and $\patvector{r}_0 = \patvector{0}$. In this case, the relevance score $f(\patvector{x})$ that will be propagated is:
- \begin{align*}
- 	f(\patvector{x}) = \max_i h_i
- \end{align*}
- 
- 
- In this thesis, I performed experiments  using sequence length $ SEQ = \{1, 4, 7, 14\}$.
-Table \ref{tab:seq-length} shows dimensions of $\patvector{x}_t$ for different sequence length.
-
-\renewcommand{\arraystretch}{1.5}
-\begin{table}[h]
-\centering
-\begin{tabular}{l|l|l|l|l|}
-\cline{2-5}
-                                            & \multicolumn{4}{c|}{Sequence Length}                                                               \\ \hline
-\multicolumn{1}{|c|}{Dataset}               & \multicolumn{1}{c|}{1} & \multicolumn{1}{c|}{4} & \multicolumn{1}{c|}{7} & \multicolumn{1}{c|}{14} \\ \hline
-\multicolumn{1}{|l|}{MNIST / Fashion-MNIST} &        $ \mathbb{R}^{28,28}  $              &          $ \mathbb{R}^{28,7}  $               &         $ \mathbb{R}^{28,4}  $               &          $ \mathbb{R}^{28,2}  $               \\ \hline
-%\multicolumn{1}{|l|}{UFI-Cropped}           &                        &                        &                        &                         \\ \hline
-%\multicolumn{1}{|l|}{}                      &                        &                        &                        &                         \\ \hline
-\end{tabular}
-\caption{Dimensions of $\patvector{x}_t$ for each dataset and sequence length}
-\label{tab:seq-length}
-
-\end{table}
-\renewcommand{\arraystretch}{1}
+\citep{XiaoFashionMNISTNovelImage2017} also reports benchmarking results of classical machine learning algorithms on Fashion-MNIST. On average, they achieve accuracy between 0.85 to 0.89. According to Fashion-MNIST's page\footnote{https://github.com/zalandoresearch/fashion-mnist}, A. Brock reports the state-of-the-art result  with 0.97 accuracy using Wide Residual Network(WRN)\cite{ZagoruykoWideResidualNetworks2016} and standard data preprocessing and augmentation.
 
 
 \section{RNN Cell Architectures}
@@ -252,67 +209,146 @@ Lastly, as the quality of relevance heatmap depending on performance of the mode
 
 % TODO : Hyper hopt Hyperopt
 
-\section{Results}
-In this section, I am going to present what I have  found from experiments. First, I am going to discuss results from MNIST and then move on to ones from Fashion-MNIST. Moreover, I will use \rnncellseq{CELL\_NAME}{SEQ} convention to denote a RNN network with CELL\_NAME cell trained on a sequence length SEQ. For example, \rnncellseq{Deep}{7} means a RNN with Deep cell architecture trained on data whose $\patvector{x}^{(\alpha)}$ is a sequence of length 7.
+\section{Experiment 1 : Sequence Classification}
+
+\subsection{Problem Formulation}
+To demonstrate how well RNNs can distribute relevant quantities to input space, I formulated an artificial classification problem in which each image sample $\x$ is column-wise split into non-overlapping $(\x_t)_{t=1}^{T}$.  The RNN classifier needs to summarize information from the sequence $(\x_t)_{t=1}^{T}$ to answer what is the class of $\x$.   
+
+\addfigure{\ref{fig:artificial_problem}} illustrates the setting. Here, a MNIST sample $ \patvector{x} \in \mathbb{R}^{28,28}$ is divided to a sequence of $( \patvector{x}_t \in   \mathbb{R}^{28,7} )_{t=1} ^ 4$. At time step $t$, $\patvector{x}_t$ is presented to the RNN classifier which yields recurrent input $\patvector{r}_{t+1}$ for the next step. For the last step $T$, in this example $T = 4$, the RNN classifier computes $f(\x) \in \mathbb{R}^{10}$ and the class that $\x$ belongs to. 
+
+ \begin{figure}[!hbt]
+\centering
+\includegraphics[width=0.9\textwidth]{sketch/artificial_problem}
+\caption{General setting of RNN classifiers in this thesis} 
+\label{fig:artificial_problem}
+\end{figure}
+
+ Denote $g_r$ and $g_{f}$ function that the RNN  with parameters $\boldsymbol{\theta}$ uses to compute $\patvector{r}_{t+1}$ and $f(\x)$ respectively. The overall computation can be summarized as follows: 
+ \begin{align*}
+ 	\patvector{r}_{t+1} &= g_r(\patvector{\theta}, \patvector{x_t}, \patvector{r_t}) \\
+ 	 &\ \ \vdots\\
+f(\x) &= g_{h}(\patvector{\theta}, \patvector{x}_{t_{\text{last}}},  \patvector{r}_{t_{\text{last}}}) \\
+ 	\patvector{\hat{y}} &= \text{softmax}(f(\x)),
+ \end{align*}
+ where $\patvector{\hat{y}}$ is the class probabilities and $\patvector{r}_0 = \patvector{0}$.   To explain the model,  $R(\x)$ is set to the value of $f(\x)$ that is corresponding to the true target class.
+ 
+ \todo{figure show how R(x) is set?}
+ 
+ 
+\renewcommand{\arraystretch}{1.5}
+\begin{table}[h]
+\centering
+\begin{tabular}{l|l|l|l|l|}
+\cline{2-4}
+                                            & \multicolumn{3}{c|}{Sequence Length}                                                               \\ \hline
+\multicolumn{1}{|c|}{Dataset}               & \multicolumn{1}{c|}{1} & \multicolumn{1}{c|}{4} & \multicolumn{1}{c|}{7}  \\ \hline
+\multicolumn{1}{|l|}{MNIST / FashionMNIST} &        $ \mathbb{R}^{28,28}  $              &          $ \mathbb{R}^{28,7}  $               &         $ \mathbb{R}^{28,4}  $                            \\ \hline
+%\multicolumn{1}{|l|}{UFI-Cropped}           &                        &                        &                        &                         \\ \hline
+%\multicolumn{1}{|l|}{}                      &                        &                        &                        &                         \\ \hline
+\end{tabular}
+\caption{Dimensions of $\patvector{x}_t$ for each dataset and sequence length}
+\label{tab:seq-length}
+
+\end{table}
+\renewcommand{\arraystretch}{1}
+
+%In this section, I am going to present what I have  found from experiments. First, I am going to discuss results from MNIST and then move on to ones from Fashion-MNIST. Moreover, I will use \rnncellseq{CELL\_NAME}{SEQ} convention to denote a RNN network with CELL\_NAME cell trained on a sequence length SEQ. For example, \rnncellseq{Deep}{7} means a RNN with Deep cell architecture trained on data whose $\patvector{x}^{(\alpha)}$ is a sequence of length 7.
 %TODO : More introduction
 
-\subsection{MNIST}
-As a starting point, I first trained classifiers using \rnncell{Shallow} and \rnncell{Deep} cell with $SEQ=\{1, 4, 7\}$ on MNSIT using setting described in Section \ref{sec:setup}. As shown in Table \ref{tab:mnist_model_acc}, these models are equivalent  in term of accuracy performance, hence their heatmaps can be compared. 
+\subsection{Result}
+I began this preliminary experiment  with Shallow and Deep architecture. They were trained on MNIST and FashionMNIST with sequence length $ SEQ = \{1, 4, 7\}$. Table \ref{tab:seq-length} shows dimensions of $\patvector{x}_t$ for different sequence length and Table \ref{tab:mnist_model_acc} summaries accuracy of the trained models. To simplify the manuscript, I am going to use \textit{\rnncellseq{ARCHITECTURE}{SEQ}} convention to denote a RNN with \textit{ARCHITECTURE} trained on sequence length \textit{SEQ}. For example, \rnncellseq{Deep}{7} means a  Deep RNN architecture trained on $(\x_t \in \mathbb{R}^{28,4} )_{t=1}^{7}$.
+
 
 \begin{table}[]
 \centering
 \begin{tabular}{lrr}
 \textbf{}                  & \multicolumn{1}{c}{\textbf{Shallow}} & \multicolumn{1}{c}{\textbf{Deep}} \\ \hline
-\multicolumn{1}{l|}{SEQ-1} & 0.9813                               & 0.9788                            \\
-\multicolumn{1}{l|}{SEQ-4} & 0.9830                               & 0.9861                            \\
-\multicolumn{1}{l|}{SEQ-7} & 0.9807                               & 0.9852                           
+\multicolumn{1}{l|}{SEQ-1} & xx.xx\%                              & xx.xx\%                           \\
+\multicolumn{1}{l|}{SEQ-4} & xx.xx\%                              & xx.xx\%                            \\
+\multicolumn{1}{l|}{SEQ-7} & xx.xx\%                              & xx.xx\%
 \end{tabular}
 \caption{Model Accuracy}
 \label{tab:mnist_model_acc}
 \end{table}
 
-\addfigure{\ref{fig:mnist_experiment}} demonstrates relevance heatmaps from LRP and the trained models. Both \rnncellseq{Shallow}{1}  and \rnncellseq{Deep}{1} produce sound heatmaps, noting here that $\patvector{x}_t \in \mathbb{R}^{28,28}$. For $SEQ=\{4,7\}$,  their heatmaps are significantly different. \rnncellseq{Deep}{4,7}'s heatmaps contains high intensity values around the center of the images, while \rnncellseq{Shallow}{4,7}'s ones mostly concentrate on the right of the images.  This implies that \rnncellseq{Shallow}{4,7} are not able to  propagate relevance quantities through recurrent channels.
 
  \begin{figure}[h]
 \centering
-\includegraphics[width=\textwidth]{sketch/mnist_experiment}
-\caption{Comparison of relevance heatmaps from LRP between Shallow and Deep Cell}
+\includegraphics[width=0.8\textwidth]{sketch/mnist_experiment}
+\caption{Relevance heatmaps from Shallow and Deep Cell trained on MNIST with different sequence lengths}
 \label{fig:mnist_experiment}
 \end{figure}
 
-Moreover, we could observe that \rnncellseq{Deep}{4,7} are not only able to propagate relevance back through the input sequence, it also appropriately captures features of the input as the corresponding shapes of the samples are present on the heatmaps. On the other hand, \rnncellseq{Shallow}{4,7} do not show such capabilities.
+
+\addfigure{\ref{fig:mnist_experiment}} shows relevance heatmaps from Shallow and Deep architecture trained on MNIST.  We can see general characteristics of each explanation technique. In particular, sensitivity analysis(SA) and guided backprop(GB) heatmaps are sparse, while the ones from deep Taylor decomposition(DTD) are more diffuse throughout $\x$.  When applying these techniques to \rnncellseq{Shallow}{1}  and \rnncellseq{Deep}{1}, the relevance heatmaps look similar regardless of the architectures.  As the sequence length is increased, SA and GB heatmaps are still almost identical  for \rnncellseq{Shallow}{4,7} and \rnncellseq{Deep}{4,7}. However, this is not the case for DTD.  From the figure, we can see that \rnncellseq{Shallow}{4,7} and  \rnncellseq{Deep}{4,7} return significantly different relevance heatmaps from DTD method.  In particular,  \rnncellseq{Shallow}{4,7} 's heatmaps are mainly concentrated on the right part of $\x$ associating to last time steps, while  \rnncellseq{Deep}{4,7}'s ones are appropriately highlighted at the actual content area of $\x$.
 
 
  \begin{figure}[h]
 \centering
-\includegraphics[width=\textwidth]{sketch/mnist_class_1_comparison}
-\caption{Relevance heatmaps Shallow and Deep Cell\\(The samples are randomly chosen from MNIST's testing set)} 
-\label{fig:mnist_experiment1}
+\includegraphics[width=0.8\textwidth]{sketch/fashion_mnist_experiment}
+\caption{Relevance heatmaps from Shallow and Deep Cell trained on FashionMNIST with different sequence lengths}
+\label{fig:fashion_mnist_experiment}
 \end{figure}
 
-\addfigure{\ref{fig:mnist_experiment1}} shows more concrete evidence. Here, 16 samples from \textit{Class 1} were randomly chosen from the test set and fed to \rnncell{Shadow} and \rnncell{Deep} as  $SEQ=7$ meaning $\patvector{x}_t \in \mathbb{R}^{28,4}$.  Intuitively, the heatmaps from \rnncellseq{Deep}{7} align nicely to the data, while \rnncellseq{Shallow}{7}'s ones  do not seem to present any characteristic of the inputs. In fact, \rnncellseq{Deep}{7} manages to perfectly distribute relevance scores to region that the data actually lie, for example the last 2 images.  
+Relevance heatmaps of Shallow and Deep architecture trained on  FashionMNIST  are shown on \addfigure{\ref{fig:fashion_mnist_experiment}}. Similar to MNIST, we do not see any remarkable difference on SA and GB heatmaps of the two architectures : only that \rnncellseq{Deep}{4,7} produces slightly more sparse heatmaps. The wrong concentration issue of DTD  seems to appear on both \rnncellseq{Shallow}{4,7}'s and \rnncellseq{Deep}{4,7}'s heatmaps although we can still see correct highlight from Deep architecture on some samples. For example, the trouser sample, we can see  that \rnncellseq{Deep}{4,7} architecture manage to distribute high relevance scores to area of the trouser.
 
 
 
-\addfigure{\ref{fig:mnist_1_dist}}  also conveys the same insight, but from the aspect of  \textit{Class 1} population in testing set. The figure is a comparison of the distribution of pixel intensity from the \textit{Class 1} population, represented with dashed line, and the distributions of relevance quantities from the heatmaps explained by the models.  In the plot, value of the distribution for each step-$i^{th}$ is aggregated from corresponding pixels of the data and relevance heatmaps. We can clearly see that the distribution of relevance produced by \rnncellseq{Deep}{7}  looks similar to the input distribution, while the one from \rnncellseq{Shallow}{7} diverges significantly.
+
+
+
+ \begin{figure}[ht!]
+\centering
+\includegraphics[width=\textwidth]{sketch/class_1_comparison}
+\caption{DTD relevance heatmaps of MNIST \textit{Class 1} and FashionMNIST \textit{Class Trouser} samples from \rnncellseq{Shallow}{7} and \rnncellseq{Deep}{7} }\\
+\label{fig:class_1_comparison}
+\end{figure}
+
+\addfigure{\ref{fig:class_1_comparison}} presents relevance heatmaps of MNIST \textit{Class 1} and FashionMNIST \textit{Class Trouser} samples. These samples were chosen to emphasize the impact of RNN architecture on DTD explanation. In particular,  these samples have $\x_{t'}$ containing features  primarily locating at the center, or middle of the sequence, hence appropriate relevance heatmaps should be highlighted at $\x_{t'}$ and possibly its neighbors.  As expected, we can see \rnncellseq{Deep}{7} produces sound results in which the  heatmaps have high intensity value where $\x_{t'}$ approximately locate, while \rnncellseq{Shallow}{7} mainly assigns relevance quantities to $\x_{t}$ for $t \approx T$.
 
 
  \begin{figure}[h]
 \centering
-\includegraphics[width=0.5\textwidth]{notebooks/mnist_1_dist}
+\includegraphics[width=\textwidth]{sketch/exp1_dist_plot}
 \caption{Comparison of pixel intensity distribution from MNIST Class 1 testing population and relevance distribution explained by the models} 
-\label{fig:mnist_1_dist}
+\label{fig:exp1_dist_plot}
 \end{figure}
 
-It is worth mentioning that samples in MNIST Class 1 are relatively simples, hence comparing such distributions can give some insight of the explainability of the models. However, in real world setting, qualifying explainability of a neural network via the distributions might not give meaningful intuition, because input tends to have complex structure and the network is likely to produce relevance heatmap that has different structure from the original image. We shall see this behavior in Fashion-MNIST experiments.
+%It is worth mentioning that samples in MNIST Class 1 are relatively simples, hence comparing such distributions can give some insight of the explainability of the models. However, in real world setting, qualifying explainability of a neural network via the distributions might not give meaningful intuition, because input tends to have complex structure and the network is likely to produce relevance heatmap that has different structure from the original image. We shall see this behavior in Fashion-MNIST experiments.
+%
+%
+%
+%However, one interesting observation I have found is that sensivity analysis ... 
 
-% TODO : mention AOPC?
 
+\section{Experiment 2 : Majority Sample Classification}
+\subsection{Problem Formulation}
 
+ \begin{figure}[h]
+\centering
+\includegraphics[width=0.7\textwidth]{sketch/artificial_problem_3digits}
+\caption{Majority Sample Classification Problem} 
+\label{fig:artificial_problem_3digits}
+\end{figure}
 
+\subsection{Result}
+ \begin{figure}[h]
+\centering
+\includegraphics[width=0.7\textwidth]{sketch/heatmap_msc_mix}
+\caption{Relevance heamaps for MSC problem} 
+\label{fig:heatmap_msc_mix}
+\end{figure}
 
-However, one intesting observation I have found is that senstitvity analysis ... 
-\subsection{Fashion-MNIST}
+ \begin{figure}[h]
+\centering
+\includegraphics[width=0.7\textwidth]{sketch/rel_dist_maj_3_samples_thesis}
+\caption{Percentage of relevance in data region} 
+\label{fig:rel_dist_maj_3_samples_thesis}
+\end{figure}
+
+\todo{rewrite things from the paper}
+
+\section{Experiment 3 : Improve Relevance Distribution}
 
 
 %TODO : Add Model accuracy in appendix

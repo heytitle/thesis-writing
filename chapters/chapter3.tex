@@ -21,7 +21,7 @@
 \section{Explainability of Neural Networks}
 Neural networks have become one of major machine learning algorithms used in many applications, for example computer vision and medicine. Despite those achievements, they are still considered as a blackbox process that is  difficult to interpret its results or find evidences that the networks use to make such accurate decisions for further analysis.
 
-Moreover, it is always important to verify whether the trained network properly utilize data or what information it uses to make decisions. Literatures usually call this process as ``Explainability''.  Bach et al.\cite{BachAnalyzingClassifiersFisher2015} show that there are situations that the networks exploit artifacts in the data to make decisions. This discovery emphasizes the importance of having explainable neural networks, not to mention the fact that we are applying more and more neural networks to domains that human's life involved, such as medicine or self-driving car.
+Moreover, it is always important to verify whether the trained network properly utilize data or what information it uses to make decisions. Literatures usually call this process as ``Explainability''.  \cite{BachAnalyzingclassifiersFisher2016} show that there are situations that the networks exploit artifacts in the data to make decisions. This discovery emphasizes the importance of having explainable neural networks, not to mention the fact that we are applying more and more neural networks to domains that human's life involved, such as medicine or self-driving car.
 
 There are 2 approaches towards explaining neural network, namely \textit{Global} and \textit{Local} analysis. Given a  classification problem of $\mathcal{C}$ classes classification problem and a trained network, global method aims to find an input $\patvector{x}^*$ that is the most representative to a class $c \in \mathcal{C}$. ``Activation Maximization\cite{ErhanUnderstandingRepresentationsLearned2010}'' is such method.
 $$
@@ -50,7 +50,7 @@ Consider $f(\patvector{x})$ is an output from a neural network classifier that i
 \begin{align*}
 	\forall \patvector{x} : f(\patvector{x}) = \sum_i R_i
 \end{align*}
-Sum of relevance of each pixel $x_i$ should equal to the total relevance that the network outputs.
+Sum of relevance score of each pixel $x_i$ should equal to the total relevance that the network outputs.
 
 \end{definition}
 \begin{definition} Positivity Property
@@ -59,11 +59,11 @@ Sum of relevance of each pixel $x_i$ should equal to the total relevance that th
 \end{definition}
 
 \subsection{Sensitivity Analysis}
-Sensitivity analysis is a local analysis that derives relevance $R_i$ of pixel $x_i$, from the partial derivative of $f(\patvector{x})$ respect to $x_i$. In particular, 
+Sensitivity analysis\cite{SimonyanDeepConvolutionalNetworks2013} is a local analysis that derives relevance $R_i$ of pixel $x_i$, from the partial derivative of $f(\patvector{x})$ respect to $x_i$. In particular, literature usually formulates the calculation as 
 
 \begin{align*}
 	R_i =
-	 \bigg( \frac{\partial f}{ \partial x_i } \bigg)^2
+	 \bigg( \frac{\partial f(\patvector{x})}{ \partial x_i } \bigg)^2
 \end{align*}
 
 Hence, 
@@ -71,7 +71,25 @@ Hence,
 	\sum_i R_i = || \nabla f(\patvector{x}) ||^2
 \end{align*}
 
-Although this technique can be easily implemented via automatic differentiation provided in modern deep learning frameworks, such as TensorFlow\cite{AbadiTensorFlowLargeScaleMachine2016}, the derivation above implies that sensitivity analysis instead seeks to explain $R_i$ from the aspect of variation magnitudes, not the actual relevance quantity. 
+Although this technique can be easily implemented via automatic differentiation provided in modern deep learning frameworks, such as TensorFlow\cite{AbadiTensorFlowLargeScaleMachine2016}, the derivation of $\sum_i R_i$ above implies that sensitivity analysis instead seeks to explain $R_i$ from the aspect of variation magnitudes, not the actual relevance quantity.
+
+\subsection{Guided Backpropagation}
+Guided backpropagation is a extended version of sensitivity analysis where gradients are propagated in a controlled manner. It is designed specifically for neural network using piecewise linear activations. In particular, Springenberg et al.\cite{SpringenbergStrivingSimplicityAll2014e} reformulate the definition  of ReLU function as:
+\begin{align*}
+	\sigma(x) = x \mathbbm{1}[ x > 0 ],
+\end{align*}
+where $\mathbbm{1}[ \cdot ]$  is an indicator function. With the new formulation, \cite{SpringenbergStrivingSimplicityAll2014e} proposes a new derivative of a ReLU neuron $j$ as:
+\begin{align*}
+	\frac{\partial_* f(\patvector{x}) }{ \partial a_j } = \mathbbm{1}\bigg[a_j > 0 \bigg] \mathbbm{1}\bigg[ \frac{ \partial f(\patvector{x}) }{ \partial a_j } > 0 \bigg] \frac{ \partial f(\patvector{x}) }{ \partial a_j } 
+\end{align*}
+The 2 indicator functions control whether original gradients are propagated back, hence the name ``Guided Backpropagation''. Hence, the relevance score for $x_i$ is:
+
+\begin{align*}
+	R_i = \bigg( \frac{ \partial_* f(\patvector{x}) }{ \partial x_i }  \bigg)^2
+\end{align*}
+
+With this result, one can see that $x_i$ is relevant to the problem if activations $a_j$ that it supplies are active and positively contribute to $f(\patvector{x})$.
+
 
 \subsection{Simple Taylor Decomposition}
 This method decomposes $f(\patvector{x})$ into terms of relevance scores $R_i$ via Taylor Decomposition. Formally, 
@@ -106,7 +124,7 @@ Moreover, the result suggests the relationship between sensitivity analysis and 
 
 
 \subsection{Layer-wise Relevance Propagation}
-The methods mentioned so far derive $R_i$ directly from $f(\patvector{x})$ and do not  use important knowledge about the network itself, such as architecture or activation values. Alternatively, Bach et	 al.\cite{BinderLayerwiseRelevancePropagation2016} propose Layer-wise Relevance Propagation(LRP) framework that leverages this known information to distribute relevance scores to $x_i$. In particular, LRP propagates relevance scores backward from layer to layer, similar to the back-propagation algorithm of gradient descent.
+The methods mentioned so far derive $R_i$ directly from $f(\patvector{x})$ and do not  use important knowledge about the network itself, such as architecture or activation values. Alternatively, Bach et	 al.\citep{BinderLayerwiseRelevancePropagation2016} propose Layer-wise Relevance Propagation(LRP) framework that leverages this known information to distribute relevance scores to $x_i$. In particular, LRP propagates relevance scores backward from layer to layer, similar to the back-propagation algorithm of gradient descent.
 
 \afterpage{
 
