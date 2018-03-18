@@ -1,5 +1,5 @@
-\chapter{Experiments \label{cha:chapter4}}
-
+\chapter{Experiments}
+\label{cha:chapter4}
 
 \section{Dataset}
 
@@ -24,11 +24,11 @@ Xiao et. al.\cite{XiaoFashionMNISTNovelImage2017} propose a novel dataset, calle
 \begin{figure}[h]
 \centering
 \includegraphics[width=0.6\textwidth]{fashion_mnist}
-\caption{Fashion-MNIST Dataset\todo{use same size as MNIST figure}}
-\label{fig:mnist_samples}
+\caption{Fashion-MNIST Dataset\todo{Figure use same size as MNIST figure}}
+\label{fig:fashion_mnist_samples}
 \end{figure}
 
-\citep{XiaoFashionMNISTNovelImage2017} also reports benchmarking results of classical machine learning algorithms on Fashion-MNIST. On average, they achieve accuracy between 0.85 to 0.89. According to Fashion-MNIST's page\footnote{https://github.com/zalandoresearch/fashion-mnist}, A. Brock reports the state-of-the-art result  with 0.97 accuracy using Wide Residual Network(WRN)\cite{ZagoruykoWideResidualNetworks2016} and standard data preprocessing and augmentation.
+\cite{XiaoFashionMNISTNovelImage2017} also reports benchmarking results of classical machine learning algorithms on Fashion-MNIST. On average, they achieve accuracy between 0.85 to 0.89. According to Fashion-MNIST's page\footnote{https://github.com/zalandoresearch/fashion-mnist}, A. Brock reports the state-of-the-art result  with 0.97 accuracy using Wide Residual Network(WRN)\cite{ZagoruykoWideResidualNetworks2016} and standard data preprocessing and augmentation.
 
 
 \section{RNN Cell Architectures}
@@ -131,7 +131,7 @@ The reason of using $\sigma_{s} (b_j)$ for bias term is due to the non positive 
 Speaking about training methodology, I use Adam\cite{KingmaAdamMethodStochastic2014} optimizer to train networks. Preliminary study shows that relevance heatmaps from networks trained by Adam are less noisy than the ones from other optimizers, such as  Stochastic Gradient Descent(SGD). Number of epochs is set to 200, while dropout probability is 0.5 and batch size is 50.  
 Learning rate is not fixed as it is likely that different network architectures requires different value to achieve good performance, hence left adjustable. Table \ref{tab:hyper_summary} summaries the setting of hyperparameters.
 
-%TODO: Heatmaps SGD, RMSProp, Adam
+%TODO: Figure Heatmaps SGD, RMSProp, Adam
  
  \begin{table}[!htb]
 \centering
@@ -207,7 +207,6 @@ Lastly, as the quality of relevance heatmap depending on performance of the mode
 \label{tab:min_acc}
 \end{table}
 
-% TODO : Hyper hopt Hyperopt
 
 \section{Experiment 1 : Sequence Classification}
 
@@ -232,7 +231,7 @@ f(\x) &= g_{h}(\patvector{\theta}, \patvector{x}_{t_{\text{last}}},  \patvector{
  \end{align*}
  where $\patvector{\hat{y}}$ is the class probabilities and $\patvector{r}_0 = \patvector{0}$.   To explain the model,  $R(\x)$ is set to the value of $f(\x)$ that is corresponding to the true target class.
  
- \todo{figure show how R(x) is set?}
+ \todo{Figure figure show how R(x) is set?}
  
  
 \renewcommand{\arraystretch}{1.5}
@@ -253,10 +252,10 @@ f(\x) &= g_{h}(\patvector{\theta}, \patvector{x}_{t_{\text{last}}},  \patvector{
 \renewcommand{\arraystretch}{1}
 
 %In this section, I am going to present what I have  found from experiments. First, I am going to discuss results from MNIST and then move on to ones from Fashion-MNIST. Moreover, I will use \rnncellseq{CELL\_NAME}{SEQ} convention to denote a RNN network with CELL\_NAME cell trained on a sequence length SEQ. For example, \rnncellseq{Deep}{7} means a RNN with Deep cell architecture trained on data whose $\patvector{x}^{(\alpha)}$ is a sequence of length 7.
-%TODO : More introduction
+
 
 \subsection{Result}
-I began this preliminary experiment  with Shallow and Deep architecture. They were trained on MNIST and FashionMNIST with sequence length $ SEQ = \{1, 4, 7\}$. Table \ref{tab:seq-length} shows dimensions of $\patvector{x}_t$ for different sequence length and Table \ref{tab:mnist_model_acc} summaries accuracy of the trained models. To simplify the manuscript, I am going to use \textit{\rnncellseq{ARCHITECTURE}{SEQ}} convention to denote a RNN with \textit{ARCHITECTURE} trained on sequence length \textit{SEQ}. For example, \rnncellseq{Deep}{7} means a  Deep RNN architecture trained on $(\x_t \in \mathbb{R}^{28,4} )_{t=1}^{7}$.
+I began this preliminary experiment  with Shallow and Deep architecture. They were trained on MNIST and FashionMNIST with sequence length $T = \{1, 4, 7\}$. Table \ref{tab:seq-length} shows dimensions of $\patvector{x}_t$ for different sequence length and Table \ref{tab:mnist_model_acc} summaries accuracy of the trained models. To simplify the manuscript, I am going to use \textit{\rnncellseq{ARCHITECTURE}{T}} convention to denote a RNN with \textit{ARCHITECTURE} trained on sequence length \textit{T}. For example, \rnncellseq{Deep}{7} refers to the Deep RNN architecture trained on $(\x_t \in \mathbb{R}^{28,4} )_{t=1}^{7}$.
 
 
 \begin{table}[]
@@ -290,9 +289,7 @@ I began this preliminary experiment  with Shallow and Deep architecture. They we
 \label{fig:fashion_mnist_experiment}
 \end{figure}
 
-Relevance heatmaps of Shallow and Deep architecture trained on  FashionMNIST  are shown on \addfigure{\ref{fig:fashion_mnist_experiment}}. Similar to MNIST, we do not see any remarkable difference on SA and GB heatmaps of the two architectures : only that \rnncellseq{Deep}{4,7} produces slightly more sparse heatmaps. The wrong concentration issue of DTD  seems to appear on both \rnncellseq{Shallow}{4,7}'s and \rnncellseq{Deep}{4,7}'s heatmaps although we can still see correct highlight from Deep architecture on some samples. For example, the trouser sample, we can see  that \rnncellseq{Deep}{4,7} architecture manage to distribute high relevance scores to area of the trouser.
-
-
+Relevance heatmaps of Shallow and Deep architecture trained on  FashionMNIST  are shown on \addfigure{\ref{fig:fashion_mnist_experiment}}. Similar to MNIST, we do not see any remarkable difference on SA and GB heatmaps of the two architectures : only that \rnncellseq{Deep}{4,7} produces slightly more sparse heatmaps. Although the wrong concentration issue of DTD  seems to appear on both \rnncellseq{Shallow}{4,7}'s and \rnncellseq{Deep}{4,7}'s heatmaps, we still can observe proper highlight from Deep architecture on some samples. For example, the trouser sample, we can see  that \rnncellseq{Deep}{4,7} architecture manage to distribute high relevance scores to area of the trouser. Latent features of FashionMNIST  might be one of the reasons why Deep architecture does not distribute relevance scores to early steps for the FashionMNIST samples. Consider \textit{Shoe} and \textit{Ankle Boot} samples in \addfigure{\ref{fig:fashion_mnist_samples}}. One can see that  their front part are similar and only the heel part that determines the differences between the two categories.
 
 
 
@@ -300,30 +297,27 @@ Relevance heatmaps of Shallow and Deep architecture trained on  FashionMNIST  ar
  \begin{figure}[ht!]
 \centering
 \includegraphics[width=\textwidth]{sketch/class_1_comparison}
-\caption{DTD relevance heatmaps of MNIST \textit{Class 1} and FashionMNIST \textit{Class Trouser} samples from \rnncellseq{Shallow}{7} and \rnncellseq{Deep}{7} }\\
+\caption{DTD relevance heatmaps of MNIST \textit{Class 1} and FashionMNIST \textit{Class Trouser} samples from \rnncellseq{Shallow}{7} and \rnncellseq{Deep}{7}. }
 \label{fig:class_1_comparison}
 \end{figure}
 
-\addfigure{\ref{fig:class_1_comparison}} presents relevance heatmaps of MNIST \textit{Class 1} and FashionMNIST \textit{Class Trouser} samples. These samples were chosen to emphasize the impact of RNN architecture on DTD explanation. In particular,  these samples have $\x_{t'}$ containing features  primarily locating at the center, or middle of the sequence, hence appropriate relevance heatmaps should be highlighted at $\x_{t'}$ and possibly its neighbors.  As expected, we can see \rnncellseq{Deep}{7} produces sound results in which the  heatmaps have high intensity value where $\x_{t'}$ approximately locate, while \rnncellseq{Shallow}{7} mainly assigns relevance quantities to $\x_{t}$ for $t \approx T$.
+\addfigure{\ref{fig:class_1_comparison}} presents relevance heatmaps of MNIST \textit{Class 1} and FashionMNIST \textit{Class Trouser} samples. These samples were chosen to emphasize the impact of RNN architecture on DTD explanation. In particular,  these samples have $\x_{t'}$ containing features  primarily locating at the center, or middle of the sequence, hence appropriate relevance heatmaps should be highlighted at $\x_{t'}$ and possibly its neighbors.  As expected, we can see \rnncellseq{Deep}{7} produces sound results in which the  heatmaps have high intensity value where $\x_{t'}$ approximately locate, while \rnncellseq{Shallow}{7} mainly assigns relevance quantities to $\x_{t}$ for $t \approx T$. \addfigure{\ref{fig:exp1_dist_plot}} further shows a quantitive evidence of this problem. Here, distribution of relevance score from \rnncellseq{Shallow}{7} and \rnncellseq{Deep}{7} are plotted across time step $t = \{ 1, \dots, 7 \}$. The distributions are computed from all test samples in MNIST \textit{Class 1} and FashionMNIST \textit{Class Trouser} respectively as well as the data distributions that are derived from pixel intensity values.  We can see that \rnncellseq{Deep}{7}'s relevance distributions are similar to the data distributions, while  \rnncellseq{Shallow}{7}'s ones diverge completely. Particularly,  one can see that \rnncellseq{Shallow}{7} distributes more than 90\% of relevance scores to the last 3 steps, namely $\x_5$, $\x_6$ and $\x_7$.
 
 
  \begin{figure}[h]
 \centering
 \includegraphics[width=\textwidth]{sketch/exp1_dist_plot}
-\caption{Comparison of pixel intensity distribution from MNIST Class 1 testing population and relevance distribution explained by the models} 
+\caption{Pixel intensity and DTD relevance distribution from \rnncellseq{Shallow}{7} and \rnncellseq{Deep}{7} averaged over MNIST \textit{Class 1} and FashionMNIST \textit{Class Trouser} test population.} 
 \label{fig:exp1_dist_plot}
 \end{figure}
 
-%It is worth mentioning that samples in MNIST Class 1 are relatively simples, hence comparing such distributions can give some insight of the explainability of the models. However, in real world setting, qualifying explainability of a neural network via the distributions might not give meaningful intuition, because input tends to have complex structure and the network is likely to produce relevance heatmap that has different structure from the original image. We shall see this behavior in Fashion-MNIST experiments.
-%
-%
-%
-%However, one interesting observation I have found is that sensivity analysis ... 
+\subsection{Summary}
+Results from this first experiment seem to suggest that choice of RNN architectures has an impact on quality of its explanation.  In particular,  as presented in \addfigure{\ref{fig:class_1_comparison}} and \addfigure{\ref{fig:exp1_dist_plot}}, quality of deep Taylor decomposition(DTD) explanation is significantly influenced by the architecture. In contrast, we do see such notable effect from sensitivity analysis(SA) and guided backprop(GB) method.  In the following experiment, I am going to present a methodical evaluation of this impact in detail.
 
 
-\section{Experiment 2 : Majority Sample Classification}
-\subsection{Problem Formulation}
 
+\section{Experiment 2 : Majority Sample Classification} \label{sec:exp2}
+   
  \begin{figure}[h]
 \centering
 \includegraphics[width=0.7\textwidth]{sketch/artificial_problem_3digits}
@@ -331,13 +325,51 @@ Relevance heatmaps of Shallow and Deep architecture trained on  FashionMNIST  ar
 \label{fig:artificial_problem_3digits}
 \end{figure}
 
+\subsection{Problem Formulation} \label{sec:exp2_prob_formulate}
+When neural network are trained, one can apply explantation techniques to the models to get relevance heatmaps of samples.  The heatmap of sample $\x$ illustrates important features in $x$ that the trained network utilizes to perform its objective prediction,  such as classification.  Therefore, one needs to know the ground truth of these latent features in order to methodologically evaluate how well the model distributes  relevance scores to $\x$'s input space. However,  this knowledge is not trivial to find as it is an incident from the optimization process in high-dimensional space that we in fact seek to understand.
+
+To alleviate this challenge, I constructed two artificial datasets using samples from  MNIST and FashionMNIST respectively. Let's consider MNIST. The new dataset was constructed as follows: each original sample $\widetilde{\x} \in \mathbb{R}^{28,28}$, I randomly selected 2 additional samples : one from the same class of $\widetilde{\x}$ and the other one from a different class. Then, these 3 samples are concatenated in random order yielding a sample $\x \in \mathbb{R}^{28,84}$ of the new dataset. 
+
+With this construction procedure, one possible objective  is to train RNNs to predict the majority class in each sequence $(\x_t )_{t=1}^{T}$. For example, consider $\x = \{ 8, 7, 8\}$ shown in \addfigure{\ref{fig:artificial_problem_3digits}}, the majority class here is \textit{Class 8}. Because we already know time step $t'$ that are corresponding to original samples $\widetilde{\x}$ belonging to the majority group in each sequence $\x$, we can simply compute percentage of relevance scores assigned to $t'$ to quantitively  evaluate explainability  of a RNN architecture. 
+
+I also introduces two additional variation of Deep architecture, namely DeepV2 and ConvDeep. DeepV2 has one more layer after the first fully-connected layer, while ConvDeep instead employs a sequence of convolutional and pooling operation after the input layer. Figure X shows details of the architectures. 
+
+
+
+ %Table x show accuracy sf
+
 \subsection{Result}
+
+
+\begin{table}[h]
+\begin{center}
+\begin{tabular}{l c|c|c|}
+\cline{3-4}
+& &
+\multicolumn{2}{c|}{\parbox{3.5cm}{ \vskip 1mm \centering \textbf{Accuracy} \vskip 1mm}} \\ \hline
+\multicolumn{1}{|l|}{\textbf{Cell Architecture}} & \textbf{No. variables} & \textbf{MNIST} & \textbf{FashionMNIST} \\ \hline
+\multicolumn{1}{|l|}{Shallow}    & 184330                 & 98.39\% & 90.15\% \\ 
+\multicolumn{1}{|l|}{Deep}       & 153578                 & 98.42\% & 90.60\% \\ 
+ \multicolumn{1}{|l|}{DeepV2}     & 161386                 & 98.38\% & 90.43\% \\
+\multicolumn{1}{|l|}{ConvDeep}   & 151802                 & 99.07\% & 92.43\%  \\ \hline 
+\end{tabular}
+
+\end{center}
+\caption{Number of trainable variables and model accuracy for Majority Sample Classification experiment.}
+\label{tab:maj_rnn_model_acc}
+\end{table}
+
  \begin{figure}[h]
 \centering
-\includegraphics[width=0.7\textwidth]{sketch/heatmap_msc_mix}
-\caption{Relevance heamaps for MSC problem} 
-\label{fig:heatmap_msc_mix}
+\includegraphics[width=\textwidth]{sketch/heatmap_msc_for_thesis}
+\caption{Relevance heatmaps for MSC problem} 
+\label{fig:heatmap_msc_mix_for_thesis}
 \end{figure}
+
+In this experiment, I chose $T=12$, hence $(\x_t \in \mathbb{R}^{28,7})_{t=1}^{12}$. Table \ref{tab:maj_rnn_model_acc} shows number of trainable variables and accuracy of the trained models. These trained models have equivalent number of variables and accuracy, hence comparing heatmaps of these models is a fair evaluation.
+
+As can be seen from \addfigure{\ref{fig:heatmap_msc_mix_for_thesis}}, the deeper architecture, the fewer relevant scores distributed to irrelevant region. This effect happens across all explanation methods. This result further supports what has shown in Experiment 1.  Moreover, although relevance heatmaps from \rnncellseq{Shallow}{12}, \rnncellseq{Deep}{12}, and \rnncellseq{DeepV2}{12} generally look noisy, increasing the depth of architecture seems to reduce the noise in the heatmaps.   On the other hand, \rnncellseq{ConvDeep}{12} does not  only properly assign relevance quantities to the right time steps, but its heatmaps are also sound. In particular, one can easily perceive features of $\x$ from \rnncellseq{ConvDeep}{12}'s GB and DTD heatmaps.
+
 
  \begin{figure}[h]
 \centering
@@ -346,9 +378,9 @@ Relevance heatmaps of Shallow and Deep architecture trained on  FashionMNIST  ar
 \label{fig:rel_dist_maj_3_samples_thesis}
 \end{figure}
 
-\todo{rewrite things from the paper}
+\addfigure{\ref{fig:rel_dist_maj_3_samples_thesis}} presents a quantitive  evaluation of the impact from the depth of architecture to the explanation. Here, the measurement is the percentage of relevance quantities assigned to regions of majority class : these regions are indicated by the red triangles in \addfigure{\ref{fig:heatmap_msc_mix_for_thesis}}, averaged over test sample population. Results from \addfigure{\ref{fig:rel_dist_maj_3_samples_thesis}} indicate that the depth of architecture indeed improves quality of the explanations. In particular, the percentage of correct relevance assignment of each explanation technique increases as more layers introduced. This enhancement can be seen clearly from the result of FashionMNIST. Moreover, as expected, \rnncellseq{ConvDeep}{12} improves the percentage even more. Additionally, we can observe that the difference between the  percentage of the baseline, \rnncellseq{Shallow}{12}, and the deep architectures changes with different proposition across methods. In particular, we see the difference of SA and DTD are slightly larger than the difference of GB. This implies that some explanation methods get more benefit from the depth of architecture.
 
-\section{Experiment 3 : Improve Relevance Distribution}
+\subsection{Summary}
+The outcome of this experiment quantitively confirms that the depth of architecture has impacts on explanation of the model. It also shows that  the depth of architecture affects explanation in different level on different methods. More precisely, comparing to guided backprop(GB), quality of sensitivity analysis(SA) and deep Taylor decomposition(DTD) explanation is more depend on the depth.
 
-
-%TODO : Add Model accuracy in appendix
+\input{chapters/exp3}

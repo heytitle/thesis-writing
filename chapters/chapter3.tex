@@ -1,22 +1,5 @@
 \chapter{Background\label{cha:chapter3}}
-
-\section{Neural Networks}
-\begin{figure}[h]
-\centering
-\includegraphics[width=0.8\textwidth]{sketch/rnn_unfold}
-\caption{RNN Structure}
-\label{fig:rnn_unfold}
-\end{figure}
-
-\subsection{Learning Algorithms}
-\subsubsection{Loss functions}
-\subsubsection{SGD}
-\subsubsection{ADAM}
-\subsubsection{Backpropagation Through Time}
-\subsubsection{Vanishing and exploding gradient}
-
-\subsection{CNNs}
-\subsection{RNNs}
+\include{chapters/nn-background}
 
 \section{Explainability of Neural Networks}
 Neural networks have become one of major machine learning algorithms used in many applications, for example computer vision and medicine. Despite those achievements, they are still considered as a blackbox process that is  difficult to interpret its results or find evidences that the networks use to make such accurate decisions for further analysis.
@@ -124,7 +107,7 @@ Moreover, the result suggests the relationship between sensitivity analysis and 
 
 
 \subsection{Layer-wise Relevance Propagation}
-The methods mentioned so far derive $R_i$ directly from $f(\patvector{x})$ and do not  use important knowledge about the network itself, such as architecture or activation values. Alternatively, Bach et	 al.\citep{BinderLayerwiseRelevancePropagation2016} propose Layer-wise Relevance Propagation(LRP) framework that leverages this known information to distribute relevance scores to $x_i$. In particular, LRP propagates relevance scores backward from layer to layer, similar to the back-propagation algorithm of gradient descent.
+The methods mentioned so far derive $R_i$ directly from $f(\patvector{x})$ and do not  use important knowledge about the network itself, such as architecture or activation values. Alternatively, Bach et	 al.\cite{BinderLayerwiseRelevancePropagation2016} propose Layer-wise Relevance Propagation(LRP) framework that leverages this known information to distribute relevance scores to $x_i$. In particular, LRP propagates relevance scores backward from layer to layer, similar to the back-propagation algorithm of gradient descent.
 
 \afterpage{
 
@@ -161,7 +144,7 @@ where $w_{jk}^+$, $w_{jk}^-$ are $\max(0, w_{jk})$, $\min(0, w_{jk})$, and $\alp
 \end{align}
 
 
-%TODO : how LRP ensure conservation property?
+%TODO : Theory how LRP ensure conservation property?
 This $\alpha\beta$-rule ensures that conservation property is satisfied as $f(\patvector{x})$ is distributed through the network. 
 \begin{align*}
 	\sum_{i} R_i = 	\sum_{j} R_j = 	\sum_{k} R_k = f(\patvector{x})
@@ -195,10 +178,7 @@ $ \text{prev\_layer} \leftarrow \text{layer}  - 1$ \;
  \label{algo:lrp}
 \end{algorithm}
 
-%TODO: Heatmap comparision Figure sensitivity, simple taylor, lrp
-
-
-\section{Deep Taylor Decomposition}
+\subsection{Deep Taylor Decomposition}
 Deep Taylor Decomposition(DTD) is a explanation technique that decomposes $R_k$ as a sum of $R_j$ from previous layer using Simple Taylor Decomposition. Montavon et al.\cite{MontavonExplainingnonlinearclassification2017} proposes the method to explain decisions of neural networks with piece-wise linear activations. Similar to LRP, DTD decomposes $R_k$ and propagates the quantity backward to $R_J$. In particular, $R_k$ is decomposed as follows :
 
 
@@ -384,57 +364,9 @@ R_j = \sum_k  \frac{ a_j  w_{jk} - l_j w_{jk}^- - h_j w_{jk}^+  }{\sum_{j}   a_j
 \end{align*}}
                \\ \hline
 \end{tabular}
-\caption{LRP rules from Deep Taylor Decomposition} %TODO : ca
+\caption{LRP rules from Deep Taylor Decomposition}
 \label{tab:lrp_deep_taylor_rules}
 \end{table}
 \renewcommand{\arraystretch}{1}
 
-
-%
-%As a result,  
-%
-%To find $\tilde{\patvector{a}}_j$ that is in the same region as $\patvector{a_j}$, $v_j$ need to be derived  
-%Noticing that $v_j$ is depend on domain of $a_j$
-%
-%%\begin{align*}
-%%R_k = \sum_{	
-%%\end{align*}
-%
-
-
-
-
-
-%For the latter, we need 
-
-
-%
-%To find a $\tilde{\patvector{a}}^{(l)}$, consider a neural network on  \addfigure{\ref{fig:deep_tayloy_decomposition_toy}}. The forward pass computations are defined as follows: 
-%
-%\begin{align*}
-%a_j &= \text{max}( \sum_{ i } x_i w_{ij} + b_j, 0 )\\
-%a_k &=\text{max}( \sum_{ j } a_j w_{jk} + b_k, 0 ) \\
-%a_l &= \sum_{ k } a_k w_{kl} + b_l, 0 \\\\
-%f(x)  &= \text{softmax}( \{  a_l \} )
-%\end{align*}
-%
-%Here, the relevance score is the corresponding $a_k$ of the softmax output. 
-%
-%
-%To find such a root 
-%One remaining component is $\tilde{\patvector{a}}^{(l)}$. To derive such a root point $\tilde{\patvector{a}}^{(l)}$, we first assume that
-%\begin{align}
-%a_k^{(l+1)} = \max \bigg(0, \sum_j a^{(l)}_j w_{jk}^{(l+1)} + b_k \bigg),
-%\end{align}
-%with constraint $b_k \le 0$.
-
-
-
-%It might seem challenging to find 
-%
-% leverages the 
-%  into several functions. It uses Simple Taylor Decomposition to decompose $R_j^{(l+1)}$ into a sum 
-% 
-%  sdf propagation method that is developed for a specific type of neural networks. That is the networks using ReLU activations. As the name suggested, the method is built upon Simple Taylor Decomposition of relevance score between 2 connecting layers.
-% 
-% l
+	

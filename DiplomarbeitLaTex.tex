@@ -31,8 +31,6 @@
 \usepackage{mfirstuc}
 
 
-
-
 % header and footer line - no header & footer line on pages where a new chapter starts
 \pagestyle{scrheadings}
 \ohead{Designing Recurrent Neural Networks for Explainability}
@@ -56,6 +54,7 @@
 \newcommand{\patmatrix}[1]{\boldsymbol{\uppercase{#1}}}
 \newcommand{\patvector}[1]{\boldsymbol{\lowercase{#1}}}
 \newcommand{\x}{\boldsymbol{x}}
+\newcommand{\btheta}{\boldsymbol{\theta}}
 
 \newcommand{\patarg}[2]{ \underset{#2}{\text{arg#1}}\   }
 
@@ -66,6 +65,9 @@
 \newcommand{\rnncellseq}[2]{\capitalisewords{#1}-#2}
 \newcommand{\rnncell}[1]{\capitalisewords{#1}}
 \newcommand{\todo}[1]{\textcolor{red}{TODO : #1}}
+\newcommand{\xa}[0]{\patvector{x}^{(\alpha)}}
+\newcommand{\ya}[0]{y^{(\alpha)}}
+\newcommand{\yha}[0]{\hat{y}^{(\alpha)}}
 
   
 \input{./misc/hyphenation} 					% use this file to set explicit hyphenations (doesn't seem to work correctly)
@@ -119,7 +121,7 @@
 
     \input{./chapters/chapter3}
     \input{./chapters/chapter4}
-%    \input{./chapters/chapter5}
+    \input{./chapters/chapter5}
 %    \input{./chapters/chapter6}
 %    \input{./chapters/chapter7}
 
