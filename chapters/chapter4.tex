@@ -376,9 +376,12 @@ As can be seen from \addfigure{\ref{fig:heatmap_msc_mix_for_thesis}}, the deeper
 \includegraphics[width=0.7\textwidth]{sketch/rel_dist_maj_3_samples_thesis}
 \caption{Percentage of relevance in data region} 
 \label{fig:rel_dist_maj_3_samples_thesis}
+%todo figure remove lines
 \end{figure}
 
 \addfigure{\ref{fig:rel_dist_maj_3_samples_thesis}} presents a quantitive  evaluation of the impact from the depth of architecture to the explanation. Here, the measurement is the percentage of relevance quantities assigned to regions of majority class : these regions are indicated by the red triangles in \addfigure{\ref{fig:heatmap_msc_mix_for_thesis}}, averaged over test sample population. Results from \addfigure{\ref{fig:rel_dist_maj_3_samples_thesis}} indicate that the depth of architecture indeed improves quality of the explanations. In particular, the percentage of correct relevance assignment of each explanation technique increases as more layers introduced. This enhancement can be seen clearly from the result of FashionMNIST. Moreover, as expected, \rnncellseq{ConvDeep}{12} improves the percentage even more. Additionally, we can observe that the difference between the  percentage of the baseline, \rnncellseq{Shallow}{12}, and the deep architectures changes with different proposition across methods. In particular, we see the difference of SA and DTD are slightly larger than the difference of GB. This implies that some explanation methods get more benefit from the depth of architecture.
+
+\todo{add cases that convdeep fail}
 
 \subsection{Summary}
 The outcome of this experiment quantitively confirms that the depth of architecture has impacts on explanation of the model. It also shows that  the depth of architecture affects explanation in different level on different methods. More precisely, comparing to guided backprop(GB), quality of sensitivity analysis(SA) and deep Taylor decomposition(DTD) explanation is more depend on the depth.
