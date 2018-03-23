@@ -31,7 +31,7 @@ Xiao et. al.\cite{XiaoFashionMNISTNovelImage2017} propose a novel dataset, calle
 \cite{XiaoFashionMNISTNovelImage2017} also reports benchmarking results of classical machine learning algorithms on Fashion-MNIST. On average, they achieve accuracy between 0.85 to 0.89. According to Fashion-MNIST's page\footnote{https://github.com/zalandoresearch/fashion-mnist}, A. Brock reports the state-of-the-art result  with 0.97 accuracy using Wide Residual Network(WRN)\cite{ZagoruykoWideResidualNetworks2016} and standard data preprocessing and augmentation.
 
 
-\section{RNN Cell Architectures}
+\section{RNN Cell Architectures}\label{sec:rnn_cell}
 In this section, I will describe architectures or RNN cell evaluated in this thesis.  To make the descriptions concise, I denote notations as follows: 
 
 \begin{itemize}
@@ -102,7 +102,7 @@ Two variations of \rnncell{Deep} cell are also experimented, namely \rnncell{Dee
 
 
 
-\section{Setup}\label{sec:setup}
+\section{General Setting}\label{sec:setup}
  
  I implemented experiments using TensorFlow\footnote{\url{http://tensorflow.org/}}.  weights $w_{ij} \in \patmatrix{W}$ and biases $b_{j} \in \patvector{b}$ are initialized as follows:
 \begin{align*}
@@ -208,7 +208,7 @@ Lastly, as the quality of relevance heatmap depending on performance of the mode
 \end{table}
 
 
-\section{Experiment 1 : Sequence Classification}
+\section{Experiment 1 : Sequence Classification}\label{sec:exp1}
 
 \subsection{Problem Formulation}
 To demonstrate how well RNNs can distribute relevant quantities to input space, I formulated an artificial classification problem in which each image sample $\x$ is column-wise split into non-overlapping $(\x_t)_{t=1}^{T}$.  The RNN classifier needs to summarize information from the sequence $(\x_t)_{t=1}^{T}$ to answer what is the class of $\x$.   

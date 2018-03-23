@@ -117,7 +117,7 @@ In practice, because the training set usually contains several thousand samples,
 Lastly, because noise in the data and potentially highly non-smooth of the loss function, learning rate $\lambda$ is a great influential to the training process. More precisely, it should not be too small or too large. This requires some effort and experience in order to get the value right. Some work have proposed alternative update rules aiming to make the training process more stable. For example,  Adaptive Moment Estimation(Adam)\cite{KingmaAdamMethodStochastic2014}  uses adaptive learning rate  and incorporates accumulated direction and speed of the previous gradients (momentum) into the update, hence more consistent gradient and fast convergence. Other similar proposals are RMSProp \cite{TielemanLectureRmsPropDivide2012} and Adadelta \cite{ZeilerADADELTAAdaptiveLearning2012}.
 
 
-\subsection{Convolutional Neural Networks}
+\subsection{Convolutional Neural Networks} \label{sec:conv}
 Convolutional Neural Networks(CNNs) refer to neural networks that employ convolutional operators to process information in early layers instead of fully-connected layers(weighted sum). Typically, a convolutional operator is followed by a pooling operator. Using this convolutional and pooling operators allows the NN to extract hierarchical features that are spatially invariant \cite{ZeilerVisualizingUnderstandingConvolutional2013}, hence having higher predictive capability of the NN comparing to traditional fully-connected layers with the same number of parameters.
 
 
