@@ -60,8 +60,9 @@
 \newcommand{\patarg}[2]{ \underset{#2}{\text{arg#1}}\   }
 
 
-\newcommand*\circled[1]{\tikz[baseline=(char.base)]{
-            \node[shape=circle,draw,inner sep=2pt, white, fill=red,minimum size=1em] (char) {\textbf{\footnotesize{#1}}};}}
+%\newcommand*\circled[1]{\tikz[baseline=(char.base)]{
+%            \node[shape=circle,draw,inner sep=2pt, white, fill=red,minimum size=1em] (char) {\textbf{\footnotesize{#1}}};}}
+\newcommand*\circled[1]{(#1)}
             
 \newcommand{\rnncellseq}[2]{\capitalisewords{#1}-#2}
 \newcommand{\rnncell}[1]{\text{\capitalisewords{#1}}}
@@ -69,8 +70,9 @@
 \newcommand{\xa}[0]{\patvector{x}^{(\alpha)}}
 \newcommand{\ya}[0]{y^{(\alpha)}}
 \newcommand{\yha}[0]{\hat{y}^{(\alpha)}}
-
-  
+\newcommand{\lrpp}[0]{\text{LRP-}\alpha_{1.5}\beta_{0.5}}
+\newcommand{\heatmapscaleexplain}{Blue indicates negative relevance, while red indicates positive relevance.}
+ 
 \input{./misc/hyphenation} 					% use this file to set explicit hyphenations (doesn't seem to work correctly)
 
 \begin{document}
@@ -110,7 +112,7 @@
     
     \listoftables
     \thispagestyle{empty}
-    
+    %todo : make sure figures are in the same section as content.
 
     
 % --------------------------------------------------------------
@@ -118,13 +120,18 @@
 \mainmatter % comment single chapters for faster compilation
 
     \input{./chapters/chapter1}
-      \input{./chapters/chapter2}
+    		\input{./chapters/dataset}
+     \input{./chapters/related-work}
 
-    \input{./chapters/chapter3}
-    \input{./chapters/chapter4}
-%    \input{./chapters/chapter5}
-%    \input{./chapters/chapter6}
-%    \input{./chapters/chapter7}
+	    \include{chapters/nn-background}
+	    \input{./chapters/explanation-methods}
+	    
+    % experiment
+    \input{./chapters/experiments}
+	    \input{chapters/exp3}
+	    
+    \input{./chapters/conclusion}
+
 
 % ---------------------------------------------------------------
 \backmatter % no page numbering from here
@@ -136,7 +143,7 @@
     \bibliographystyle{apalike}
     \bibliography{./bib/references}
     
-%    \input{./misc/annex}
+    \input{./misc/annex}
 
 \end{document}
 x

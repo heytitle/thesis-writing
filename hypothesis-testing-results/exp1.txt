@@ -1,0 +1,86 @@
+============= Hypothesis Testing  =============
+for sensitivity method with significant level at 0.05
+==================== ANOVA ====================
+                sum_sq    df          F        PR(>F)
+architecture  0.017522   3.0  16.995769  8.038269e-08
+Residual      0.017870  52.0        NaN           NaN
+effective size(eta squared) : 0.495083
+
+--------------------------------------------------
+Multiple Comparison of Means - Tukey HSD,FWER=0.05
+================================================
+ group1   group2 meandiff  lower   upper  reject
+------------------------------------------------
+convdeep   deep  -0.0353  -0.0539 -0.0167  True 
+convdeep deep_v2  -0.019  -0.0376 -0.0005  True 
+convdeep shallow  -0.047  -0.0656 -0.0284  True 
+  deep   deep_v2  0.0163  -0.0023  0.0348 False 
+  deep   shallow -0.0117  -0.0303  0.0069 False 
+deep_v2  shallow  -0.028  -0.0466 -0.0094  True 
+------------------------------------------------
+
+
+============= Hypothesis Testing  =============
+for guided_backprop method with significant level at 0.05
+==================== ANOVA ====================
+                sum_sq    df         F    PR(>F)
+architecture  0.021354   3.0  5.070579  0.003727
+Residual      0.072995  52.0       NaN       NaN
+effective size(eta squared) : 0.226326
+
+--------------------------------------------------
+Multiple Comparison of Means - Tukey HSD,FWER=0.05
+================================================
+ group1   group2 meandiff  lower   upper  reject
+------------------------------------------------
+convdeep   deep  -0.0458  -0.0834 -0.0083  True 
+convdeep deep_v2 -0.0233  -0.0609  0.0143 False 
+convdeep shallow -0.0482  -0.0858 -0.0106  True 
+  deep   deep_v2  0.0226   -0.015  0.0601 False 
+  deep   shallow -0.0024  -0.0399  0.0352 False 
+deep_v2  shallow -0.0249  -0.0625  0.0127 False 
+------------------------------------------------
+
+
+============= Hypothesis Testing  =============
+for lrp_deep_taylor method with significant level at 0.05
+==================== ANOVA ====================
+                sum_sq    df          F        PR(>F)
+architecture  0.469895   3.0  295.54357  1.217432e-32
+Residual      0.027559  52.0        NaN           NaN
+effective size(eta squared) : 0.944600
+
+--------------------------------------------------
+Multiple Comparison of Means - Tukey HSD,FWER=0.05
+================================================
+ group1   group2 meandiff  lower   upper  reject
+------------------------------------------------
+convdeep   deep   -0.062  -0.0851 -0.0389  True 
+convdeep deep_v2 -0.0169   -0.04   0.0062 False 
+convdeep shallow -0.2313  -0.2544 -0.2082  True 
+  deep   deep_v2  0.0451   0.022   0.0682  True 
+  deep   shallow -0.1693  -0.1924 -0.1462  True 
+deep_v2  shallow -0.2144  -0.2375 -0.1913  True 
+------------------------------------------------
+
+
+============= Hypothesis Testing  =============
+for lrp_alpha1_5_beta_5 method with significant level at 0.05
+==================== ANOVA ====================
+                sum_sq    df           F        PR(>F)
+architecture  0.483564   3.0  260.587651  2.640318e-31
+Residual      0.032165  52.0         NaN           NaN
+effective size(eta squared) : 0.937632
+
+--------------------------------------------------
+Multiple Comparison of Means - Tukey HSD,FWER=0.05
+================================================
+ group1   group2 meandiff  lower   upper  reject
+------------------------------------------------
+convdeep   deep  -0.0344  -0.0593 -0.0094  True 
+convdeep deep_v2 -0.0079  -0.0329  0.017  False 
+convdeep shallow -0.2267  -0.2516 -0.2017  True 
+  deep   deep_v2  0.0264   0.0015  0.0514  True 
+  deep   shallow -0.1923  -0.2173 -0.1674  True 
+deep_v2  shallow -0.2187  -0.2437 -0.1938  True 
+------------------------------------------------

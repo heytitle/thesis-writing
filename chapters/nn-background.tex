@@ -1,3 +1,5 @@
+\chapter{Background}\label{cha:chapter3}
+
 \section{Neural Networks}
 Neural networks(NNs) are a type of machine learning algorithms that inspired by how human brain works.  In particular, NNs have units called neurons connecting together similar to the way of neurons our brain do. These connections allow NNs to hierarchically build representations that are necessary to perform an objective task. \addfigure{\ref{fig:nn_simple}} illustrates a simple coordination reaction task by our brain.
 
@@ -5,31 +7,41 @@ Neural networks(NNs) are a type of machine learning algorithms that inspired by 
     \begin{center}
 
 \includegraphics[width=\textwidth]{nn_simple}
-\caption[xxx]{An illustration of how neurons in our brain  cooperate together to sense the pain and move the thumb. \footnotemark}
+\caption[xxx]{An illustration of how neurons in human brain cooperate together to sense the pain and react accordingly. \footnotemark}
 \label{fig:nn_simple}
 
 \end{center}
 \end{figure}
-\footnotetext{source: Eugenio N. Leon, \url{https://becominghuman.ai/making-a-simple-neural-network-2ea1de81ec20}}
+\footnotetext{Source: Eugenio N. Leon, \url{https://becominghuman.ai/making-a-simple-neural-network-2ea1de81ec20}}
 
 
  \begin{figure}[ht!]
     \begin{center}
 
-\includegraphics[width=0.5\textwidth]{simple_neural_network_header}
-\caption[xxx]{}
-%todo Figure add labels for weights and activation functions
+\includegraphics[width=0.7\textwidth]{sketch/typical_nn_structure}
+\caption[]{A general structure of neural networks}
 \label{fig:nn_typical_structure}
 
 \end{center}
 \end{figure}
 
-\addfigure{\ref{fig:nn_typical_structure}} illustrates a general structure of NNs. It has input layer, output layer and hidden layers, which are analogously similar to sensory, motor and inter neurons in \addfigure{\ref{fig:nn_simple}}. The goal is to build connections between these neurons such that the NN is able to perform an objective task with high accuracy. This process is called \textit{training}.  In this example, the objective task to classify what is the given digit.
+
+ \begin{figure}[ht!]
+	\begin{center}
+
+		\includegraphics[width=0.7\textwidth]{sketch/a_neuron}
+		\caption{Connectivity of a neuron}
+		\label{fig:a_neuron}
+	\end{center}
+\end{figure}
+
+
+\addfigure{\ref{fig:nn_typical_structure}} illustrates a general structure of NNs. It has input layer, output layer and hidden layers, which are analogously similar to sensory, motor and inter neurons in \addfigure{\ref{fig:nn_simple}}. \addfigure{\ref{fig:a_neuron}} shows connections of a neuron to neurons in previous and later layer. The goal is to build connections between these neurons such that the NN is able to perform an objective task with high accuracy.  These connections are determined by weights, which are denoted by $w_{i\rightarrow j}, w_{j\rightarrow k}$ in \addfigure{\ref{fig:a_neuron}}. This process is called \textit{training}.  In this example, the objective task to classify what is the given digit.
 
 
 Consider a given set of $p$ training samples $\mathcal{D} = \{ \xa, \ya) \}_{\alpha=1}^{p}$,  there are 3 primary components to train a NN, namely  
 \begin{enumerate}
-	\item \textbf{Network architecture} : it defines how neurons connect and communicate to each other. More precisely, these are corresponding to connection weights and biases $\patvector{\theta}$ and neuron's activation functions illustrated in \addfigure{\ref{fig:nn_typical_structure}}. Mathematically, it is a function $f$ with parameters $\patvector{\theta}$ that nonlinearly transforms an input $\xa\in \mathbb{R}^d $ to some values.
+	\item \textbf{Network architecture} : $\sigma$ it defines how neurons connect and communicate to each other. More precisely, these are corresponding to connection weights and biases $\patvector{\theta}$ and neuron's activation functions illustrated in \addfigure{\ref{fig:nn_typical_structure}}. Mathematically, it is a function $f$ with parameters $\patvector{\theta}$ that nonlinearly transforms an input $\xa\in \mathbb{R}^d $ to some values.
 	\item \textbf{Loss function $L$} : it is a measurement corresponding to the objective task that quantifies whether output $f(\xa)$ from the NN matches the true output $\ya$.
 	\item \textbf{Learning algorithm} : it is responsible to find the network's parameters $\patvector{\hat{\theta}}$ to optimize the loss function $L$(\textit{Empirical Error})  as a proxy for optimizing loss or error for unforeseen $\x \notin \mathcal{D} $ (\textit{Generalization Error}). 
 \end{enumerate}
@@ -67,8 +79,8 @@ Consider a  function $L(\theta) = \theta^2$ on \addfigure{\ref{fig:gradent_desce
 
 \begin{figure}[ht!]
     \begin{center}
-		\includegraphics[width=0.5\textwidth]{gradient_descent_toy}
-		\caption[]{A Toy example}
+		\includegraphics[width=\textwidth]{sketch/gradient_intuition}
+		\caption[]{An illustration of Gradient Descent}
 		\label{fig:gradent_descent_toy}
 	\end{center}
 \end{figure}
@@ -81,16 +93,7 @@ However, a NN usually contains thousands of parameters, hence $L(\boldsymbol{\th
 \end{align*}
 
 
-\begin{figure}[ht!]
-    \begin{center}
-		\includegraphics[width=0.5\textwidth]{simple_network_for_backprop}
-		\caption[]{A Toy example}
-		\label{fig:simple_network_for_backprop}
-	\end{center}
-\end{figure}
-
-
-Let's further consider a simple NN shown in \addfigure{\ref{fig:simple_network_for_backprop}} with $\btheta = \{ \forall i,j,k,l : w^{(1)}_{i \rightarrow j}, w^{(2)}_{j \rightarrow k}, w^{(3)}_{k \rightarrow l}  \}$ and biases are omitted. $f(\x, \btheta)$ is calculated as follows
+Let's consider again a simple NN shown in \addfigure{\ref{fig:nn_typical_structure}} with $\btheta = \{ \forall i,j,k,l : w^{(1)}_{i \rightarrow j}, w^{(2)}_{j \rightarrow k}, w^{(3)}_{k \rightarrow l}  \}$ and biases are omitted. Then, $f(\x, \btheta)$ is calculated as follows
 
 \begin{align*}
 		h_j^{(1)} &= \sum_i w_{i \rightarrow j}^{(1)} x_i & a_j^{(1)} &= \sigma (h_j^{(1)})	\\
@@ -120,34 +123,46 @@ Lastly, because noise in the data and potentially highly non-smooth of the loss 
 \subsection{Convolutional Neural Networks} \label{sec:conv}
 Convolutional Neural Networks(CNNs) refer to neural networks that employ convolutional operators to process information in early layers instead of fully-connected layers(weighted sum). Typically, a convolutional operator is followed by a pooling operator. Using this convolutional and pooling operators allows the NN to extract hierarchical features that are spatially invariant \cite{ZeilerVisualizingUnderstandingConvolutional2013}, hence having higher predictive capability of the NN comparing to traditional fully-connected layers with the same number of parameters.
 
-
+\afterpage{
 \begin{figure}[ht!]
     \begin{center}
-		\includegraphics[width=0.5\textwidth]{conv_intuition}
-		\caption[]{An intuition of what features CNN learns}
+		\includegraphics[width=0.5\textwidth]{sketch/cnn_hierachical_features}
+		\caption[]{Hierarchical features learned by CNN\footnotemark}
 		\label{fig:conv_intuition}
-		%todo Figure make it horizontal and cite the original 
 	\end{center}
-	% https://cs.stackexchange.com/questions/16545/what-is-the-difference-between-a-neural-network-a-deep-learning-system-and-a-de
-
 \end{figure}
+\footnotetext{Source : \cite{LeeConvolutionalDeepBelief2009}}
+}
 
-\addfigure{\ref{fig:conv_intuition}} illustrates an intuition  behind hierarchical structures that CNN's neurons learn to detect. More precisely, in this example, neurons in the first learn to detect low level features, such as edges, and neurons in middle layer then use knowledge to detect higher level features, for example nose, mouth or eyes, and so on.
+\addfigure{\ref{fig:conv_intuition}} illustrates hierarchical structures that CNN's neurons learn to detect. More precisely, in this example, neurons in the first learn to detect low level features, such as edges, and neurons in middle layer then use knowledge to detect higher level features, for example nose, mouth or eyes, and so on.
 
-Since \cite{LeCunGradientBasedLearningApplied2001} successfully applied CNNs to a document classification problem, CNNs have become the first choice of architectures in many domains. Particularly, in computer vision, CNNs are the core component of state-of-the-art results in various contests. Such successful results are :  AlexNet\cite{KrizhevskyImageNetClassificationDeep2012} that archive the remarkable results on  ImageNet Large-Scale Visual Recognition Challenge 2012(ILSVRC 2012) followed by the achievement of VGG\cite{SimonyanVeryDeepConvolutional2014} and GoogleLenet \cite{SzegedyGoingDeeperConvolutions2014} architecture in ILSVRC 2014 and ResNet\cite{HeDeepResidualLearning2015} that won ILSVRC 2015.
+\afterpage{
+\begin{figure}[ht!]
+    \begin{center}
+		\includegraphics[width=0.8\textwidth]{lenet}
+		\caption[xx]{Architecture of LeNet-5 for digits recognition.\footnotemark}
+		\label{fig:lenet}
+	\end{center}
+\end{figure}
+\footnotetext{Source : \cite{LeCunGradientBasedLearningApplied2001} }
+}
+
+Since \cite{LeCunGradientBasedLearningApplied2001} proposed LeNet-5, shown in \addfigure{\ref{fig:lenet}}, and successfully applied it to handwritten recognition problem, CNNs have become the first choice of architectures in many domains. Particularly, in computer vision, CNNs are the core component of state-of-the-art results in various contests. Such successful results are :  AlexNet\cite{KrizhevskyImageNetClassificationDeep2012} that archive the remarkable results on  ImageNet Large-Scale Visual Recognition Challenge 2012(ILSVRC 2012) followed by the achievement of VGG\cite{SimonyanVeryDeepConvolutional2014} and GoogleLenet \cite{SzegedyGoingDeeperConvolutions2014} architecture in ILSVRC 2014 and ResNet\cite{HeDeepResidualLearning2015} that won ILSVRC 2015.
 
 
 
 \subsection{Recurrent Neural Networks}
 Recurrent Neural Networks(RNNs) are neural networks whose computed outputs   are repeatedly incorporated into the next computation. \addfigure{\ref{fig:rnn_unfold}} illustrates this idea of recurrent computation by unfolding RNN into steps. Let's consider $\x$ a sequence of $x_1, \dots x_t$.  At step $t$, RNN takes $r_{t-1}$ and $x_{t}$ to compute $r_{t}$ and $\hat{y}_t$. This recurrent connections can be interpreted as accumulating information from the past, hence RNNs are capable of processing sequential data, possibly  coming with different length. Natural Language Processing(NLP) and Machine Translation(MT) are some of the fields that RNNs are widely applied to.
 
+\afterpage{
 \begin{figure}[h]
 \centering
 \includegraphics[width=0.8\textwidth]{sketch/rnn_unfold}
-\caption{RNN Structure} %todo Figure add r_t to folded version, fix indices
-
+\caption[xxx]{Unfolded RNN Structure\footnotemark}
 \label{fig:rnn_unfold} 
 \end{figure}
+\footnotetext{Inspired by \url{http://colah.github.io/posts/2015-08-Understanding-LSTMs/}}
+}
 
 \subsubsection{Backpropagation Through Time}
 As the number of computation steps in RNNs is depend on the length of samples, which can be different in principle, one needs to organize data in such a way that samples in the same batch have the same steps of computations before training a RNN. In this case, training RNNs can be viewed as training a feedforward neural network where we apply backpropagation,  except that variables are shared across steps. 
