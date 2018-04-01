@@ -52,7 +52,7 @@ Batch size              & 50
 \multicolumn{1}{l|}{FashionMNIST}    & \multicolumn{1}{r}{85.00\%}  \\
 %\multicolumn{1}{l|}{UFI Cropped}                                       &                         \dots
 \end{tabular}
-\caption{Minimum Classification Accuracy for models to be considered}
+\caption{Minimum Classification accuracy for models to be considered}
 \label{tab:min_acc}
 \end{table}
 
@@ -191,6 +191,7 @@ We experimented with MNIST and FashionMNIST data using sequence length $T = \{1,
 To simplify the writing, we am going to use \textit{\rnncellseq{ARCHITECTURE}{T}} convention to denote a RNN with \textit{ARCHITECTURE} trained on the sequence length \textit{T}. For example, \rnncellseq{Deep}{7} refers to the Deep cell trained on $(\x_t \in \mathbb{R}^{28,4} )_{t=1}^{7}$.
 
 \subsection{Result}
+\label{sec:exp1_result}
 
 \renewcommand{\arraystretch}{1.5}
 \begin{table}[]
@@ -317,7 +318,7 @@ As illustrated in \addfigure{\ref{fig:quantitative_evaluation}}, the percentage 
 \begin{figure}[!htb]
 \centering
 \includegraphics[width=\textwidth]{sketch/quantitative_evaluation}
-\caption{Quantitative measurement} 
+\caption{Comparison of 2 quantitative measurements} 
 \label{fig:quantitative_evaluation}
 \end{figure}
 
@@ -341,11 +342,11 @@ It is also possible that some architectures might perform similarly and the diff
 \cline{3-4}
 & &
 \multicolumn{2}{c|}{\parbox{3.5cm}{ \vskip 1mm \centering \textbf{Accuracy} \vskip 1mm}} \\ \hline
-\multicolumn{1}{|l|}{\textbf{Cell Architecture}} & \textbf{No. trainable variables} & \textbf{MNIST} & \textbf{FashionMNIST} \\ \hline
-\multicolumn{1}{|l|}{Shallow}    & 184330          & 98.12\% & 90.00\% \\ 
-\multicolumn{1}{|l|}{Deep}       & 153578           & 98.16\% & 89.81\% \\ 
- \multicolumn{1}{|l|}{DeepV2}     & 161386        & 98.26\% & 90.57\% \\
-\multicolumn{1}{|l|}{ConvDeep}   & 151802       & 99.22\% & 92.87\%  \\ \hline 
+\multicolumn{1}{|l|}{\textbf{Cell architecture}} & \textbf{No. variables} & \textbf{MNIST-MAJ} & \textbf{FashionMNIST-MAJ} \\ \hline
+\multicolumn{1}{|l|}{Shallow}    & 184,330          & 98.12\% & 90.00\% \\ 
+\multicolumn{1}{|l|}{Deep}       & 153,578           & 98.16\% & 89.81\% \\ 
+ \multicolumn{1}{|l|}{DeepV2}     & 161,386        & 98.26\% & 90.57\% \\
+\multicolumn{1}{|l|}{ConvDeep}   & 151,802       & 99.22\% & 92.87\%  \\ \hline 
 \end{tabular}
 
 \end{center}
@@ -357,7 +358,7 @@ It is also possible that some architectures might perform similarly and the diff
  \begin{figure}[!htb]
 \centering
 \includegraphics[width=\textwidth]{sketch/heatmap_msc_for_thesis}
-\caption{Relevance heatmaps produced by different explanation techniques and cell architectures trained on MNIST-MAJ and FashionMNIST-MAJ with sequence length $T=12$. \heatmapscaleexplain } 
+\caption{Relevance heatmaps produced by different explanation techniques on Shallow, Deep, DeepV2 and ConvDeep architecture trained on MNIST-MAJ and FashionMNIST-MAJ with sequence length $T=12$. \heatmapscaleexplain } 
 \label{fig:heatmap_msc_mix_for_thesis}
 \end{figure}
 
@@ -370,7 +371,7 @@ Table \ref{tab:maj_rnn_model_acc} shows number of trainable variables and accura
  \begin{figure}[!hbt]
 \centering
 \includegraphics[width=\textwidth]{sketch/rel_dist_maj_3_samples_thesis}
-\caption{Percentage of relevance in data region} 
+\caption{Average cosine similarity from different explanation techniques and Shallow, Deep, DeepV2 and ConvDeep architecture. The values are averaged from cross-validation results and the vertical lines depicted 95\% confidence interval. The baseline is the Shallow architecture depicted by the blue line.\todo{link accuracy to appendix}} 
 \label{fig:rel_dist_maj_3_samples_thesis}
 \end{figure}
 

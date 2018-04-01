@@ -26,6 +26,9 @@
 \usepackage[ruled]{algorithm2e}
 \usepackage{afterpage}
 \usepackage{nomencl}
+\usepackage{breakcites}
+
+
 \makenomenclature
 
 
@@ -59,9 +62,13 @@
 
 \newcommand{\patarg}[2]{ \underset{#2}{\text{arg#1}}\   }
 
-
-%\newcommand*\circled[1]{\tikz[baseline=(char.base)]{
-%            \node[shape=circle,draw,inner sep=2pt, white, fill=red,minimum size=1em] (char) {\textbf{\footnotesize{#1}}};}}
+%
+\newcommand*\patcircle[1]{\tikz[baseline=(char.base)]{
+            \node[shape=circle,draw,inner sep=2pt, black, fill=white,minimum size=1em] (char) {\textbf{\footnotesize{#1}}};}}
+            
+\newcommand\encircle[1]{%
+  \tikz[baseline=(X.base)] 
+    \node (X) [draw, shape=circle, inner sep=0] {\strut #1};}
 \newcommand*\circled[1]{(#1)}
             
 \newcommand{\rnncellseq}[2]{\capitalisewords{#1}-#2}
