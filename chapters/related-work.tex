@@ -1,16 +1,10 @@
 \chapter{Related Work}
 \label{cha:chapter2}
+%\todo{shorten caption in list of figures and table}
+%\todo{related work}
 
-Survey of neural networks
+Neural networks(NN) have been demonstrating their capabilities to solve complex problems in recent years. Recurrent neural networks(RNN) are one of these successful developments. In particular, RNN are designed to process sequential data. Hence, RNN is considerably useful for applications related to text, such as machine translation and natural language processing. In fact, state-of-the-art of these applications today mostly rely on RNN. However, the question of how neural networks, including RNN, derive their predictions is still unclear to us. This causes resistance in the adoptation and development of the technology itself. 
 
-Noise injection
-variational ... 
+\cite{SimonyanDeepConvolutionalNetworks2013}  proposed a pioneer work in understand the predictions of NN through a method called, \textit{sensitivity analysis}(SA), as well as features that each layer in those networks learn. \cite{SpringenbergStrivingSimplicityAll2014e} suggested a modified version of SA, called \textit{guided backprop}(GB), for ReLU-type neural networks. The result demonstrated that GB produces more meaniful explanations than SA. \cite{SmilkovSmoothGradremovingnoise2017} also suggested an approach to improve quality of SA explanations. \cite{BachPixelWiseExplanationsNonLinear2015} proposed an alternative approach, called \textit{Layer-Wise Relevance Propagation}(LRP). The metho utilizes architecture of the neural network itself to create explanations, instead of relying on derivatives as in SA and GB. For ReLU-type networks,\cite{MontavonExplainingnonlinearclassification2017} showed that LRP can be equivalent to \textit{deep Taylor decomposition}(DTD). \cite{SundararajanAxiomaticAttributionDeep2017} proposed \textit{integrated gradients} combining gradient and decomposition technique. \cite{RibeiroWhyShouldTrust2016} developed \textit{Local Interpretable Model-Agnostic Explanations}(LIME) that can explain predictions from wider set of models. \cite{OlahBuildingBlocksInterpretability2018} suggested ideas for visualizing explanations from multiple domains. 
 
-Explanailbiy 
-- Sensitivity, ... 
- - Gregoire, ...
- - Lime
- - Laura structureing class
- - Leira ..  LSTM .. 
- 
- 
+However, there is still only few work in the direction of explaining predictions from RNN. The only work we have found is from \cite{ArrasExplainingRecurrentNeural2017} where they applied LRP to  LSTM\cite{HochreiterLongshorttermmemory1997} trained to perform a sentiment analysis task.

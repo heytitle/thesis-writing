@@ -1,7 +1,6 @@
-\section{Experiment 3 : Improve Relevance Distribution}
-The results from the previous experiment show that better structured cell architecture leads to better explanation, in other words, easier to be explained. However, there are some cases that the purposed architectures fail to distribute relevance properly.  Hence, this experiment aims to extend the proposed architectures further to better address the problem. More precisely, we consider the same classification problem as described in Section \ref{sec:exp2_prob_formulate} and propose 3 improvements, namely stationary dropout, employing gating units,  and literal connections of convolutional layers.
+\section{Experiment 3 : Improve Relevance Propagation}
+The results from the previous experiment show that better structured cell architecture leads to better explanation, in other words, easier to be explained. However, there are some cases that the purposed architectures fail to distribute relevance properly.  Hence, this experiment aims to extend the proposed architectures further to better address the problem. More precisely, we consider the same setting as Section \ref{sec:exp2_prob_formulate}. Here, we propose 3 improvements, namely stationary dropout, employing gating units,  and literal connections of convolutional layers.
 
-\todo{evaluation, methodologoy}
 
 \subsection{Proposal 1 :  Stationary Dropout}
 Dropout is a simple regularization technique that randomly suspends activity of neurons during training\cite{SrivastavaDropoutSimpleWay2014} . This randomized suspension allows the neurons to learn more specific representations and reduces chance of overfitting.  As a result, its influence directly impacts the quality of explanation. 
@@ -22,7 +21,7 @@ Dropout is a simple regularization technique that randomly suspends activity of 
 \subfloat[Naive Dropout]{\includegraphics[width=0.8\textwidth]{sketch/lstm_naive_dropout} \label{fig:lstm_naive_dropout}} \\
 \subfloat[Stationary Dropout]{\includegraphics[width=0.8\textwidth]{sketch/lstm_variational_dropout} \label{fig:lstm_variational_dropout}}
 
-\caption{Different dropout approaches for LSTM where \textcircled{\tiny \textbf D} indicates a dropout mask and its color represents the suspension activity.}
+\patcaption{LSTM with different dropout approaches.}{\textcircled{\tiny \textbf D} indicates a dropout mask and its color represents the suspension activity.}
 \label{fig:dropout_lstm}
 \end{figure}
 
@@ -49,14 +48,14 @@ As discussed in Section \ref{sec:conv}, convolution and pooling operator enable 
  \begin{figure}[!htb]
 \centering
 \includegraphics[width=\textwidth]{sketch/conv_literalconn}
-\caption{ConvDeep with literal connections(\rnncell{Conv$^+$Deep})} 
+\patcaption{ConvDeep with literal connections}{(\rnncell{Conv$^+$Deep}).} 
 \label{fig:conv_literalconn}
 \end{figure}
 
 Therefore, we propose to also share results from convolution operators to the operators in the next step. We name this connections as \textit{literal connections} and \addfigure{\ref{fig:conv_literalconn}} illustrates such connections in red. From the following, we are going to refer Conv$^+$ to the setting where convolutional layers are connected through the literal connections. 
 
 %\subsection{Setting}
-In this experiment, we divided results into 2 parts. The first part focuses on stationary dropout and R-LSTM proposal and use the Deep architecture as a baseline. We refer models trained with stationary dropout with $-SD$ suffix. For R-LSTM's configuration, we also added one layer with 256 neurons between the input and 75 R-LSTM cells to make it comparable to the Deep architecture.  
+In this experiment, we divided results into 2 parts. The first part focuses on stationary dropout and R-LSTM proposal and use the Deep architecture as a baseline. We refer models trained with stationary dropout with $-SD$ suffix. For R-LSTM's configuration, we also added one layer with 256 neurons between the input and 75 R-LSTM cells to make it comparable to the Deep architecture.  \todo{Figure X : show R-LSTM setting}
 
 In the second part, we are going to discuss results from the literal connection proposal as well as results from ConvR-LSTM where the first fully-connected layer is replaced by convolutions and pooling layers with the same configuration as in ConvDeep. The number of R-LSTM cells is also the same to the first part. 
 
@@ -83,7 +82,7 @@ Table \ref{tab:maj_exp3_model_acc} shows number of trainable parameters in the p
 \end{tabular}
 
 \end{center}
-\caption{Number of trainable variables and model accuracy of the  proposed architectures for MNIST-MAJ and FashionMNIST-MAJ}
+\caption{Number of trainable variables and model accuracy of the  proposed architectures for MNIST-MAJ and FashionMNIST-MAJ.}
 \label{tab:maj_exp3_model_acc}
 \end{table}
 \renewcommand{\arraystretch}{1}
@@ -93,7 +92,7 @@ Table \ref{tab:maj_exp3_model_acc} shows number of trainable parameters in the p
  \begin{figure}[!htb]
 \centering
 \includegraphics[width=\textwidth]{sketch/heatmap_msc_rlstm_exp}
-\caption{Relevance heatmaps produced by different explanation techniques on Deep and R-LSTM architecture trained on MNIST-MAJ and FashionMNIST-MAJ with sequence length $T=12$ and different dropout configurations. \heatmapscaleexplain} 
+\patcaption{Relevance heatmaps produced by different explanation techniques on Deep and R-LSTM architecture trained on MNIST-MAJ and FashionMNIST-MAJ with sequence length $T=12$ and different dropout configurations.}{\heatmapscaleexplain} 
 \label{fig:heatmap_msc_rlstm_exp}
 \end{figure}
 
@@ -103,7 +102,9 @@ Table \ref{tab:maj_exp3_model_acc} shows number of trainable parameters in the p
  \begin{figure}[!htb]
 \centering
 \includegraphics[width=\textwidth]{sketch/rel_dist_rlstm_exp}
-\caption{Average cosine similarity from different explanation techniques and Deep and R-LSTM architecture. The values are averaged from cross-validation results and the vertical lines depicted 95\% confidence interval. The baseline is the Deep architecture depicted by dotted blue line.\todo{link accuracy to appendix}} 
+%\caption{}  }. 
+\patcaption{Average cosine similarity from different explanation techniques and Deep and R-LSTM architecture.}{The values are averaged from cross-validation results and the vertical lines depicted 95\% confidence interval. The baseline is the Deep architecture depicted by dotted blue line. Accuracy of the models can be found at Appendix  \ref{annex:model_acc}}
+
 \label{fig:rel_dist_rlstm_exp}
 \end{figure}
 
@@ -118,7 +119,7 @@ Table \ref{tab:maj_exp3_model_acc} shows number of trainable parameters in the p
  \begin{figure}[!htb]
 \centering
 \includegraphics[width=\textwidth]{sketch/heatmap_msc_convtran_exp_v2}
-\caption{Relevance heatmaps produced by different explanation techniques on variants of ConvDeep and R-LSTM architecture trained on MNIST-MAJ and FashionMNIST-MAJ with sequence length $T=12$. \heatmapscaleexplain} 
+\patcaption{Relevance heatmaps produced by different explanation techniques on variants of ConvDeep and R-LSTM architecture trained on MNIST-MAJ and FashionMNIST-MAJ with sequence length $T=12$.}{\heatmapscaleexplain} 
 \label{fig:heatmap_msc_convtran_exp}
 \end{figure}
 For the second part, we compare the ConvDeep architecture and the effect of literal connections as well as R-LSTM-SD with convolutional layers, which is referred as ConvR-LSTM-SD. According to \addfigure{\ref{fig:heatmap_msc_convtran_exp}}, Conv$^+$Deep produces more diffuse relevance heatmaps than ConvDeep. This is specially notable on heatmaps from SA  and GB method. Similarly, Conv$^+$Deep also produces worse results for DTD and $\lrpp$, for example consider Digit 1 and Digit 9 sample, where the relevance scores are unnecessarily distributed to the last digit's block. 
@@ -128,21 +129,21 @@ For the second part, we compare the ConvDeep architecture and the effect of lite
  \begin{figure}[!htb]
 \centering
 \includegraphics[width=\textwidth]{sketch/heatmap_msc_convrlstm_pos_rel}
-\caption{Positive Relevance heatmaps produced by $\lrpp$ technique on R-LSTM and ConvR-LSTM architecture trained on MNIST-MAJ and FashionMNIST-MAJ with sequence length $T=12$. \heatmapscaleexplain} 
+\patcaption{Positive relevance heatmaps produced by $\lrpp$ technique on R-LSTM and ConvR-LSTM architecture trained on MNIST-MAJ and FashionMNIST-MAJ with sequence length $T=12$.}{\heatmapscaleexplain} 
 \label{fig:heatmap_msc_convrlstm_pos_rel}
 \end{figure}
 
  \begin{figure}[!htb]
 \centering
 \includegraphics[width=\textwidth]{sketch/rel_dist_convdeep_trans_exp}
-\caption{Average cosine similarity from different explanation techniques and variants of ConvDeep and R-LSTM architecture. The values are averaged from cross-validation results and the vertical lines depicted 95\% confidence interval. The baseline are the Deep and R-LSTM-SD architecture represented in blue.\todo{link accuracy to appendix}} 
+\patcaption{Average cosine similarity from different explanation techniques and variants of ConvDeep and R-LSTM architecture.}{The values are averaged from cross-validation results and the vertical lines depicted 95\% confidence interval. The baseline are the Deep and R-LSTM-SD architecture represented in blue. Accuracy of the models can be found at Appendix \ref{annex:model_acc}} 
 \label{fig:rel_dist_convdeep_trans_exp}
 \end{figure}
 
 \addfigure{\ref{fig:rel_dist_convdeep_trans_exp}} presents the cosine similarity measurement this second part of the experiment. Here, ConvDeep and R-LSTM-SD are results from the previous experiments and used as baseline. Unexpectedly, having literal connections in ConvDeep does not seem to show consistent influence between MNIST-MAJ and FashionMNIST-MAJ. However, the connections considerably reduce the explanation capability of the ConvR-LSTM-SD architecture. 
  Although explanations from ConvR-LSTM-SD are less noisy and contain impressive structures from the input as shown in \addfigure{\ref{fig:heatmap_msc_convrlstm_pos_rel}}, the average cosine similarity of R-LSTM-SD and ConvR-LSTM-SD look almost identical. This is due to the fact our cosine similarity measurement operates on scalar values but not structures inside explanation heatmaps.
  
- \todo{In fact, using Tukey HSD test shows that the improvement is not statistically significant} 
+ \todo{hypo: In fact, using Tukey HSD test shows that the improvement is not statistically significant} 
 \todo{hypothesis testing}
 
 \clearpage

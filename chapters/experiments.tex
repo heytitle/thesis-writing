@@ -39,7 +39,7 @@ Epoch     & 100                                \\
 Dropout Probability     & 0.2                               \\
 Batch size              & 50                                
 \end{tabular}
-\caption{Hyperparameter Summary}
+\caption{Summary of hyperparameter.}
 \label{tab:hyper_summary}
 \end{table}
 
@@ -52,7 +52,7 @@ Batch size              & 50
 \multicolumn{1}{l|}{FashionMNIST}    & \multicolumn{1}{r}{85.00\%}  \\
 %\multicolumn{1}{l|}{UFI Cropped}                                       &                         \dots
 \end{tabular}
-\caption{Minimum Classification accuracy for models to be considered}
+\caption{Minimum classification accuracy for models to be considered.}
 \label{tab:min_acc}
 \end{table}
 
@@ -126,12 +126,12 @@ Our implementation is written in Python and TensorFlow\cite{AbadiTensorFlowLarge
 
  
 
-\clearpage
+%\clearpage
 \section{Experiment 1 : Sequence Classification}
 \label{sec:exp1}
 
 \subsection{Problem Formulation}
-In this preliminary experiment, we constructed an artificial classification problem in which each image sample $\x$ is column-wise split into a sequence of non-overlapping $(\x_t)_{t=1}^{T}$. The RNN classifier needs to summarize information from the sequence $(\x_t)_{t=1}^{T}$ to answer what is the class of $\x$.   Using image allows us to conveniently inspect how well RNNs can distribute relevant quantities to input space. 
+We consider this experiment as a preliminary study. Here, we constructed an artificial classification problem in which each image sample $\x$ is column-wise split into a sequence of non-overlapping $(\x_t)_{t=1}^{T}$. The RNN classifier needs to summarize information from the sequence $(\x_t)_{t=1}^{T}$ to answer what is the class of $\x$.   Using image allows us to conveniently inspect how well RNNs can distribute relevant quantities to input space. 
 
 \addfigure{\ref{fig:artificial_problem}} illustrates the setting. Here, a MNIST sample $ \patvector{x} \in \mathbb{R}^{28,28}$ is divided to a sequence of $( \patvector{x}_t \in   \mathbb{R}^{28,7} )_{t=1} ^ 4$. At time step $t$, $\patvector{x}_t$ is presented to the RNN classifier yielding recurrent input $\patvector{r}_{t+1}$ for the next step. For the last step $T$, in this example $T = 4$, the RNN classifier computes $f(\x) \in \mathbb{R}^{10}$ and class probabilities accordingly.
 
@@ -214,7 +214,7 @@ To simplify the writing, we am going to use \textit{\rnncellseq{ARCHITECTURE}{T}
  \begin{figure}[!htb]
 \centering
 \includegraphics[width=0.8\textwidth]{sketch/mnist_experiment}
-\caption{Relevance heatmaps produced by different explanation techniques of Shallow and Deep architecture trained on MNIST with different sequence lengths. \heatmapscaleexplain }
+\patcaption{Relevance heatmaps from different explanation techniques applied to Shallow and Deep architecture trained on MNIST with different sequence lengths.}{\heatmapscaleexplain }
 \label{fig:mnist_experiment}
 \end{figure}
 
@@ -227,7 +227,7 @@ Table \ref{tab:mnist_model_acc} summaries accuracy of the trained models. Both S
  \begin{figure}[!htb]
 \centering
 \includegraphics[width=0.8\textwidth]{sketch/fashion_mnist_experiment}
-\caption{Relevance heatmaps produced by different explanation techniques of Shallow and Deep architecture trained on FashionMNIST with different sequence lengths. \heatmapscaleexplain}
+\patcaption{Relevance heatmaps from different explanation techniques applied to  Shallow and Deep architecture trained on FashionMNIST with different sequence lengths.}{\heatmapscaleexplain}
 \label{fig:fashion_mnist_experiment}
 \end{figure}
 
@@ -239,7 +239,7 @@ Similar structures of FashionMNIST samples might be one of the reasons why Deep 
  \begin{figure}[!htb]
 \centering
 \includegraphics[width=0.8\textwidth]{sketch/class_1_comparison}
-\caption{Relevance heatmaps of MNIST \textit{Class 1} and FashionMNIST \textit{Class Trouser} samples from \rnncellseq{Shallow}{7} and \rnncellseq{Deep}{7} explained by DTD and $\lrpp$. \heatmapscaleexplain }
+\patcaption{Relevance heatmaps of MNIST \textit{Class 1} and FashionMNIST \textit{Class Trouser} samples from \rnncellseq{Shallow}{7} and \rnncellseq{Deep}{7} explained by DTD and $\lrpp$.}{\heatmapscaleexplain }
 \label{fig:class_1_comparison}
 \end{figure}
 
@@ -295,7 +295,7 @@ Hence, apart of Shallow and Deep architecture, we also introduced another two ar
        \includegraphics[width=0.48\textwidth]{sketch/convdeep_arch}
      }
 
-\caption{DeepV2 and ConvDeep cell architecture with number of neurons at each layer depicted.}
+\patcaption{DeepV2 and ConvDeep cell architecture}{with number of neurons at each layer depicted.}
 \label{fig:deep_conv_arch}
 \end{figure}
 
@@ -304,7 +304,7 @@ Lastly, despite the fact that  our implementation is readily to apply on differe
 
 \subsection{Evaluation Methodology}
 \label{sec:evaluation_med}
-From the problem construction, we know that relevance quantities should  be primarily assigned to blocks that belong to the majority group. This construction enables us to both directly examine quality of produced relevance heatmaps visually as well as quantitative evaluation.  In particular, for qualitative inspections, we constructed training and testing data based on the original training and testing split that \cite{LeCunMNISThandwrittendigit2010} and \cite{XiaoFashionMNISTNovelImage2017} proposed and trained with setting described in Section \ref{sec:setup}.
+From the problem construction, we know that relevance quantities should  be primarily assigned to blocks that belong to the majority group. This construction enables us to both directly examine quality of produced relevance heatmaps visually as well as quantitative evaluation.  In particular, for qualitative inspections, we constructed training and testing data based on the original training and testing split that \cite{LeCunMNISThandwrittendigit2010} and \cite{XiaoFashionMNISTNovelImage2017} proposed and trained with setting described in Section \ref{sec:setup}. \todo{talk about ability to distributed relevance to reight region and visual perception}
 
 \subsubsection{Quantitative Evaluation}
 A straightforward way to quantitatively evaluate results is to calculate proportion of relevance distributed to pixels that are contained in the blocks of the majority group digit/item. However, this measurement has a shortcoming where architectures can achieve high score if they distribute relevance to only one of the correct blocks. Hence, we then propose to use \textit{cosine similarity} instead. The cosine similarity is computed from  a  binary  vector $\patvector{m} \in \mathbb{R}^3$  whose values represent correctness of the blocks and a vector $\patvector{\upsilon} \in \mathbb{R}^3$ of relevance percentage distributed to the blocks. 
@@ -318,14 +318,14 @@ As illustrated in \addfigure{\ref{fig:quantitative_evaluation}}, the percentage 
 \begin{figure}[!htb]
 \centering
 \includegraphics[width=\textwidth]{sketch/quantitative_evaluation}
-\caption{Comparison of 2 quantitative measurements} 
+\patcaption{Comparison between percentage of correctly distributed relevance and cosine similarity.}{} 
 \label{fig:quantitative_evaluation}
 \end{figure}
 
 \subsubsection{Statistical Evaluation}
 To reduce variations possibly introduced by, for example variable initialization, we conducted quantitatively evaluations through $k$-fold cross-validation where we combined  training and testing set together before spliting into $k$ folds. Each fold is used as the testing set once. For each cross-validation iteration, we average the cosine similarity across testing samples. The final result is then averaged from folds' statistics.  To keep the same proportion of training and testing data, we chose $k=7$. 
 
-\todo{ check whether we need it: 
+\todo{hypo : check whether we need it: 
 It is also possible that some architectures might perform similarly and the difference is not visually observed. For such scenarios, we will use one-way ANOVA on statistics of cosine similarity and pairwise Tukey Honest Significant Difference (HSD) as a post-hoc test to verify whether there are statistically significant results. We use significance level at $0.05$. Dataset is considered as a confounding variable. This procedure is conducted separately for each explanation method.
 }
 
@@ -358,7 +358,7 @@ It is also possible that some architectures might perform similarly and the diff
  \begin{figure}[!htb]
 \centering
 \includegraphics[width=\textwidth]{sketch/heatmap_msc_for_thesis}
-\caption{Relevance heatmaps produced by different explanation techniques on Shallow, Deep, DeepV2 and ConvDeep architecture trained on MNIST-MAJ and FashionMNIST-MAJ with sequence length $T=12$. \heatmapscaleexplain } 
+\patcaption{Relevance heatmaps from different explanation techniques applied to Shallow, Deep, DeepV2 and ConvDeep architecture trained on MNIST-MAJ and FashionMNIST-MAJ with sequence length $T=12$.}{\heatmapscaleexplain } 
 \label{fig:heatmap_msc_mix_for_thesis}
 \end{figure}
 
@@ -371,7 +371,10 @@ Table \ref{tab:maj_rnn_model_acc} shows number of trainable variables and accura
  \begin{figure}[!hbt]
 \centering
 \includegraphics[width=\textwidth]{sketch/rel_dist_maj_3_samples_thesis}
-\caption{Average cosine similarity from different explanation techniques and Shallow, Deep, DeepV2 and ConvDeep architecture. The values are averaged from cross-validation results and the vertical lines depicted 95\% confidence interval. The baseline is the Shallow architecture depicted by the blue line.\todo{link accuracy to appendix}} 
+
+\patcaption{Average cosine similarity from different explanation techniques and Shallow, Deep, DeepV2 and ConvDeep architecture.}{The values are averaged from cross-validation results and the vertical lines depicted 95\% confidence interval. The baseline is the Shallow architecture depicted by the blue line. Accuracy of the models can be found at Appendix  \ref{annex:model_acc}}
+
+
 \label{fig:rel_dist_maj_3_samples_thesis}
 \end{figure}
 

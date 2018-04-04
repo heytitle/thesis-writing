@@ -1,0 +1,24 @@
++-------------+----------------------------------+---------+-----------+--------+
+| dataset     | architecture                     |   count |   avg_acc |    std |
+|-------------+----------------------------------+---------+-----------+--------|
+| mnist-maj   | deep_v2                          |       7 |     98.48 | 0.1274 |
+| mnist-maj   | shallow                          |       7 |     98.35 | 0.2393 |
+| mnist-maj   | convrlstm_persisted_dropout      |       7 |     99.60 | 0.0467 |
+| mnist-maj   | deep                             |       7 |     98.43 | 0.0926 |
+| mnist-maj   | rlstm_persisted_dropout          |       7 |     98.75 | 0.1248 |
+| mnist-maj   | rlstm                            |       7 |     98.77 | 0.0603 |
+| mnist-maj   | convtran_rlstm_persisted_dropout |       7 |     98.30 | 0.1842 |
+| mnist-maj   | deep_persisted_dropout           |       7 |     98.43 | 0.1599 |
+| mnist-maj   | convdeep_transcribe              |       7 |     97.89 | 0.1988 |
+| mnist-maj   | convdeep                         |       7 |     99.28 | 0.0737 |
+| fashion-maj | deep_v2                          |       7 |     92.07 | 0.3596 |
+| fashion-maj | shallow                          |       7 |     92.30 | 0.2550 |
+| fashion-maj | convrlstm_persisted_dropout      |       7 |     95.44 | 0.1356 |
+| fashion-maj | deep                             |       7 |     91.35 | 0.3053 |
+| fashion-maj | rlstm_persisted_dropout          |       7 |     93.42 | 0.2513 |
+| fashion-maj | rlstm                            |       7 |     93.40 | 0.2714 |
+| fashion-maj | convtran_rlstm_persisted_dropout |       7 |     89.71 | 0.4215 |
+| fashion-maj | deep_persisted_dropout           |       7 |     91.87 | 0.3136 |
+| fashion-maj | convdeep_transcribe              |       7 |     89.14 | 0.2770 |
+| fashion-maj | convdeep                         |       7 |     94.19 | 0.2128 |
++-------------+----------------------------------+---------+-----------+--------+

@@ -1,15 +1,29 @@
 \section{Explainability of Neural Networks}
 Neural networks have become one of major machine learning algorithms used in many applications, for example computer vision and medicine. Despite those achievements, they are still considered as a blackbox process that is  difficult to interpret its results or find evidences that the networks use to make such accurate decisions for further analyses.
 
-\afterpage[!hbt]{
+
+%\begin{figure}
+%  \centering
+%  \begin{minipage}{\textwidth}
+%  
+%			\includegraphics[width=0.6\textwidth]{sketch/husky_explanation}
+%
+%    \caption[Compact Routing Example]%
+%    {Compact Routing\footnote{something} Example}
+%  \end{minipage}
+%\end{figure}
+%
+
+
  \begin{figure}[!hbt]
-\centering
-\includegraphics[width=0.6\textwidth]{sketch/husky_explanation}
-\caption[xx]{A classifier classifies ``husky" as ``wolf" because of the snow background.\footnotemark }
-\label{fig:husky_explanation}
+	 		\centering
+			\includegraphics[width=0.6\textwidth]{sketch/husky_explanation}
+			\caption{A classifier classifies ``husky" as ``wolf" because of the snow background.}
+			  \small{ Source : \cite{RibeiroWhyShouldTrust2016} }
+			\label{fig:husky_explanation}
 \end{figure}
-\footnotetext{Source : \cite{RibeiroWhyShouldTrust2016} }
-}
+%\footnotetext{}
+
 
 Moreover, it is always important to verify whether trained neural networks properly utilize data or what information it uses to make decisions. Literatures refer this functional inspection as ``Explainability'' or ``Interpretability". \cite{BachAnalyzingclassifiersFisher2016, RibeiroWhyShouldTrust2016} demonstrated that there are cases that some neural networks exploit artifacts in the data to make decisions. \addfigure{\ref{fig:husky_explanation}} is such an example. This discoveries emphasize the importance of having explainable neural networks, not to mention the fact that nowadays neural networks have involved in several aspects that human's life is involved, such as medicine or self-driving car. Therefore, having more explainable models is necessary.
 
@@ -23,7 +37,7 @@ Formally, interpreting neural networks can analyze in 2 approaches, namely \text
 
 On the other hand, local explanation focuses on finding relevant information in $\patvector{x}$ that can explain why the neural network predicts that $\x$ belongs to a certain class $c_i \in \mathcal{C}$.  More precisely, local explanation seeks to assign each pixel $x_i \in \patvector{x}$ with a score that quantitatively explains how the pixel influences the neural network to make a decision. The score is formally referred as \textit{relevance score} and denoted with $R_i(\x)$ or $R_i$ if it is clear from the context. As a result, combining $R_i(\x)$ together will produces a \textit{relevance heatmap} or \textit{explanation heatmap}.
 
-As illustrated in \addfigure{\ref{fig:comparision_between_global_and_local_analysis}}\footnote{The analogy is borrowed from Prof. M\"{u}ller's lecture slide and the images were taken from \cite{NguyenSynthesizingpreferredinputs2016a, BachPixelWiseExplanationsNonLinear2015}.}, the difference between global and local explanation can be analogously described by formulating questions as follows
+As illustrated in \addfigure{\ref{fig:comparision_between_global_and_local_analysis}}, the difference between global and local explanation can be analogously described by formulating questions as follows
 \begin{itemize}
 	\item Global explanation : ``Hoes does a usual lamp look like?"
     \item Local explanation : ``which area in the image make it look like a lamp?" 
@@ -33,6 +47,9 @@ As illustrated in \addfigure{\ref{fig:comparision_between_global_and_local_analy
 \centering
 \includegraphics[width=0.8\textwidth]{sketch/global_and_local_method}
 \caption{Comparison between global and local explanation}
+\small{
+The analogy is borrowed from Prof. M\"{u}ller's lecture slide. \\The images were taken from \cite{NguyenSynthesizingpreferredinputs2016a, BachPixelWiseExplanationsNonLinear2015}.
+}
 \label{fig:comparision_between_global_and_local_analysis}
 \end{figure}
 
@@ -91,16 +108,19 @@ The methods mentioned so far derive $R_i(\x)$ directly from $f(\patvector{x})$ a
 
 
 
-\afterpage{
+
  \begin{figure}[!hbt]
 	\begin{center}
 		\includegraphics[width=0.8\textwidth]{sketch/lrp_graph}
-		\caption[The LOF caption]{An illustration of relevance propagation in LRP.\footnotemark}
+		\caption{An illustration of relevance propagation in LRP.}
+		\small{
+			Source : \url{http://heatmapping.org}
+			}
 		\label{fig:lrp_graph}
 	\end{center}
 \end{figure}
-\footnotetext{The figure is a modified version from \url{http://heatmapping.org}}
-}
+%\footnotetext{}}
+%}
 
 Consider the neural network illustrated in \addfigure{\ref{fig:lrp_graph}}. $R_j$ and $R_k$ are relevance score of  neurons $j,k$ in successive layers.  LRP provides a general form of relevance propagation as 
 
@@ -109,9 +129,9 @@ Consider the neural network illustrated in \addfigure{\ref{fig:lrp_graph}}. $R_j
 \end{align}
 
 where $\delta_{j\leftarrow k}$ defines a proportion that  $R_{k}$ contributes to $R_j$. Consider further that activity $a_k$ of neuron $k$ is computed by 
-\begin{align*}
+\begin{align}
 	a_k = \sigma \bigg( \sum_{j} w_{jk} a_j + b_k \bigg),
-\end{align*} 
+\end{align} 
 where $\sigma$ is a activation function, $w_{jk}, b_k$ are the corresponding weight and bias between neuron $j$ and $k$. For monotonic increasing $\sigma$, $\delta_{j\leftarrow k}$ can be calculated as follows 
 \begin{align} \label{eq:delta_j_k}
 	\delta_{j\leftarrow k} = \alpha\frac{a_j w_{jk}^+}{\sum_{j} a_jw_{jk}^+} - \beta\frac{a_j w_{jk}^-}{\sum_{j} a_jw_{jk}^-},
@@ -149,9 +169,6 @@ where $\hat{R}_{k}  = \alpha R_{k}$ and  $\check{R}_{k} = -\beta R_{k} $. We can
 	- Section 5.1 \cite{MontavonMethodsInterpretingUnderstanding2017}
 \end{quote} 
 
-
-
-%TODO : Theory how LRP ensure conservation property?
 Moreover, LRP has \textit{Conservation Property} in which relevance quantities are conserved during distributing $f(\patvector{x})$ back to $\x$. Formally, it is 
 \begin{align}
 	\sum_{i} R_i =  \cdots =	\sum_{j} R_j = \sum_{k} R_k = \cdots = f(\patvector{x})
@@ -408,7 +425,7 @@ R_j = \sum_k  \frac{ a_j  w_{jk} - l_j w_{jk}^- - h_j w_{jk}^+  }{\sum_{j}   a_j
 \begin{figure}[!htb]
 \centering
 \includegraphics[width=\textwidth]{sketch/lenet_heatmaps}
-\caption[xx]{Relevance heatmaps from LeNet-5 architecture explained by different explanation methods. \heatmapscaleexplain }
+\patcaption{Relevance heatmaps from LeNet-5 architecture explained by different explanation methods.}{\heatmapscaleexplain }
 \label{fig:lenet_heatmaps}
 \end{figure}
 
