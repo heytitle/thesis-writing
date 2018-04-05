@@ -72,9 +72,6 @@ f(\x) &= g_{f}(\patvector{\theta}, \patvector{x}_{T},  \patvector{r}_{T}) \\
 Our implementation is written in Python and based on TensorFlow\cite{AbadiTensorFlowLargeScaleMachine2016}. It is publicly available on Github\footnote{\url{https://github.com/heytitle/thesis-designing-recurrent-neural-networks-for-explainability/releases/tag/release-final}}.  We run our experiments either on a GeForce GTX 1080 provided by TUB ML group or AWS's p2.xlarge\footnote{\url{https://aws.amazon.com/ec2/instance-types/p2/}} instance. With this setting, each model approximately takes 2 hour to train.
 
 
-% \todo{computational resource}
-% \todo{Tensoflow Python and Repo}
-
  
  % 
 %Traditionally, number of neurons in each layer ($n^{(l)}$) is  another hyperparameter that we can adjust. However, as the goal is to compare relevance heatmaps from different architectures, those numbers are fixed and chosen in such a way that total number of variables in each architecture are equivalent. \addfigure{\ref{fig:neuron_numbers}} illustrates the details of the settings.
@@ -288,7 +285,7 @@ Because we already know blocks of digit/item that belong to the majority group f
 As discussed in the previous experiment that only some DTD and $\lrpp$ explanations from the Deep architecture on FashionMNIST were sound. This seems to suggest that the architecture might not have enough capability to extract proper representations from FashionMNIST samples, causing the incorrect propagation issue.
 
 Hence, apart of Shallow and Deep architecture, we are going to  introduce another two architectures, namely DeepV2 and ConvDeep. The DeepV2 architecture has one more layer after the first fully-connected layer than the Deep cell. On the other hand, the ConvDeep architecture instead replaces the first layer with  a sequence of convolutional and pooling operation. \addfigure{\ref{fig:deep_conv_arch}} shows details of these new architectures.
-% \todo{input padding }
+% todo : input padding
 
 
 %\subsection{Setting}
@@ -337,7 +334,7 @@ To reduce variations possibly introduced by, for example variable initialization
 
 
 
-%\todo{
+% todo Statistical Evaluation
 %\subsubsection{Statistical Evaluation}
 %hypo : check whether we need it: 
 %It is also possible that some architectures might perform similarly and the difference is not visually observed. For such scenarios, we will use one-way ANOVA on statistics of cosine similarity and pairwise Tukey Honest Significant Difference (HSD) as a post-hoc test to verify whether there are statistically significant results. We use significance level at $0.05$. Dataset is considered as a confounding variable. This procedure is conducted separately for each explanation method.
@@ -395,7 +392,7 @@ Although explanation heatmaps from \rnncell{Shallow}, \rnncell{Deep}, and \rnnce
 \addfigure{\ref{fig:rel_dist_maj_3_samples_thesis}} presents quantitive  evaluations of the impact from the depth of architecture to the quality of explanation. As a reminder, the measurement is cosine similarity between a mark vector $\boldsymbol{m} \in \mathbb{R}^3$ and an aggregated relevance to blocks of digit/item vector $\boldsymbol{\upsilon \in \mathbb{R}^3 }$ and averaged through $7$-fold cross-validation procedure as described in Section \ref{sec:evaluation_med}. Results from the figure indicate that the depth of architecture indeed improves quality of the explanations. In particular, the averaged cosine similarity of each explanation technique systematically increases when introducing  more layers. This effect can be seen clearly from the result of FashionMNIST-MAJ. Additionally, we can also observe that the difference of the metric between the baseline, \rnncell{Shallow}, and the other  architectures changes with different proposition across methods. In particular, we see the difference from DTD and $\lrpp$ are much larger than the other methods. This implies that some explanation methods are more sensitive to architecture configuration than the others.
 
 
-%\todo{hypo : pair wise statistical testing}
+% todo hypo : pair wise statistical testing
 
 \subsection{Summary}
 Results of this experiment quantitively confirm that architecture of RNN is indeed an important factor to the explainability of RNN models, especially in the aspect of propagating relevance to corresponding input steps.  The results also shows that this impact affects the quality of explanation in different level on different methods. More precisely, deep Taylor decomposition(DTD) and Layer-Wise Relevance Propagations(LRP) technique are more sensitive to the architecture of the explained model than sensitivity analysis(SA) and guided backprop(GB) method.

@@ -8,5 +8,16 @@
 \vspace*{0.5cm}
 
 \noindent
-%TODO Writing abstract 
-Standard (non-LSTM) recurrent neural networks have been challenging to train, but special optimization techniques such as heavy momentum makes this possible. However, the potentially strong entangling of features that results from this difficult optimization problem can cause deep Taylor or LRP-type to perform rather poorly due to their lack of global scope. LSTM networks are an alternative, but their gating function make them hard to explain by deep Taylor LRP in a fully principled manner. Ideally, the RNN should be expressible as a deep ReLU network, but also be reasonably disentangled to let deep Taylor LRP perform reasonably. The goal of this thesis will be to enrich the structure of the RNN with more layers to better isolate the recurrent mechanism from the representational part of the model. 
+
+Neural networks have been increasingly used to solve complex problems. However, their decision making is still unclear to us, hence several explanation method have been proposed recently. In this thesis, we apply sensitivity analysis(SA), guided backprop(GB), Layer-Wise Relevance Propagation(LRP) and deep Taylor decomposition(DTD) to RNN. We extensively study the quality of produced explanations with different RNN configurations. We conduct experiments using artificial classification problems constructed from MNIST and FashionMNIST. Cosine similarity is used to quantify the quality of explanation. Our results show that the quality of explanation from trained RNNs achieving equivalent accuracy can be notably different. In particular, our evaluations demonstrate that deeper architecture and employing gating units in recurrent computations allow RNN to produce significantly higher quality.  Convolutional layers and stationary dropout are another contributors to the quality. We also find that DTD and LRP are more sensitive to the configuration of RNN than SA and GB. With a certain setting, one of architectures considered in this work could reach high level of explainability. We believe that its explanations are substantially informative.
+
+%deep Taylor decomposition(DTD) and Layer-Wise Relevance Propagation(LRP) 
+%|||||||||
+%
+%||||||||||
+%Explaining decisions of neural networks have  increaslying gained attentions from researchers. Several techniques were deveoped, however only small  
+%
+%Research in direction of 
+%
+%
+%Standard (non-LSTM) recurrent neural networks have been challenging to train, but special optimization techniques such as heavy momentum makes this possible. However, the potentially strong entangling of features that results from this difficult optimization problem can cause deep Taylor or LRP-type to perform rather poorly due to their lack of global scope. LSTM networks are an alternative, but their gating function make them hard to explain by deep Taylor LRP in a fully principled manner. Ideally, the RNN should be expressible as a deep ReLU network, but also be reasonably disentangled to let deep Taylor LRP perform reasonably. The goal of this thesis will be to enrich the structure of the RNN with more layers to better isolate the recurrent mechanism from the representational part of the model. 
