@@ -1,6 +1,5 @@
 \section{Explainability of Neural Networks}
-Neural networks have become one of major machine learning algorithms used in many applications, for example computer vision and medicine. Despite those achievements, they are still considered as a blackbox process whose results are hardly to be interpreted by human. In particular, we barely know evidences how the networks transform input to such accurate decisions.
-
+Neural networks (NNs) have become one of significant machine learning algorithms underpinning applications in various domains, such as  computer vision and NLP. Despite those achievements, they are still considered as a black box process whose prediction results are ambiguous to be interpreted by the human. In particular, we barely know evidence how the networks transform input to such accurate decisions.
 
 %\begin{figure}
 %  \centering
@@ -14,46 +13,49 @@ Neural networks have become one of major machine learning algorithms used in man
 %\end{figure}
 %
 
-
- \begin{figure}[!hbt]
-	 		\centering
-			\includegraphics[width=0.6\textwidth]{sketch/husky_explanation}
-			\caption{A classifier classifies ``husky" as ``wolf" because of the snow background.}
-			  \small{ Source : \cite{RibeiroWhyShouldTrust2016} }
-			\label{fig:husky_explanation}
-\end{figure}
+%
+% \begin{figure}[!hbt]
+%	 		\centering
+%			\includegraphics[width=0.6\textwidth]{sketch/husky_explanation}
+%			\caption{A classifier classifies ``husky" as ``wolf" because of the snow background.}
+%			  \small{ Source : \citep{RibeiroWhyShouldTrust2016} }
+%			\label{fig:husky_explanation}
+%\end{figure}
 %\footnotetext{}
 
 
-Practically, it is always important to verify whether trained neural networks properly utilize data or what information they use to make decisions. From literatures, This kind of functional understanding is typically referred to \textit{explaining} or \textit{interpreting} prediction: neural networks are explainable if their predictions can be associated back to what relevant in the input. \cite{BachAnalyzingclassifiersFisher2016, RibeiroWhyShouldTrust2016} demonstrated cases where neural networks exploit artifacts in the data to make decisions. \addfigure{\ref{fig:husky_explanation}} is such an example. This discoveries emphasize the importance of having explainable models, not to mention that nowadays neural networks have been increasinly involved in several aspects of human life, ranging from medical development to self-driving car. 
+Practically, it is always important to verify whether trained NNs properly utilize data or what information they use to make decisions. From literature, this kind of practical understanding is typically referred to as \textit{explaining} or \textit{interpreting} prediction: NNs are explainable if their predictions can be associated back to what is relevant in the input. \citet{BachAnalyzingclassifiersFisher2016} demonstrated a case where a NN classifier exploits artifacts in the data to make decisions. In particular, they showed that  a classification decision of the NN is primarily based on copyright text in the image. \citet{RibeiroWhyShouldTrust2016} also presented a similar case where a classifier mainly uses background of images to classify between two classes. These discoveries emphasize the importance of having explainable models, not to mention risks associated to human lives from applications being powered by them, such as medical diagnosis and autonomous cars.
+%
+%that nowadays neural networks have been increasingly involved in several aspects of human life, ranging from medical development to self-driving car. 
 
 \subsection{Global and Local Explanation}\label{sec:global_local_explanation}
-Formally, there are 2 aspects of explaining neural networks, namely \textit{global} and \textit{local} explanation. Consider an image  classification problem of $\mathcal{C}$ classes, global explanation aims to find an image $\patvector{x}^*$ that is the most representative to a class $c_i \in \mathcal{C}$. Activation Maximization\cite{ErhanUnderstandingRepresentationsLearned2010} is one of the method in this category.
 
-\begin{align}
-\patvector{x}^*  = \patarg{max}{\patvector{x}}  \mathbb{P}( c |\patvector{x},\theta)
-\end{align}
+Formally, there are two aspects of explaining neural networks, namely \textit{global} and \textit{local} explanations. Consider a NN  classifier categorizing images into $K$ classes.  The global explanation aims to find the most representative image $\patvector{x}^*$ of the class $C_k \in \{C_k\}_{k=1}^K$ in respect to activities of neurons in the NN. Activation maximization (AM) \citep{ ErhanUnderstandingRepresentationsLearned2010,SimonyanDeepConvolutionalNetworks2013} is one of the methods in this category. Denote $z_{C_k}(\x)$  the score of the class $C_k$ (i.e. pre-softmax activation) of an image $\x$, the objective of AM is to find a synthetic image $\x^*$ such that  
 
+\begin{align*}
+\patvector{x}^*  = \patarg{max}{\patvector{x}} z_{C_k}(\x) - \lambda \|\x\|,
+\end{align*}
+where $\lambda$ is the $L_2$ regularization parameter. \citet{SimonyanDeepConvolutionalNetworks2013} and \citet{NguyenSynthesizingpreferredinputs2016a} demonstrated practical results of AM on state-of-the-art deep neural network (DNN) architectures.
 
-On the other hand, local explanation focuses on finding relevant information in $\patvector{x}$ that can explain why the neural network predicts that $\x$ into a certain class $c_i \in \mathcal{C}$.  More precisely, this aspect seeks to assign each pixel $x_i \in \patvector{x}$ with a score that quantitatively explains how the pixel influences the decision of the neural network. The score is formally referred as \textit{relevance score} and denoted with $R_i(\x)$ or $R_i$ if it is clear from the context. As a result, combining $R_i(\x)$ together will result in what so called, \textit{explanation}, \textit{explanation heatmap} or \textit{relevance heatmap}.
+On the other hand, the local explanation focuses on finding relevant information in $\patvector{x}$ that can explain why the NN predicts $\x$ into a certain class $C_k$.  More precisely, this aspect seeks to assign each pixel $x_i \in \patvector{x}$ with a score that quantitatively describes how the pixel influences the decision of the network. The score is formally referred as \textit{relevance score} and denoted with $R_i(\x)$ or $R_i$ if it is clear from the context. Combining $R_i(\x)$ together will result in what so called, \textit{explanation}, \textit{explanation heatmap}, or \textit{relevance heatmap}.
 
-As illustrated in \addfigure{\ref{fig:comparision_between_global_and_local_analysis}}, the difference between global and local explanation can be analogously described by formulating questions as follows
+As illustrated in \addfigure{\ref{fig:comparision_between_global_and_local_analysis}}, the difference between the global and local explanations can be analogously described by formulating questions as follows
 \begin{itemize}
-	\item Global explanation : ``How does a usual lamp look like?"
-    \item Local explanation : ``Which part of the image make it look like a lamp?" 
+	\item Global explanation : ``How does a typical digit 2 look like?"
+    \item Local explanation : ``Which part of the image make it look like a digit 2?" 
 \end{itemize}
 
- \begin{figure}[!hbt]
+ \begin{figure}
 \centering
 \includegraphics[width=0.8\textwidth]{sketch/global_and_local_method}
-\caption{Comparison between global and local explanation}
+\caption{A comparison between the global and local explanations}
 \small{
-The analogy is borrowed from Prof. M\"{u}ller's lecture slide. \\The images were taken from \cite{NguyenSynthesizingpreferredinputs2016a, BachPixelWiseExplanationsNonLinear2015}.
+The images were taken from \citet{MontavonExplainingnonlinearclassification2017}.
 }
 \label{fig:comparision_between_global_and_local_analysis}
 \end{figure}
 
-In the following, we are going to discuss approaches in local explanation in details and leave content of global explanation aside due to scope of the thesis. In particular, we are going to introduces these local explanation methods, namely \textit{sensitivity analysis}, \textit{guided backprop}, \textit{simple Taylor decomposition}, \textit{Layer-wise Relevance Propagation} and \textit{deep Taylor decomposition}.
+In the following, we are going to discuss local explanation methods in details and leave content of the global explanation aside due to the scope of the thesis. In particular, we are going to introduce these local explanation methods, namely \textit{sensitivity analysis}, \textit{guided backprop}, \textit{simple Taylor decomposition}, \textit{Layer-wise Relevance Propagation}, and \textit{deep Taylor decomposition}.
 
 
 %Consider $f(\patvector{x})$ is an output from a neural network classifier that is corresponding to the class prediction, for example the value at the final layer before applying softmax function.
@@ -70,54 +72,52 @@ In the following, we are going to discuss approaches in local explanation in det
 %\end{definition}
 
 \subsection{Sensitivity Analysis}
-Sensitivity analysis(SA)\cite{SimonyanDeepConvolutionalNetworks2013} is a local explanation technique that derives relevance score $R_i(\x)$ through the  partial derivative of $f(\patvector{x})$ respect to $x_i$. More formally, it is formulated as follows 
+\textit{Sensitivity analysis} (SA) is a local explanation technique that derives the relevance score $R_i(\x)$ through the  partial derivative of $\frac{\partial f(\patvector{x})}{ \partial x_i }$.  The method was first proposed by \citet{ZuradaSensitivityAnalysisMinimization1994} in context of removing redundant input data for a NN. \citet{KhanClassificationdiagnosticprediction2001} applied it to investigate a NN trained to classify types of cancer gene expressions. Then, \citet{SimonyanDeepConvolutionalNetworks2013} introduced this technique to a DNN for explaining image classifications. One of the possible formulations is 
 
-\begin{align}
+\begin{align*}
 	R_i(\x) =
 	 \bigg( \frac{\partial f(\patvector{x})}{ \partial x_i } \bigg)^2
-\end{align}
-
+\end{align*}
+	
 This formulation is associated to
-\begin{align}
-	\sum_i R_i(\x) = || \nabla f(\patvector{x}) ||^2
-\end{align}
+\begin{align*}
+	\sum_i R_i(\x) = \| \nabla f(\patvector{x}) \|^2
+\end{align*}
 
-The derivation of $\sum_i R_i(\x)$ above implies that SA seeks to explain $R_i(\x)$ from the aspect of variation magnitudes of $f(\x)$, which might not reflect the actual influence of the pixels to the decision.
+The derivation of $\sum_i R_i(\x)$ above implies that SA seeks to explain $R_i(\x)$ from the aspect of variation magnitudes of $f(\x)$, which might not reflect the total influence of features in the input to the decision.
 
-Nonetheless, this technique can be easily implemented in modern deep learning frameworks, such as TensorFlow\cite{AbadiTensorFlowLargeScaleMachine2016}, via automatic differentiation. Hence, one might consider it as a first tool towards explaining neural network decisions.
+Nonetheless, this technique can be easily implemented in modern deep learning frameworks, such as TensorFlow \citep{AbadiTensorFlowLargeScaleMachine2016}, via automatic differentiation. Hence, one might consider it as a first tool towards explaining NN decisions.
 
 \subsection{Guided Backpropagation}
-Guided backpropagation(GB) is a extended version of SA where gradients are propagated throughout the network in a controlled manner. It is specifically designed for neural networks that rely on ReLU activations. \cite{SpringenbergStrivingSimplicityAll2014e} formally proposed an alternative definition  of ReLU function as
-\begin{align}
-	\sigma(a_j) = a_j \mathbbm{1}[ a_j > 0 ],
-\end{align}
-where $\mathbbm{1}[ \cdot ]$  is an indicator function, hence a new derivative of a ReLU neuron $j$ 
-\begin{align}
-	\frac{\partial_* f(\patvector{x}) }{ \partial a_j } = \mathbbm{1}\bigg[a_j > 0 \bigg] \mathbbm{1}\bigg[ \frac{ \partial f(\patvector{x}) }{ \partial a_j } > 0 \bigg] \frac{ \partial f(\patvector{x}) }{ \partial a_j } 
-\end{align}
-From the derivation above, both $\mathbbm{1}[ \cdot ]$ control whether original gradients will be propagated back. In particular, the gradients will be propagated to the previous layer only if neuron $j$ is active and the gradient from the next layer is positive. Similar to SA, the relevance score for each pixel is computed as 
+\textit{Guided backpropagation} (GB) is a extended version of SA where signals for computing the gradient are propagated throughout the network in a controlled manner. \citet{SpringenbergStrivingSimplicityAll2015a} specifically designed the method for NNs that rely on ReLU activations.  They first defined an alternative definition  of ReLU function as
+\begin{align*}
+	\sigma(h_j) = \underbrace{h_j \mathbbm{1}[ h_j > 0 ]}_{a_j},
+\end{align*}
+where $\mathbbm{1}[ \cdot ]$  is an indicator function, then they proposed a  propagation rule for the signal passing through a ReLU neuron $j$ as
+\begin{align*}
+	\frac{\partial_* f(\patvector{x}) }{ \partial h_j } = \mathbbm{1}\bigg[h_j > 0 \bigg] \max \bigg(0, \frac{ \partial_* f(\patvector{x}) }{ \partial a_j } \bigg)
+\end{align*}
+Applying this rule to the backpropagation yields a signal that is no longer a gradient. However, it can be interpreted as a signal describing positive variations propagated throughout the network. In particular, the rule propagates the signal to a neuron $j$ only when the incoming signal is positive and the neuron has a positive raw excitation ($h_j > 0$). Similar to SA, we compute the relevance score for each pixel  as 
 
-\begin{align}
+\begin{align*}
 	R_i(\x) = \bigg( \frac{ \partial_* f(\patvector{x}) }{ \partial x_i }  \bigg)^2
-\end{align}
+\end{align*}
+
+By propagating only positive relevance to only positively activating neurons, \citet{SpringenbergStrivingSimplicityAll2015a} empirically demonstrated that GB produces better explanations than SA in practice. Our results on \addfigure{\ref{fig:lenet_heatmaps}} also confirm this improvement.
 %
 %With this result, one can see that $x_i$ is relevant to the problem if activations $a_j$ that it supplies are active and positively contribute to $f(\patvector{x})$.
 
 \subsection{Layer-wise Relevance Propagation}
-The methods mentioned so far derive $R_i(\x)$ directly from $f(\patvector{x})$ and do not rely on any knowledge related to the neural network itself, such as architecture or activation values. Alternatively, \cite{BinderLayerWiseRelevancePropagation2016} proposed Layer-wise Relevance Propagation(LRP) framework that leverages such information when distributing relevance scores to $x_i$. In particular, LRP propagates relevance scores backward from layer to layer, similar to backpropagation algorithm, but just different quantities.
+The methods introduced so far derive $R_i(\x)$ directly from $f(\patvector{x})$ and do not rely on any knowledge related to the neural network itself, such as network architecture or activation values. Alternatively, \citet{BachPixelWiseExplanationsNonLinear2015} proposed \textit{layer-wise relevance propagation}(LRP) technique that leverages such information when distributing relevance scores to $x_i$. In particular, LRP propagates relevance scores backward from the last layer to the first layer, similar to the backpropagation algorithm, but just different quantities.
 
 
 
 
- \begin{figure}[!hbt]
+ \begin{figure}
 	\begin{center}
-		\includegraphics[width=0.8\textwidth]{sketch/lrp_graph}
+		\includegraphics[width=0.5\textwidth]{sketch/lrp_graph}
 		\caption{An illustration of relevance propagation in LRP.}
-		\small{
-			Source : \url{http://heatmapping.org}
-			}
 		\label{fig:lrp_graph}
-		%todo fig : make "i" to the first layer
 	\end{center}
 \end{figure}
 %\footnotetext{}}
@@ -129,29 +129,29 @@ Consider the neural network illustrated in \addfigure{\ref{fig:lrp_graph}}. $R_j
 	R_j = \sum_{k} 	\delta_{j\leftarrow k} R_{k} ,
 \end{align}
 
-where $\delta_{j\leftarrow k}$ defines a proportion that  $R_{k}$ contributes to $R_j$. Consider further that activity $a_k$ of neuron $k$ is computed by 
-\begin{align}
+where $\delta_{j\leftarrow k}$ defines a proportion that  $R_{k}$ contributes to $R_j$. Consider further that the activity $a_k$ of neuron $k$ is computed by 
+\begin{align*}
 	a_k = \sigma \bigg( \sum_{j} w_{jk} a_j + b_k \bigg),
-\end{align} 
-where $\sigma$ is a activation function, $w_{jk}, b_k$ are the corresponding weight and bias between neuron $j$ and $k$. For monotonic increasing $\sigma$, $\delta_{j\leftarrow k}$ can be calculated as follows 
+\end{align*}
+where $\sigma$ is an activation function, $w_{jk}$ is the corresponding weight between neuron $j$ and $k$, and $b_k$ is the bias of neuron $k$. For monotonic increasing $\sigma$, $\delta_{j\leftarrow k}$ can be calculated as follows 
 \begin{align} \label{eq:delta_j_k}
 	\delta_{j\leftarrow k} = \alpha\frac{a_j w_{jk}^+}{\sum_{j} a_jw_{jk}^+} - \beta\frac{a_j w_{jk}^-}{\sum_{j} a_jw_{jk}^-},
 \end{align}
-where $w_{jk}^+$, $w_{jk}^-$ are $\max(0, w_{jk})$, $\min(0, w_{jk})$, and $\alpha$,  $\beta$ are parameters with $\alpha-\beta = 1$ constraint. Combining (\ref{eq:general_lrp_rj}) and (\ref{eq:delta_j_k}) results in LRP-$\alpha\beta$ rule, 
+where $w_{jk}^+ = \max(0, w_{jk})$, $w_{jk}^- = \min(0, w_{jk})$, and $\alpha$ and $\beta$ are parameters with $\alpha-\beta = 1$ constraint. Combining (\ref{eq:general_lrp_rj}) and (\ref{eq:delta_j_k}) results in LRP-$\alpha\beta$ rule, 
 
-\begin{align}
+\begin{align*}
 	R_j = \sum_{k} 	\bigg( \alpha\frac{a_j w_{jk}^+}{\sum_{j} a_jw_{jk}^+} - \beta\frac{a_j w_{jk}^-}{\sum_{j} a_jw_{jk}^-} \bigg )  R_{k}
-\end{align}
+\end{align*}
 
 LRP procedures are summarized in Algorithm \ref{algo:lrp}.
 
 \begin{algorithm}[H]
-$f(\patvector{x}), \{ \{a\}_{l_1}, \{a\}_{l_2}, \dots, \{a\}_{l_n}\}$ = \text{forward\_pass}($\patvector{x}, \patvector{\theta}$)\;
+$f(\patvector{x}), \{ (a_{l_1})_{l_1}, (a_{l_2})_{l_2}, \dots, (a_{l_n})_{l_n}\}$ = \text{forward\_pass}($\patvector{x}, \patvector{\theta}$)\;
 $R_k = f(\patvector{x})$\;
  \For{ $\text{layer} \in \text{reverse}(\{l_1, l_2, \dots, l_n\})$}{
 $ \text{prev\_layer} \leftarrow \text{layer}  - 1$ \;
 	\For{ $j \in $ neurons(prev\_layer), $k \in$ neurons(layer)}{
-		$R_j \leftarrow \text{LRP-}\alpha\beta(R_k, \{a\}_j, \{ w \}_{j,k} )$
+		$R_j \leftarrow \text{LRP-}\alpha\beta(R_k, (a_j)_j, (w_{jk})_{jk} )$
 	}
  }
  \caption{LRP Algorithm}
@@ -166,79 +166,72 @@ $$
 where $\hat{R}_{k}  = \alpha R_{k}$ and  $\check{R}_{k} = -\beta R_{k} $. We can then intuitively interpret this propagation as 
 
 \begin{quote}
-``Relevance $\hat{R}_k$'' should be redistributed to the lower-layer neurons $\{a_j\}_j$ in proportion to their excitatory effect on $a_k$. ``Counter-relevance'' $\check{R}_k $ should be redistributed to the lower-layer neurons $\{a_j\}_j$ in proportion to their inhibitory effect on $a_j$
-	- Section 5.1 \cite{MontavonMethodsInterpretingUnderstanding2017}
+``Relevance $\hat{R}_k$'' should be redistributed to the lower-layer neurons $(a_j)_j$ in proportion to their excitatory effect on $a_k$. ``Counter-relevance'' $\check{R}_k $ should be redistributed to the lower-layer neurons $(a_j)_j$ in proportion to their inhibitory effect on $a_j$
+	- Section 5.1 \citep{MontavonMethodsinterpretingunderstanding2018}
 \end{quote} 
 
-Moreover, LRP also provides \textit{conservation property} in which total relevance quantities are conserved during propagating $f(\patvector{x})$ back to $\x$. Formally, it is 
-\begin{align}
+Moreover, LRP  has a \textit{conservation property} in which the total relevance quantity is conserved during propagating $f(\patvector{x})$ to $\x$. This property is similar to a principle applied in \citep{PoulinVisualExplanationEvidence2006,LandeckerInterpretingindividualclassifications2013} where they developed explanation techniques for other types of ML models, such as SVM with RBF kernel. Formally, it is 
+\begin{align*}
 	\sum_{i} R_i =  \cdots =	\sum_{j} R_j = \sum_{k} R_k = \cdots = f(\patvector{x})
-\end{align}
+\end{align*}
 
-
-Nonetheless, choices of $\alpha,\beta$ is still a question for LRP.  In particular, \cite{MontavonMethodsInterpretingUnderstanding2017, BinderLayerWiseRelevancePropagation2016} demonstrated that the influence of the values to the quality of explanation are depend on network architecture. For example, \cite{MontavonMethodsInterpretingUnderstanding2017} observed that LRP-${\alpha_1, \beta_0}$ works well for deep architectures, such as GoogleNet\cite{SzegedyGoingDeeperConvolutions2014}, while LRP-${\alpha_2, \beta_1}$ is better for shallower architectures, such as BVLC CaffeNet\cite{JiaCaffeConvolutionalArchitecture2014}.
-
-
-%However, it seems that there is no clear relationship between values of $\alpha,\beta$ and the structure of the heatmap.  demonstrate that the values are depend on the architecture of the network. In particular, 
-%
-
-
-
+Nonetheless, choosing values of $\alpha$ and $\beta$ is still a question for LRP.  In particular, \citet{MontavonExplainingnonlinearclassification2017} and \citet{BinderLayerWiseRelevancePropagation2016} demonstrated that the influence of the values to the quality of explanation  depends on architecture of the network being explained. For example, \cite{MontavonMethodsinterpretingunderstanding2018} observed that LRP-${\alpha_1\beta_0}$ works well for deep architectures, such as GoogleNet \citep{SzegedyGoingdeeperconvolutions2015}, while LRP-${\alpha_2\beta_1}$ is better for shallower architectures, such as BVLC CaffeNet \citep{JiaCaffeConvolutionalArchitecture2014}.
 
 \subsection{Simple Taylor Decomposition}
-As the name suggested,  the method decomposes $f(\patvector{x})$ using Taylor expansion around a root point $\tilde{\x}$. The relevance scores $R_i(\x)$ are interpreted as the first order terms of the series. It is formally defined as 
+As the name suggested,  the method decomposes $f(\patvector{x})$ using the Taylor expansion around a root point $\tilde{\x}$. \citet{BazenTaylorDecompositionUnified2013} introduced  the technique to explain marginal effects in econometric models. \citet{BachPixelWiseExplanationsNonLinear2015} applied the technique to a pixel-wise decomposition method for explaining non-linear classification predictions. The relevance scores $R_i(\x)$ are interpreted as the first order terms of the series. It is formally defined as 
 
 % into terms of relevance scores $R_i$ via Taylor decomposition. Formally, 
 
 \begin{align} \label{eq:simple_taylor_expansion}
-	f(\patvector{x}) 	&= f(\tilde{\patvector{x}}) + \sum_{i} \underbrace{\frac{\partial f }{ \partial x_i } \Bigg|_{x_i = \tilde{x}_i}  ( x_i - \tilde{x}_i ) }_{R_i} + \zeta, 
+	f(\patvector{x}) 	&= f(\tilde{\patvector{x}}) + \sum_{i} \underbrace{\frac{\partial f }{ \partial x_i } \Bigg|_{\tilde{\patvector{x}}_i}  ( x_i - \tilde{x}_i ) }_{R_i} + \zeta, 
 \end{align}
 where $\zeta$ are the second and higher order terms that are not considered here. The root point $\tilde{\x}$ can be found via the optimization below 
-\begin{align}
-\underset{\xi \in \mathcal{X} }{\text{min}}  || \xi - \patvector{x} ||^2 \hspace{2cm}  \text{such that}\  f(\xi) = 0,
-\end{align}
+\begin{align*}
+\underset{\xi \in \mathcal{X} }{\text{min}}  \| \xi - \patvector{x} \|^2 \hspace{2cm}  \text{such that}\  f(\xi) = 0,
+\end{align*}
+where $\mathcal{X}$ represents the input distribution. This optimization is time-consuming  and $\xi$ might potentially diverge from $\patvector{x}$ leading to non-informative $R_i$. However, for NNs using piecewise linear activations, such as ReLU,  $\tilde{\x}$ can be computed analytically. In particular, with the assumptions 1) $\sigma(tx) = t\sigma(x) ,\forall t \ge 0$ and 2) no use of bias, \citet{MontavonMethodsinterpretingunderstanding2018} argued that $\tilde{\patvector{x}}$ can be found approximately in the same flat region as $\patvector{x}$, $\tilde{\patvector{x}} = \underset{\epsilon \rightarrow 0 }{\lim} \epsilon \patvector{x}$, yielding
 
-where $\mathcal{X}$ represents the input distribution. This optimization is time consuming  and $\xi$ might potentially diverge from $\patvector{x}$ leading to non informative $R_i$. However, for neural networks using piecewise linear activations, such as ReLU,  $\tilde{\x}$ can be computed analytically. In particular, with assumptions of $\sigma(tx) = t\sigma(x) ,\forall t \ge 0$ and no use of bias, \cite{MontavonMethodsInterpretingUnderstanding2017} argued that $\tilde{\patvector{x}}$ can be found in  approximately the same flat region as $\patvector{x}$, $\tilde{\patvector{x}} = \underset{\epsilon \rightarrow 0 }{\lim} \epsilon \patvector{x}$, yielding
-
-\begin{align}
-	\frac{\partial f(\patvector{x})}{\partial x_i}\bigg|_{\patvector{x}={\tilde{\patvector{x}}}} = \frac{\partial f(\patvector{x})}{\partial x_i}\bigg|_{\patvector{x}={\patvector{x}}} 
-\end{align}
+\begin{align*}
+	\frac{\partial f(\patvector{x})}{\partial x_i}\bigg|_{{\tilde{\patvector{x}}}} = \frac{\partial f(\patvector{x})}{\partial x_i}\bigg|_{\patvector{x}} 
+\end{align*}
 
 %demonstrate that  neural networks whose activations $\sigma(x)$ are piecewise linear functions  with , for example a deep Rectified Linear Unit (ReLU) network without biases, 
 %
-As a result, (\ref{eq:simple_taylor_expansion}) can be simplified to :
+As a result, (\ref{eq:simple_taylor_expansion}) can be simplified to
 \begin{align}
-	f(\patvector{x}) &= \sum_{i} \frac{\partial f(\patvector{x})}{\partial x_i}\bigg|_{\patvector{x}={\patvector{x}}}  x_i \\
-	R_i &= \frac{\partial f(\patvector{x})}{\partial x_i}\bigg|_{\patvector{x}={\patvector{x}}}  x_i \label{eq:simple_r_i}
-\end{align} 
+	f(\patvector{x}) &= \sum_{i} \frac{\partial f(\patvector{x})}{\partial x_i}\bigg|_{\patvector{x}}  x_i \nonumber \\
+	R_i &= \frac{\partial f(\patvector{x})}{\partial x_i}\bigg|_{\patvector{x}}  x_i \label{eq:simple_r_i}
+\end{align}
 
-This derivation shows a relationship between SA and simple Taylor decomposition. Specifically, $x_i$ will have high relevance score if $x_i$ highly activates and its variation positively affects $f(x)$ and vice versa.
+This derivation shows a relationship between SA and simple Taylor decomposition. Specifically, $x_i$ will have high relevance score if it highly activates and its variation positively affects $f(x)$ and vice versa.
 
 
 \subsection{Deep Taylor Decomposition}
-Deep Taylor decomposition(DTD) is another local explanation technique that rely on Taylor expansion. Unlike simple Taylor decomposition, DTD instead decomposes $R_k$ into $R_j$, which are the first order terms of the series. \cite{MontavonExplainingnonlinearclassification2017} proposed the method to explain decisions of neural networks with piece-wise linear activations. Similar to LRP, DTD successively decomposes relevances at the last layer $R_k$ and propagates the quantities to $R_j$ in the previous layer until the relevance of the input$R_i(\x)$. Formally, $R_k$ is decomposed as follows :
+
+
+Deep Taylor decomposition (DTD) is another local explanation technique that relies on the Taylor expansion. Unlike simple Taylor decomposition, DTD instead decomposes $R_k$ into $R_j$, which are the first order terms of the series. \cite{MontavonExplainingnonlinearclassification2017} proposed the method to explain decisions of NNs with piece-wise linear activations. Similar to LRP, DTD successively propagates a relevance score  $R_k$ to $R_j$ in the previous layer. The process is repeated until reaching the input layer $R_i(\x)$. Formally, $R_k$ is decomposed as follows
 
 
 % In fact, it can be shown that LRP's propagation rule is equivalent to one of DT's rules.
 
 
  \begin{align} \label{eq:tl_rj}
- R_k = R_k \bigg|_{ \tilde{\patvector{a}}_j } + \sum_{ j } 	\frac{\partial  R_k }{ \partial a_j } \bigg|_{ a_j = \tilde{a}_j } ( a_j - \tilde{a}_j ) + \zeta_k
+ R_k = R_k \bigg|_{ (\tilde{a}_j)_j } + \sum_{ j } 	\frac{\partial  R_k }{ \partial a_j } \bigg|_{ (\tilde{a}_j)_j } ( a_j - \tilde{a}_j ) + \zeta_k
  \end{align}
 
-Let's further Assume that there exists a root point $\tilde{\patvector{a}}_j$ such that $R_k = 0$, and the second and higher terms $\zeta_k = 0 $. Then, (\ref{eq:tl_rj}) can be reduced to
-\begin{align} \label{eq:R_k_sum}
- R_k = \sum_{ j } \underbrace{	\frac{\partial  R_k }{ \partial a_j } \bigg|_{ a_j = \tilde{a}_j }  ( a_j - \tilde{a}_j ) }_{ R_{j \leftarrow k } }
-\end{align}
+Assume that there exists a root point $(\tilde{a}_j)_j$ such that $R_k = 0$, and the second and higher terms $\zeta_k = 0 $. Then, (\ref{eq:tl_rj}) can be reduced to
+\begin{align*}
+ R_k = \sum_{ j } \underbrace{	\frac{\partial  R_k }{ \partial a_j } \bigg|_{ (\tilde{a}_j)_j }  ( a_j - \tilde{a}_j ) }_{ R_{j \leftarrow k } }
+\end{align*}
 
-As the relevance propagated back,  $R_j$ is $\sum_{k} R_{j\leftarrow k}$ from neuron $k$ in the successive layer that neuron $j$ contributes to. Hence, DTD also has \textit{conservation property}, 
-%Combining Equation \ref{eq:R_k_sum} and \ref{eq:R_j_sum} yields :
+As the relevance propagated back to a neuron j,  $R_j$ is $\sum_{k} R_{j\leftarrow k}$ : its relevance score is accumulated from all neuron $k$ in the following layer that it contributes to. Hence, DTD also has the  \textit{conservation property}, 
+
 \begin{align} 
-	R_j &= \sum_{k} R_{j\leftarrow k} \label{eq:rj_from_rk} \\
-\sum_{j}	R_j &= \sum_{j} \sum_{k} R_{j\leftarrow k}\\
-\sum_{j}	R_j &= \sum_{k} \sum_{j} R_{j\leftarrow k} \\
-\sum_{j}	R_j &= \sum_{k}  R_{k} \\
-\sum_i 	R_{i} = 	\dots = \sum_j R_{j} &= \sum_k R_{k} = \dots =  f(\patvector{x}) \label{eq:rj_equal_rk}
+	R_j &= \sum_{k} R_{j\leftarrow k} \nonumber \\
+\sum_{j}	R_j &= \sum_{j} \sum_{k} R_{j\leftarrow k} \nonumber\\
+%\sum_{j}	R_j &= \sum_{k} \sum_{j} R_{j\leftarrow k} \nonumber \\
+\sum_{j}	R_j &= \sum_{k}  R_{k} \nonumber \\
+\sum_i 	R_{i} = 	\dots = \sum_j R_{j} &= \sum_k R_{k} = \dots =  f(\patvector{x}) \nonumber
 \end{align}
 
 %Demonstrated by \cite{MontavonExplainingnonlinearclassification2017}, Equation \ref{eq:rj_equal_rk} holds for all $j, k$ and all subsequent layers. Hence, this results in  conservation property which guarantee that no relevance loss during the propagations.
@@ -254,171 +247,145 @@ As the relevance propagated back,  $R_j$ is $\sum_{k} R_{j\leftarrow k}$ from ne
 %\label{fig:deep_tayloy_decomposition_toy}
 %\end{figure}
 
-\subsubsection{Finding the root point}
-Consider a neural network whose $R_k$ is computed by
+\subsubsection{Finding the root point} 
+Consider a NN whose $R_k$ is computed by
 % is based on activations of $a_j$ in the previous layer and  :
 \begin{align}\label{eq:r_k_deep_taylor}
 R_k = \text{max}\ \bigg(0, \sum_{j} a_j w_{jk}  + b_k \bigg),
 \end{align}
-where $a_j$ are activations of neurons in previous layer and  $b_k \le 0 $.
+where $a_j$ are activations of neurons in the previous layer and  $b_k \le 0 $.
 
-To find the root point $\tilde{\patvector{a}}_j$, one can see that  there are  2 cases to be considered, namely when $R_k = 0$ and $R_k > 0$. For $R_k=0$,  $\patvector{a}_j$ is already the root point. For the latter, the root point can be found by performing  line search in  some direction $\patvector{v}_j$ with magnitude $t$.
+To find the root point $(\tilde{a}_j)_j$, one can see that  there are  two cases to be considered, namely when $R_k = 0$ and $R_k > 0$. Trivially, $(a_j)_j$ is already the root point when $R_k=0$. For the latter, the root point can be found by performing  line search in  some direction $(v_j)_j$ with magnitude $t$:
 \begin{align}\label{eq:root_aj_aj}
 \tilde{a}_j = a_j - t v_j,
 \end{align}
 More precisely, the root point is the intersection point between (\ref{eq:r_k_deep_taylor}) and (\ref{eq:root_aj_aj}) where $R_k=0$. Hence,
-\begin{align}
+\begin{align*}
   0 &= 	\sum_{j} (a_j - t v_j) w_{jk}  + b_k\\
 %  0 &= \sum_{j} a_j w_{jk} - t v_j w_{jk}  + b_k\\
-  t \sum_{j} v_j w_{jk} &= R_k \\
+%  t \sum_{j} v_j w_{jk} &= R_k \\
   t &= \frac{R_k}{\sum_{j} v_j w_{jk}}
-\end{align}
+\end{align*}
 
 Therefore, $R_j$ can be then calculated by
-\begin{align}
-R_j &= \sum_k	\frac{\partial  R_k }{ \partial a_j } \bigg|_{ a_j - \tilde{a}_j }  ( a_j - \tilde{a}_j ) \\
+\begin{align*}
+R_j &= \sum_k	\frac{\partial  R_k }{ \partial a_j } \bigg|_{ (\tilde{a}_j)_j }  ( a_j - \tilde{a}_j ) \\
 &=	\sum_k w_{jk} tv_j \\
 &=	\sum_k \frac{ v_j w_{jk}   }{\sum_{j} v_j w_{jk}}  R_k
-\end{align}
+\end{align*}
 
-\begin{figure}[!hbt]
-\centering
-\includegraphics[width=0.4\textwidth]{sketch/invalid_root_point_example}
-\caption{Function's view of $R_k$  and root point candidates}
-\label{fig:root_point_illus}
-\end{figure}
+%\begin{figure}[!hbt]
+%\centering
+%\includegraphics[width=0.4\textwidth]{sketch/invalid_root_point_example}
+%\caption{Function's view of $R_k$  and root point candidates}
+%\label{fig:root_point_illus}
+%\end{figure}
 
 
 
-The last step is to find $\boldsymbol{v}_j$ such that $\tilde{\patvector{a}}_j$ is the closest point to the line $R_k=0$ and also in the same domain as $\patvector{a}_j$. \addfigure{\ref{fig:root_point_illus}} visualizes the intuition. Here, if $a_j \in \mathbb{R}^+$, then $\tilde{a}_j$ must be also in $\mathbb{R}^+$. Therefore, $\boldsymbol{v}_j$ needs to be separatedly derived for each possible domain.
+The last step is to find $(v_j)_j$ such that $(\tilde{a}_j)_j$ is the closest point to the line $R_k=0$, and $\tilde{a}_j$ is also in the same domain as $a_j$, for example, if $a_j \in \mathbb{R}^+$, then $\tilde{a}_j$ must be also in $\mathbb{R}^+$. \addfigure{\ref{fig:dtd_rule_cases}} illustrates the intuition.  Therefore, $(v_j)_j$ needs to be separately derived for each possible domain of $a_j$. In particular, there are two possible domains to be considered, namely 
+%\begin{enumerate}
+%\item $a_j \in \setreal$  \\
+%	For this domain, the search direction is just the direction of derivative $\frac{\partial R_k}{ \partial a_j }$. Hence, 
+%\begin{align*}
+%	R_j &=	\sum_k \frac{ w_{jk}^2  }{\sum_{j} w_{jk}^2}  R_k
+%\end{align*}
+%\item $a_j \in \setreal^+$ :
+%\item $a_j \in [l_j , h_j]$ where $l_j \le 0 < h_j $ :
+%\end{enumerate}
+%
 % of $\patvector{a}_j$.
 
-\subsubsection{Case $a_j \in \mathbb{R}$ : $w^2$-rule}
+\begin{figure}
+\centering
 
-Trivially, the search direction $v_j$ is just the direction of derivative,
-\begin{align}
-	v_j &= \frac{\partial R_k}{ \partial a_j } \\
-	&= w_{jk}
-\end{align}
+\subfloat[$a_j \in \setreal^+$\label{fig:dtd_zplus}]{%
+       \includegraphics[width=0.4\textwidth]{sketch/zplus_rule_case_1}
+}
+     \hfill
+\subfloat[ {$a_j \in [l_j , h_j ] $ } where $l_j \le 0 < h_j $   \label{fig:dtd_zbeta}]{%
+       \includegraphics[width=0.4\textwidth]{sketch/zbeta_rule_case_1}
+}
 
-Hence, 
-\begin{align}
-	R_j &=	\sum_k \frac{ w_{jk}^2  }{\sum_{j} w_{jk}^2}  R_k
-\end{align}
+\patcaption{Function's view of $R_k$ and the DTD root point for each domain of $a_j$.}{The DTD root points are highlighted in red.}
+\label{fig:dtd_rule_cases}
+\end{figure}
+
+
+%\subsubsection{Case $a_j \in \mathbb{R}$ : $w^2$-rule}
+%
+%Trivially, the search direction $v_j$ is just the direction of derivative $\frac{\partial R_k}{ \partial a_j }$. This yields the $w^2$-rule:
+%
+%\begin{align*}
+%	R_j &=	\sum_k \frac{ w_{jk}^2  }{\sum_{j} w_{jk}^2}  R_k
+%\end{align*}
 
 \subsubsection{Case $a_j \in \mathbb{R}^+$ : $z^+$-rule}
-\begin{figure}[!htb]
-\centering
-\subfloat[]{%
-       \includegraphics[width=0.4\textwidth]{sketch/zplus_rule_case_1}
-     }
-%     \hfill
-     \subfloat[]{%
-       \includegraphics[width=0.4\textwidth]{sketch/zplus_rule_case_2}
-     }
-\caption{Function's view of $R_k$ and the root point from $z^+$-rule}
-\label{fig:zplus_rule_cases}
-\end{figure}
-In this case, the root point is on the line segment $( a_j \mathbbm{1}[ w_{jk}  < 0 ], a_j )$. In particular, as shown on \addfigure{\ref{fig:zplus_rule_cases}}, $R_k$ has the root point at $a_j \mathbbm{1}[w_{jk}  < 0 ]$, because 
-\begin{align}	
-R_k &= \max \bigg( \sum_j a_j w_{jk } + b_k, 0 \bigg) \\
-&=  \max \bigg( \sum_j a_j \mathbbm{1}[ w_{jk}  < 0 ] w_{jk} + b_k, 0 \bigg) \\
-&=  \max \bigg(\sum_j a_j  w_{jk}^- + b_k , 0\bigg) \\
-&= 0 \label{eq:zplus_rk_zero}
-\end{align}
-The last step uses the assumptions that $a_j \in R^+$ and $b_k \le 0$. Hence, the search direction is 
-\begin{align}
+
+The ReLU activation results $a_j$ in this domain. According to \addfigure{\ref{fig:dtd_zplus}}, the DTD root point of this domain can be found on the line segment  $( a_j \mathbbm{1}[ w_{jk}  < 0 ], a_j )$. Hence, the search direction is 
+\begin{align*}
 	v_j &= a_j - a_j \mathbbm{1}[ w_{jk}  < 0 ] \\
 	&= a_j \mathbbm{1}[ w_{jk}  \ge 0 ]
-\end{align}
-
-Therefore, 
-\begin{align}
+\end{align*}
+This yields $z^+$-rule:
+\begin{align*}
 		R_j &=	\sum_k \frac{ w_{jk} a_j \mathbbm{1}[w_{jk}  \ge 0 ]  }{\sum_{j} w_{jk} a_j \mathbbm{1}[ w_{jk}  \ge 0 ]}  R_k\\
-		&=	\sum_k  \frac{ a_j  w_{jk}^+   }{\sum_{j}  a_j w_{jk}^+  }  R_k
-\end{align}
+		&=	\sum_k  \frac{ a_j  w_{jk}^+   }{\sum_{j}  a_j w_{jk}^+  }R_k,
+\end{align*}
+where $w_{jk}^+$ is $\max(0, w_{jk})$. In fact, this propagation rule is equivalent to LRP-$\alpha_1\beta_0$. 
 
-In fact, this propagation rule is equivalent to LRP-$\alpha_1\beta_0$. 
 
+\subsubsection{Case $a_j \in [l_j , h_j]$ where $l_j \le 0 < h_j $ : $z^\mathcal{B}$-rule}
 
-\subsubsection{Case $a_j \in [l_j , h_j]$ where $l_j \le 0 < h_j $ : $z^\beta$-rule}
-
-\begin{figure}[!htb]
-\centering
-\subfloat[]{%
-       \includegraphics[width=0.4\textwidth]{sketch/zbeta_rule_case_1}
-     }
-%     \hfill
-     \subfloat[]{%
-       \includegraphics[width=0.4\textwidth]{sketch/zbeta_rule_case_2}
-     }
-\caption{Function's view of $R_k$ and the root point from $z^\beta$-rule with $-1 < a_j < 1$ }
-\label{fig:zbeta_rule_cases}
-\end{figure}
-This propagation rule is considered for the first layer whose input's value is bounded, for example pixel intensity. As shown in \addfigure{\ref{fig:zbeta_rule_cases}}, the root point is on the line segment $( l_j \mathbbm{1}[ w_{jk}  \ge 0 ]  + h_j \mathbbm{1}[ w_{jk}  \le 0 ]  , a_j ) $. More precisely, the root point is at $l_j \mathbbm{1}[ w_{jk}  \ge 0 ]  + h_j \mathbbm{1}[ w_{jk}  \le 0 ]$ because
-\begin{align}
-R_k &= \max \bigg( \sum_j a_j w_{jk } + b_k, 0 \bigg) \\
-&=\max \bigg( \sum_j (l_j \mathbbm{1}[ w_{jk}  \ge 0 ]  + h_j \mathbbm{1}[ w_{jk}  \le 0 ] ) w_{jk } + b_k, 0 \bigg) \\
-&= \max \bigg( \sum_j l_j w_{jk }^+   + h_j w_{jk }^-  + b_k, 0 \bigg) \\
-&= 0
-\end{align}
-
-Hence,  the search direction is 
-\begin{align}
+This propagation rule is considered for the first layer where the input's value is bounded, for example pixel intensity. As shown in \addfigure{\ref{fig:dtd_zbeta}}, the root point is on the line segment $( l_j \mathbbm{1}[ w_{jk}  \ge 0 ]  + h_j \mathbbm{1}[ w_{jk}  \le 0 ]  , a_j ) $. Hence,  the search direction is 
+\begin{align*}
 	v_j &= a_j - \tilde{a}_j \\
 	&=a_j  - l_j \mathbbm{1}[ w_{jk}  \ge 0 ]  - h_j \mathbbm{1}[ w_{jk}  \le 0 ]
-\end{align}
-
-Therefore, 
-\begin{align}
+\end{align*}
+This search direction results in  $z^\mathcal{B}$-rule:
+\begin{align*}
 		R_j &=	\sum_k \frac{ w_{jk}  (a_j  - l_j \mathbbm{1}[ w_{jk}  \ge 0 ]  - h_j \mathbbm{1}[ w_{jk}  \le 0 ]) }{\sum_{j} w_{jk}  (a_j  - l_j \mathbbm{1}[ w_{jk}  \ge 0 ] - h_j \mathbbm{1}[ w_{jk}  \le 0 ]) }  R_k\\
-		&=	\sum_k  \frac{ a_j  w_{jk} - l_j w_{jk}^- - h_j w_{jk}^+  }{\sum_{j}   a_j  w_{jk} - l_j w_{jk}^- - h_j w_{jk}^+  -}  R_k
-\end{align}
+		&=	\sum_k  \frac{ a_j  w_{jk} - l_j w_{jk}^+ - h_j w_{jk}^-  }{\sum_{j}   a_j  w_{jk} - l_j w_{jk}^+ - h_j w_{jk}^- }  R_k,
+\end{align*}
+where $w_{jk}^-$ is $\min(0, w_{jk})$.
+
+Applying these propagation rules accordingly with LRP Algorithm \ref{algo:lrp} yields deep Taylor decomposition of  $f(\x)$. These are brief derivations of DTD rule. More theoretical details can be found in the original paper \citep{MontavonExplainingnonlinearclassification2017}.
 
 
 
-
-
-%In summary, DTD is a theory for explaining nonlinear compuations of neural network through decomposing relevance score between successive layers. Its propagation rules ensures conservation property. Given the rules above, the relevance scores can be propagated using LRP Algorithm \ref{algo:lrp}.
-%
-%Lastly, as DTD provides more general propagation rules than the $\alpha\beta$-rule from LRP, I will use DTD and LRP interchangeably throughout the thesis. In particular, it will be mentioned explicitly if $\alpha\beta$ is being used, otherwise the rule is a DTD's rule.  
-
-Table \ref{tab:lrp_deep_taylor_rules} concludes the details  when each DTD rule should be applied. With this knowledge, $f(\x)$ can be then propagated to the input using LRP Algorithm \ref{algo:lrp}.
-
-
-\renewcommand{\arraystretch}{1}
-\begin{table}[h]
-\centering
-\begin{tabular}{|l|l|}
-\hline
-\multicolumn{1}{|c|}{Rule and input domain} & \multicolumn{1}{c|}{Formula} \\ \hline
-$w^2$-rule : Real values,  $a_j \in \mathbb{R}$ & \parbox{1cm}{
-	\begin{align*}
-		R_j =	\sum_k \frac{ w_{jk}^2  }{\sum_{j} w_{jk}^2}  R_k  	
-    \end{align*}}
- \\ \hline
-% &                                \\ \hline
-$z^+$-rule : ReLU activations, $a_j \in \mathbb{R}^+$    & \parbox{1cm}{\begin{align*}
-R_j = \sum_k  \frac{ a_j  w_{jk}^+   }{\sum_{j}  a_j w_{jk}^+  }  R_k	
-\end{align*}} \\ \hline
-$z^\beta$-rule : Pixel Intensities, $ a_j \in [l_j , h_j]$ where $l_j \le 0 < h_j $  & \parbox{1cm}{\begin{align*}
-R_j = \sum_k  \frac{ a_j  w_{jk} - l_j w_{jk}^- - h_j w_{jk}^+  }{\sum_{j}   a_j  w_{jk} - l_j w_{jk}^- - h_j w_{jk}^+  -}  R_k	
-\end{align*}}
-               \\ \hline
-\end{tabular}
-\caption{Relevance propagation rules of deep Taylor decomposition. }
-\label{tab:lrp_deep_taylor_rules}
-\end{table}
-\renewcommand{\arraystretch}{1}
+%\renewcommand{\arraystretch}{1}
+%\begin{table}[h]
+%\centering
+%\begin{tabular}{|l|l|}
+%\hline
+%\multicolumn{1}{|c|}{Rule and input domain} & \multicolumn{1}{c|}{Formula} \\ \hline
+%$w^2$-rule : Real values,  $a_j \in \mathbb{R}$ & \parbox{1cm}{
+%	\begin{align*}
+%		R_j =	\sum_k \frac{ w_{jk}^2  }{\sum_{j} w_{jk}^2}  R_k  	
+%    \end{align*}}
+% \\ \hline
+%% &                                \\ \hline
+%$z^+$-rule : ReLU activations, $a_j \in \mathbb{R}^+$    & \parbox{1cm}{\begin{align*}
+%R_j = \sum_k  \frac{ a_j  w_{jk}^+   }{\sum_{j}  a_j w_{jk}^+  }  R_k	
+%\end{align*}} \\ \hline
+%$z^\beta$-rule : Pixel Intensities, $ a_j \in [l_j , h_j]$ where $l_j \le 0 < h_j $  & \parbox{1cm}{\begin{align*}
+%R_j = \sum_k  \frac{ a_j  w_{jk} - l_j w_{jk}^- - h_j w_{jk}^+  }{\sum_{j}   a_j  w_{jk} - l_j w_{jk}^- - h_j w_{jk}^+ }  R_k	
+%\end{align*}}
+%               \\ \hline
+%\end{tabular}
+%\caption{Relevance propagation rules of deep Taylor decomposition. }
+%\label{tab:lrp_deep_taylor_rules}
+%\end{table}
+%\renewcommand{\arraystretch}{1}
 
 
 \begin{figure}[!htb]
 \centering
 \includegraphics[width=\textwidth]{sketch/lenet_heatmaps}
-\patcaption{Relevance heatmaps produced by different explanation methods explaining decisions of LeNet-5.}{\heatmapscaleexplain }
+\patcaption{Relevance heatmaps produced by different explanation methods explaining classification decisions of LeNet-5.}{\heatmapscaleexplain }
 \label{fig:lenet_heatmaps}
 \end{figure}
 
-In this section, we have described intuition and details of several local explanation methods. \addfigure{\ref{fig:lenet_heatmaps}} shows  examples of relevance heatmaps from those methods explaining classification decisions of LeNet-5\cite{LeCunGradientBasedLearningApplied2001}. The network was trained on 100 epochs with batch size 50 and dropout probability at 0.2. It achieves accuracy at 99.21\% for MNIST and 87.90\% for FashionMNIST. The figure also well presents characteristics of explanation from each method. In particular, one can observe that simple Taylor decomposition provides the most noisy and non informative explanations, while the ones from SA also look noisy but some structures of input can be seen. GB produces smoother explanations than SA. On the other hand, explanations from deep Taylor decomposition(DTD) and LRP are more diffuse and smoothest : Both methods have similar relevance heatmaps when $\beta$ is small. Given this result, we are going to consider only SA, GB, DTD and $\lrpp$ in experiments.
+In this section, we have described the intuition and the detail of several local explanation methods. \addfigure{\ref{fig:lenet_heatmaps}} shows  examples of relevance heatmaps from those methods in explaining classification decisions of LeNet-5 \citep{LeCunGradientBasedLearningApplied2001} architecture. The networks were trained on 100 epochs with batch size 50 and dropout probability at 0.2. They achieve accuracy at 99.21\% for MNIST and 87.90\% for FashionMNIST. 
 
-	
+From the figure, we can see general characteristics of explanation heatmap from each method. In particular, one can observe that simple Taylor decomposition provides the most noisy and less informative explanations, while the ones from SA also look noisy but contain some structures of the input. GB, DTD and LRP produce smooth explanations and quite informative. It is worth noting that DTD and LRP method produce similar relevance heatmaps when $\beta$ is small. Given this result, we are going to consider SA, GB, DTD and $\lrpp$ in the following experiments.

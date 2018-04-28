@@ -1,14 +1,16 @@
 \chapter{Introduction}
 \label{cha:chapter1}
-In recent years, machine learning  has been increasingly involved in almost every aspect of our life, for example recommendation systems on e-commerce sites, cancer diagnosis, or self-driving car. This developments can not be achieved without intelligent algorithms behind. Due to great amount of data and more efficient computational resources, a certain type of machine learning, called neural networks, are directly benefitted and are able to achieve much better performance that traditional machine learning techniques. As a result, intelligent systems we use nowadays rely on them somehow.
+In recent years, machine learning (ML) has been increasingly involved in almost every aspect of our life, for example, recommendation systems on e-commerce sites, medical diagnosis, or self-driving cars. This development can not be achieved without intelligent algorithms behind. A particular type of ML algorithms, called neural networks (NNs), have been gradually used to power such systems.  This is because NNs have directly benefitted from the vast amount of data available and more efficient computation resources developed, giving a much better performance as compared to other ML algorithms. As a result, intelligent systems we use nowadays frequently rely on them.
 
+In short, NNs are algorithms inspired by how the human brain works. One of their advantages is that they can learn patterns from data efficiently. NNs comprise of simple units, called neurons, arranged in layers working together to transform input to the desired output. When the network is comprised of many layers, it is often referred to as \textit{deep learning}. Connections between neurons define this transformation. These connections are learned from the training data without being explicitly defined. 
 
-In short, NN, a learning paradigm inspired by human brain, are algorithms developed to efficient learn pattern from data. They have units, called neurons, arranged in layers working together to transform input to a desired output. When networks contains many layers, they are referred as deep learning. Connections between neurons define this transformation and will be learned from data. Because the transformation is typically in high dimensional space and built specifically to a certain problem, it is not obvious to us how trained NN utilize an input and make a prediction.  This lack of understanding  raises concerns and questions to the machine learning community and consumers. One major concern is about trust, in particular, how we can ensure that NN will work as we expect. Secondly, lacking of this understanding results in great amount of trials and errors when it comes to adjust configurations of NN to achieve expected performance.
+Because the transformation is typically in high dimensional space and built to a specific problem, it is not apparent to us how the trained NN utilizes input and makes a prediction.  This lack of understanding raises concerns and questions to the machine learning community and consumers. One primary concern is about trust, in particular, how we can ensure that NNs will work as we expect. Secondly, not having this insight results in considerable amount of trials and errors when it comes to adjusting configurations of NNs to achieve expected performance.
 
-Several methods have been proposed by researchers in order to better understand or explain how NN transform input to output. In particular, \cite{SimonyanDeepConvolutionalNetworks2013}  proposed a pioneer work in understand the predictions of NN through a method called, \textit{sensitivity analysis}(SA), as well as features that each layer in those networks learn. \cite{SpringenbergStrivingSimplicityAll2014e} suggested a modified version of SA, called \textit{guided backprop}(GB), for ReLU-type neural networks. The result demonstrated that GB produces more meaniful explanations than SA. \cite{SmilkovSmoothGradremovingnoise2017} also suggested an approach to improve quality of SA explanations. \cite{BachPixelWiseExplanationsNonLinear2015} proposed an alternative approach, called \textit{Layer-Wise Relevance Propagation}(LRP). The metho utilizes architecture of the neural network itself to create explanations, instead of relying on derivatives as in SA and GB. For ReLU-type networks,\cite{MontavonExplainingnonlinearclassification2017} showed that LRP can be equivalent to \textit{deep Taylor decomposition}(DTD). \cite{SundararajanAxiomaticAttributionDeep2017} proposed \textit{integrated gradients} combining gradient and decomposition technique. \cite{RibeiroWhyShouldTrust2016} developed \textit{Local Interpretable Model-Agnostic Explanations}(LIME) that can explain predictions from wider set of models. \cite{OlahBuildingBlocksInterpretability2018} suggested ideas for visualizing explanations from multiple domains. 
+Researchers have proposed several methods to understand better or explain how NNs transform input to output. In particular, \citet{SimonyanDeepConvolutionalNetworks2013}  proposed a pioneer work in understanding predictions of NNs through the \textit{activation maximization} approach and a method relying on partial derivatives which we refer to as \textit{sensitivity analysis} (SA). \citet{SpringenbergStrivingSimplicityAll2015a} suggested a modified version of SA, called \textit{guided backprop} (GB), for ReLU-type NNs. In the results, GB produces more informative explanations than SA. \citet{SmilkovSmoothGradremovingnoise2017}  proposed \textit{SmoothGrad} technique to improve quality of SA explanations. 
 
-These work have primarily focused on standard NN, or feed-forward architectures, however there is still only a limited number of work in this direction applied to recurrent neural networks(RNN) which is considerably important in domain of processing sequential data, such as machine translation(MT) and natural language processing(NLP). In fact, the closest work in this area is from \cite{ArrasExplainingRecurrentNeural2017} where they applied LRP to  LSTM\cite{HochreiterLongshorttermmemory1997} trained to perform a sentiment analysis task. Therefore, a study of these explanation techniques on RNN need to be explored. This understanding study will enable us to gain insigh how each RNN internally works and hopefully it will lead us to development more explainable architectures.
+\cite{BachPixelWiseExplanationsNonLinear2015} proposed an alternative approach, called \textit{Layer-wise Relevance Propagation} (LRP). The method utilizes architecture of the NN itself to create explanations, instead of relying on derivatives as in SA and GB. For ReLU-type networks, \citet{MontavonExplainingnonlinearclassification2017} derived  the \textit{deep Taylor decomposition} (DTD) technique for explaining their non-linear decisions. They showed that DTD is a special case of LRP. \citet{SundararajanAxiomaticAttributionDeep2017a} proposed the \textit{integrated gradients} method combining gradient and decomposition techniques. \citet{RibeiroWhyShouldTrust2016} developed \textit{Local Interpretable Model-Agnostic Explanations} (LIME) framework that can explain predictions from a wider set of models. \citet{OlahBuildingBlocksInterpretability2018} suggested ideas for visualizing explanations from multiple domains. 
 
+These works have primarily focused on standard NNs or feedforward architectures. However, there is still only a limited number of contributions in explaining predictions from recurrent neural networks (RNNs). RNNs are essential algorithms in domains that pprocess sequential data, such as machine translation and natural language processing (NLP). To the best of our knowledge, the closest works in this direction are from 1) \citet{KarpathyVisualizingUnderstandingRecurrent2015} that  interpreted activations of LSTM \citep{HochreiterLongshorttermmemory1997} cells for a certain task and 2) \citet{ArrasExplainingRecurrentNeural2017} that applied LRP to a LSTM network trained to perform a sentiment analysis task. Therefore, a study of these explanation techniques for RNNs needs to be explored. This understanding study will enable us to gain insight how RNNs internally work and hopefully it will lead us to develop more explainable RNN architectures.
 
 
 %In fact, state-of-the-art of these applications today mostly rely on RNN. However, the question of how neural networks, including RNN, derive their predictions is still unclear to us. This causes resistance in the adoptation and development of the technology itself. 
@@ -22,14 +24,16 @@ These work have primarily focused on standard NN, or feed-forward architectures,
 
 
 \section{Objective \& Scope}
-This thesis aims to explain RNN predictions. More precisely, the goal of this thesis is to study how structure of RNN affect the quality of explanations produced by various explanation techniques. In particular, we are interested in applying explanation techniques, such as sensitivity analysis(SA), guided backprop(GB), Layer-Wise Relevance Propagation(LRP) and deep Taylor decomposition(DTD) to RNN. 
+This thesis aims to explain RNN predictions. More precisely, the goal of this thesis is to study how the structure of RNNs affects the quality of explanations produced by various explanation techniques. In particular, we are interested in applying explanation techniques that were developed for feedforward architectures, such as sensitivity analysis, guided backprop, layer-wise relevance propagation and deep Taylor decomposition to the RNN setting. 
 
-Our study is based on artificial classification problems that areare specifically constructed such that  knowledge of ground truth explanations is available to us. As a result, we can perform qualitative and quantitative measurements accordingly.
+Our study is based on artificial classification problems that are specially constructed such that knowledge of ground truth explanations is available to us. As a result, we can perform qualitative and quantitative measurements accordingly.
 
 
-We have a hypothesis that RNN with more layers are more expressible than fewer layers. We extensively conduct experiments on various configurations verify our proposition. We also propose an adjustment to LSTM such that it can be explained by the techniques mentioned above.
+We hypothesize that RNNs with more layers are more explainable than ones with fewer layers. We conduct extensive experiments on various configurations to verify our proposition. We also propose an adjustment to LSTM. This adjustment allows us to apply the explanation techniques mentioned above to the LSTM architecture.
 
-Lastly, as the primary goal is to study explainability of RNN, it is worth mentioning that we do not seek to train models to achieve the state-of-the-art performance. We rather train them to reach a certain level of performance. We assume that models operating in this level are good enough and produce comparable explanations.
+Lastly, because we consider the harder case where data arrives sequentially and not all at once like convolutional neural networks (CNNs), classification accuracy is limited by this more challenging setting. Therefore, we do not seek to train models to achieve the state-of-the-art performance. We instead train them to reach a certain level of accuracy. We assume that models operating at this level are good enough and produce comparable explanations. 
+%
+%as the primary goal is to study explainability of RNNs, it is worth mentioning that we do not seek to train models to achieve the state-of-the-art performance. We instead train them to reach a certain level of accuracy. We assume that models operating at this level are good enough and produce comparable explanations. In fact, the classification problems we are considering are harder cases because data arrives sequentially and not all at once like convolutional neural networks (CNNs). Therefore, classification accuracy is limited by this more challenging setting. 
 
 
 %assumption relu? ... 
@@ -41,45 +45,47 @@ Lastly, as the primary goal is to study explainability of RNN, it is worth menti
 %artificial problems ... 
 
 
-\section{Dataset}
-Our study is based on MNIST\cite{LeCunMNISThandwrittendigit2010} and FashionMNIST\cite{XiaoFashionMNISTNovelImage2017}. Following is a brief introduction of them.
-
-\subsection{MNIST}
-
-\begin{figure}[!hbt]
-	\centering
-	\includegraphics[width=0.6\textwidth]{mnist}
-	\caption{MNIST dataset.}
-	\label{fig:mnist_samples}
-\end{figure}
-
-MNIST is one of the most popular dataset that machine learning partitioners use to benchmark machine learning algorithms. The dataset consists of 60,000 training and 10,000 testing samples. Each sample is a grayscale 28x28 image. As shown in \addfigure{\ref{fig:mnist_samples}}, MNIST has 10 categories corresponding to a digit between 0 and 9.
-
-
-State-of-the-art algorithms can classify MNIST with accuracy higher than 99\%, while classical ones, such as SVC or RandomForest, are able to achieve around 97\%\cite{XiaoFashionMNISTNovelImage2017}.
-
-
-\subsection{FashionMNIST}
-
-FashionMNIST is a dataset whose authors aim to it to be a replacement of MNIST, especially in  benchmarking machine learning algorithms.  According to \cite{XiaoFashionMNISTNovelImage2017},  FashionMNIST is more representative to modern computer vision tasks. It contains images of fashion products from 10 categories and compatible  to MNIST in every aspects, such as the size of training and testing set, image dimension and data format, hence one can easily  apply existing algorithms that work with MNIST to Fashion-MNIST without any change. \addfigure{\ref{fig:fashion_mnist_samples}} shows FashionMNIST samples.
-
-\begin{figure}[!hbt]
-\centering
-\includegraphics[width=0.65\textwidth]{sketch/fmnist_samples}
-\caption{FashionMNIST dataset.}
-\label{fig:fashion_mnist_samples}
-\end{figure}
-
-\cite{XiaoFashionMNISTNovelImage2017} also reports benchmarking results of classical machine learning algorithms on Fashion-MNIST. On average, they achieve accuracy between 85\% to 89\%. According to Fashion-MNIST's page\footnote{https://github.com/zalandoresearch/fashion-mnist}, state-of-the-art result has 97\% accuracy using Wide Residual Network(WRN)\cite{ZagoruykoWideResidualNetworks2016} and standard data preprocessing and augmentation.
+%\section{Dataset}
+%Our study is based on MNIST\citep{LeCunMNISThandwrittendigit2010} and FashionMNIST\citep{XiaoFashionMNISTNovelImage2017}. Following is a brief introduction of them.
+%
+%\subsection{MNIST}
+%
+%\begin{figure}[!hbt]
+%	\centering
+%	\includegraphics[width=0.6\textwidth]{mnist}
+%	\caption{MNIST dataset.}
+%	\label{fig:mnist_samples}
+%\end{figure}
+%
+%MNIST is one of the most popular dataset that machine learning partitioners use to benchmark machine learning algorithms. The dataset consists of 60,000 training and 10,000 testing samples. Each sample is a grayscale 28x28 image. As shown in \addfigure{\ref{fig:mnist_samples}}, MNIST has 10 categories corresponding to a digit between 0 and 9.
+%
+%
+%State-of-the-art algorithms can classify MNIST with accuracy higher than 99\%, while classical ones, such as SVC or RandomForest, are able to achieve around 97\%\citep{XiaoFashionMNISTNovelImage2017}.
+%
+%
+%\subsection{FashionMNIST}
+%
+%FashionMNIST is a dataset \todo{ rephrase : whose authors aim to it to be a replacement of MNIST, especially in  benchmarking machine learning algorithms}.  According to \citep{XiaoFashionMNISTNovelImage2017},  FashionMNIST is more representative to modern computer vision tasks. It contains images of fashion products from 10 categories and compatible  to MNIST in every aspects, such as the size of training and testing set, image dimension and data format, hence one can easily  apply existing algorithms that work with MNIST to Fashion-MNIST without any change. \addfigure{\ref{fig:fashion_mnist_samples}} shows FashionMNIST samples.
+%
+%\begin{figure}[!hbt]
+%\centering
+%\includegraphics[width=0.65\textwidth]{sketch/fmnist_samples}
+%\caption{FashionMNIST dataset.}
+%\label{fig:fashion_mnist_samples}
+%\end{figure}
+%
+%\citet{XiaoFashionMNISTNovelImage2017} also reports benchmarking results of classical machine learning algorithms on Fashion-MNIST. On average, they achieve accuracy between 85\% to 89\%. According to Fashion-MNIST's page\footnote{https://github.com/zalandoresearch/fashion-mnist}, state-of-the-art result has 97\% accuracy using Wide Residual Network(WRN)\citep{ZagoruykoWideResidualNetworks2016} and standard data preprocessing and augmentation.
 
 %\section{Terminology}
 %\todo{terminology}
 
+\clearpage
+
 \section{Outline}
-The thesis is organized as follows :
+The thesis is organized as follows:
 \begin{itemize}
 %	\item \textbf{Chapter \ref{cha:chapter2}} provides a brief literature survey and related work in the direction towards explaining neural networks.
-	\item \textbf{Chapter \ref{cha:chapter3}} summaries relevant topics in  neural networks and explanation techniques that are studied in the thesis.
+	\item \textbf{Chapter \ref{cha:chapter3}} summarizes relevant topics in  neural networks and explanation techniques that are focused in the thesis.
 	\item \textbf{Chapter \ref{cha:chapter4}} is devoted to experimental results.
 	\item \textbf{Chapter \ref{cha:chapter5}} concludes the results and discusses challenges as well as future work.
 \end{itemize}

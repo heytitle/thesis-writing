@@ -8,7 +8,7 @@
 
 \usepackage[ngerman, english]{babel}
 %\usepackage{bibgerm}       		% german references
-%\usepackage{natbib}
+\usepackage{natbib}
 
 \usepackage{amsthm}
 \theoremstyle{definition}
@@ -21,12 +21,20 @@
 \usepackage{listings, color}	% for source code
 \usepackage{subfig}						% two figures next to each other (example: figure 3a), figure 3b)
 \usepackage{scrpage2}					% header and footer line
-\usepackage{ulem}
+%\usepackage{ulem}
+\usepackage[normalem]{ulem} %to strike the words
+
 \usepackage{bbm}
 \usepackage[ruled]{algorithm2e}
 \usepackage{afterpage}
 \usepackage{nomencl}
 \usepackage{breakcites}
+
+\usepackage[ddmmyyyy]{datetime}
+
+%\usepackage{datetime}
+
+
 
 
 \makenomenclature
@@ -79,8 +87,15 @@
 \newcommand{\yha}[0]{\hat{y}^{(\alpha)}}
 \newcommand{\lrpp}[0]{\text{LRP-}\alpha_{1.5}\beta_{0.5}}
 \newcommand{\heatmapscaleexplain}{Blue indicates negative relevance, while red indicates positive relevance.}
+\newcommand{\quantitativeplotexplain}{The values are averaged from test sets of $7$-fold cross-validation and the vertical lines depict the 95\% confidence interval. Accuracy of the models can be found at Appendix  \ref{annex:model_acc}.}
 
 \newcommand{\patcaption}[2]{\caption[#1]{#1 #2}}
+\newcommand{\setreal}[0]{\mathbb{R}}
+\newcommand{\patpartial}[2]{\frac{ \partial #1}{ \partial #2 }}
+\renewcommand{\dateseparator}{.}
+
+
+\setcitestyle{square}
  
 \input{./misc/hyphenation} 					% use this file to set explicit hyphenations (doesn't seem to work correctly)
 
@@ -103,10 +118,10 @@
     \include{./misc/abstract}
     \thispagestyle{empty}
     \cleardoublepage
-    
-    \include{./misc/abstract_de}
-    \thispagestyle{empty}
-    
+%    
+%    \include{./misc/abstract_de}
+%    \thispagestyle{empty}
+%    
     
     
     
@@ -127,18 +142,16 @@
 
 \mainmatter % comment single chapters for faster compilation
 
-    \input{./chapters/chapter1}
-    		\input{./chapters/dataset}
-%     \input{./chapters/related-work}
-
-	    \include{chapters/nn-background}
-	    \input{./chapters/explanation-methods}
-	    
-    % experiment
-    \input{./chapters/experiments}
-	    \input{chapters/exp3}
-	    
-    \input{./chapters/conclusion}
+	\input{./chapters/chapter1}
+	
+	
+	\input{./chapters/nn-background}
+	\input{./chapters/explanation-methods}
+	
+	\input{./chapters/experiments}
+		\input{./chapters/exp3}
+	
+	\input{./chapters/conclusion}
 
 
 % ---------------------------------------------------------------

@@ -1,21 +1,4 @@
 
-@article{ArrasWhatRelevantText2016,
-  archivePrefix = {arXiv},
-  eprinttype = {arxiv},
-  eprint = {1612.07843},
-  primaryClass = {cs, stat},
-  title = {"{{What}} Is {{Relevant}} in a {{Text Document}}?": {{An Interpretable Machine Learning Approach}}},
-  url = {http://arxiv.org/abs/1612.07843},
-  shorttitle = {"{{What}} Is {{Relevant}} in a {{Text Document}}?},
-  abstract = {Text documents can be described by a number of abstract concepts such as semantic category, writing style, or sentiment. Machine learning (ML) models have been trained to automatically map documents to these abstract concepts, allowing to annotate very large text collections, more than could be processed by a human in a lifetime. Besides predicting the text's category very accurately, it is also highly desirable to understand how and why the categorization process takes place. In this paper, we demonstrate that such understanding can be achieved by tracing the classification decision back to individual words using layer-wise relevance propagation (LRP), a recently developed technique for explaining predictions of complex non-linear classifiers. We train two word-based ML models, a convolutional neural network (CNN) and a bag-of-words SVM classifier, on a topic categorization task and adapt the LRP method to decompose the predictions of these models onto words. Resulting scores indicate how much individual words contribute to the overall classification decision. This enables one to distill relevant information from text documents without an explicit semantic information extraction step. We further use the word-wise relevance scores for generating novel vector-based document representations which capture semantic information. Based on these document vectors, we introduce a measure of model explanatory power and show that, although the SVM and CNN models perform similarly in terms of classification accuracy, the latter exhibits a higher level of explainability which makes it more comprehensible for humans and potentially more useful for other applications.},
-  urldate = {2017-07-19},
-  date = {2016-12-22},
-  keywords = {Computer Science - Computation and Language,Computer Science - Information Retrieval,Computer Science - Learning,Statistics - Machine Learning},
-  author = {Arras, Leila and Horn, Franziska and Montavon, Gr{\'e}goire and M{\"u}ller, Klaus-Robert and Samek, Wojciech},
-  file = {/Users/heytitle/Zotero/storage/7AKZETAH/Arras et al. - 2016 - What is Relevant in a Text Document An Interpr.pdf;/Users/heytitle/Zotero/storage/ZUWJYIHN/1612.html},
-  year = {2016}
-}
-
 @article{MontavonExplainingnonlinearclassification2017,
   title = {Explaining Nonlinear Classification Decisions with Deep {{Taylor}} Decomposition},
   volume = {65},
@@ -27,28 +10,12 @@
   shortjournal = {Pattern Recognition},
   urldate = {2017-07-23},
   date = {2017-05-01},
-  pages = {211--222},
+  pages = {211-222},
   keywords = {Deep neural networks,Heatmapping,Image recognition,Relevance propagation,Taylor decomposition},
   author = {Montavon, Gr{\'e}goire and Lapuschkin, Sebastian and Binder, Alexander and Samek, Wojciech and M{\"u}ller, Klaus-Robert},
   file = {/Users/heytitle/Zotero/storage/ZRJN2CBI/S0031320316303582.html},
   journal = {Pattern Recognition},
   year = {May 1, 2017}
-}
-
-@article{MontavonMethodsInterpretingUnderstanding2017,
-  archivePrefix = {arXiv},
-  eprinttype = {arxiv},
-  eprint = {1706.07979},
-  primaryClass = {cs, stat},
-  title = {Methods for {{Interpreting}} and {{Understanding Deep Neural Networks}}},
-  url = {http://arxiv.org/abs/1706.07979},
-  abstract = {This paper provides an entry point to the problem of interpreting a deep neural network model and explaining its predictions. It is based on a tutorial given at ICASSP 2017. It introduces some recently proposed techniques of interpretation, along with theory, tricks and recommendations, to make most efficient use of these techniques on real data. It also discusses a number of practical applications.},
-  urldate = {2017-07-24},
-  date = {2017-06-24},
-  keywords = {Computer Science - Learning,Statistics - Machine Learning},
-  author = {Montavon, Gr{\'e}goire and Samek, Wojciech and M{\"u}ller, Klaus-Robert},
-  file = {/Users/heytitle/Zotero/storage/DE3B5ZN9/Montavon et al. - 2017 - Methods for Interpreting and Understanding Deep Ne.pdf;/Users/heytitle/Zotero/storage/LVET2A5I/1706.html},
-  year = {2017}
 }
 
 @article{KindermansPatternNetPatternLRPImproving2017,
@@ -67,48 +34,6 @@
   year = {2017}
 }
 
-@article{WieschollekLearningBlindMotion2017,
-  title = {Learning {{Blind Motion Deblurring}}},
-  url = {http://arxiv.org/abs/1708.04208v1},
-  abstract = {As handheld video cameras are now commonplace and available in every
-smartphone, images and videos can be recorded almost everywhere at anytime.
-However, taking a quick shot frequently yields a blurry result due to unwanted
-camera shake during recording or moving objects in the scene. Removing these
-artifacts from the blurry recordings is a highly ill-posed problem as neither
-the sharp image nor the motion blur kernel is known. Propagating information
-between multiple consecutive blurry observations can help restore the desired
-sharp image or video. Solutions for blind deconvolution based on neural
-networks rely on a massive amount of ground-truth data which is hard to
-acquire. In this work, we propose an efficient approach to produce a
-significant amount of realistic training data and introduce a novel recurrent
-network architecture to deblur frames taking temporal information into account,
-which can efficiently handle arbitrary spatial and temporal input sizes. We
-demonstrate the versatility of our approach in a comprehensive comparison on a
-number of challening real-world examples.},
-  journaltitle = {arXiv:1708.04208v1 [cs]},
-  shortjournal = {ArXiv170804208v1 Cs},
-  date = {2017-08-14},
-  author = {Wieschollek, Patrick and Hirsch, Michael and Sch{\"o}lkopf, Bernhard and Lensch, Hendrik P. A.},
-  journal = {arXiv:1708.04208v1 [cs]},
-  year = {8/14/2017}
-}
-
-@article{PhanAudioSceneClassification2017,
-  archivePrefix = {arXiv},
-  eprinttype = {arxiv},
-  eprint = {1703.04770},
-  primaryClass = {cs},
-  title = {Audio {{Scene Classification}} with {{Deep Recurrent Neural Networks}}},
-  url = {http://arxiv.org/abs/1703.04770},
-  abstract = {We introduce in this work an efficient approach for audio scene classification using deep recurrent neural networks. An audio scene is firstly transformed into a sequence of high-level label tree embedding feature vectors. The vector sequence is then divided into multiple subsequences on which a deep GRU-based recurrent neural network is trained for sequence-to-label classification. The global predicted label for the entire sequence is finally obtained via aggregation of subsequence classification outputs. We will show that our approach obtains an F1-score of 97.7\% on the LITIS Rouen dataset, which is the largest dataset publicly available for the task. Compared to the best previously reported result on the dataset, our approach is able to reduce the relative classification error by 35.3\%.},
-  urldate = {2017-09-06},
-  date = {2017-03-14},
-  keywords = {Computer Science - Learning,Computer Science - Sound},
-  author = {Phan, Huy and Koch, Philipp and Katzberg, Fabrice and Maass, Marco and Mazur, Radoslaw and Mertins, Alfred},
-  file = {/Users/heytitle/Zotero/storage/YKJIFNU4/Phan et al. - 2017 - Audio Scene Classification with Deep Recurrent Neu.pdf;/Users/heytitle/Zotero/storage/UDEGEVUL/1703.html},
-  year = {2017}
-}
-
 @article{ShahriariTakingHumanOut2016,
   title = {Taking the {{Human Out}} of the {{Loop}}: {{A Review}} of {{Bayesian Optimization}}},
   volume = {104},
@@ -120,7 +45,7 @@ number of challening real-world examples.},
   journaltitle = {Proceedings of the IEEE},
   shortjournal = {Proc. IEEE},
   date = {2016-01},
-  pages = {148--175},
+  pages = {148-175},
   keywords = {Big data,Bayes methods,Bayesian optimization,Big Data,Big data application,decision making,Decision making,design of experiments,Design of experiments,Genomes,genomic medicine,human productivity,large-scale heterogeneous computing,Linear programming,massive complex software system,optimisation,optimization,Optimization,product quality,response surface methodology,Statistical analysis,statistical learning,storage allocation,storage architecture},
   author = {Shahriari, B. and Swersky, K. and Wang, Z. and Adams, R. P. and de Freitas, N.},
   file = {/Users/heytitle/Zotero/storage/HHWVCX3I/7352306.html},
@@ -155,22 +80,6 @@ number of challening real-world examples.},
   year = {2010}
 }
 
-@article{ZagoruykoWideResidualNetworks2016,
-  archivePrefix = {arXiv},
-  eprinttype = {arxiv},
-  eprint = {1605.07146},
-  primaryClass = {cs},
-  title = {Wide {{Residual Networks}}},
-  url = {http://arxiv.org/abs/1605.07146},
-  abstract = {Deep residual networks were shown to be able to scale up to thousands of layers and still have improving performance. However, each fraction of a percent of improved accuracy costs nearly doubling the number of layers, and so training very deep residual networks has a problem of diminishing feature reuse, which makes these networks very slow to train. To tackle these problems, in this paper we conduct a detailed experimental study on the architecture of ResNet blocks, based on which we propose a novel architecture where we decrease depth and increase width of residual networks. We call the resulting network structures wide residual networks (WRNs) and show that these are far superior over their commonly used thin and very deep counterparts. For example, we demonstrate that even a simple 16-layer-deep wide residual network outperforms in accuracy and efficiency all previous deep residual networks, including thousand-layer-deep networks, achieving new state-of-the-art results on CIFAR, SVHN, COCO, and significant improvements on ImageNet. Our code and models are available at https://github.com/szagoruyko/wide-residual-networks},
-  urldate = {2017-12-29},
-  date = {2016-05-23},
-  keywords = {Computer Science - Learning,Computer Science - Neural and Evolutionary Computing,Computer Science - Computer Vision and Pattern Recognition},
-  author = {Zagoruyko, Sergey and Komodakis, Nikos},
-  file = {/Users/heytitle/Zotero/storage/GQ8BZUF6/Zagoruyko and Komodakis - 2016 - Wide Residual Networks.pdf;/Users/heytitle/Zotero/storage/ASDJ8RUP/1605.html},
-  year = {2016}
-}
-
 @inproceedings{KingmaAdamMethodStochastic2014,
   archivePrefix = {arXiv},
   eprinttype = {arxiv},
@@ -187,15 +96,6 @@ number of challening real-world examples.},
   file = {/Users/heytitle/Zotero/storage/VZXMDASB/Kingma and Ba - 2014 - Adam A Method for Stochastic Optimization.pdf;/Users/heytitle/Zotero/storage/TSUEKSFG/1412.html},
   journal = {Proceedings of the 3rd International Conference on Learning Representations (ICLR)},
   year = {2014}
-}
-
-@inproceedings{ErhanVisualizingHigherLayerFeatures2009,
-  title = {Visualizing {{Higher}}-{{Layer Features}} of a {{Deep Network}}},
-  abstract = {Deep architectures have demonstrated state-of-the-art results in a variety of settings, especially with vision datasets. Beyond the model definitions and the quantitative analyses, there is a need for qualitative comparisons of the solutions learned by various deep architectures. The goal of this paper is to find good qualitative interpretations of high level features represented by such models. To this end, we contrast and compare several techniques applied on Stacked Denoising Autoencoders and Deep Belief Networks, trained on several vision datasets. We show that, perhaps counter-intuitively, such interpretation is possible at the unit level, that it is simple to accomplish and that the results are consistent across various techniques. We hope that such techniques will allow researchers in deep architectures to understand more of how and why deep architectures work.},
-  date = {2009},
-  author = {Erhan, Dumitru and Bengio, Yoshua and Courville, Aaron C. and Vincent, Pascal},
-  file = {/Users/heytitle/Zotero/storage/TJT9A3LN/Erhan et al. - 2009 - Visualizing Higher-Layer Features of a Deep Networ.pdf},
-  year = {2009}
 }
 
 @article{AbadiTensorFlowLargeScaleMachine2016,
@@ -252,23 +152,6 @@ number of challening real-world examples.},
   year = {2015}
 }
 
-@article{BachAnalyzingClassifiersFisher2015,
-  archivePrefix = {arXiv},
-  eprinttype = {arxiv},
-  eprint = {1512.00172},
-  primaryClass = {cs},
-  title = {Analyzing {{Classifiers}}: {{Fisher Vectors}} and {{Deep Neural Networks}}},
-  url = {http://arxiv.org/abs/1512.00172},
-  shorttitle = {Analyzing {{Classifiers}}},
-  abstract = {Fisher Vector classifiers and Deep Neural Networks (DNNs) are popular and successful algorithms for solving image classification problems. However, both are generally considered `black box' predictors as the non-linear transformations involved have so far prevented transparent and interpretable reasoning. Recently, a principled technique, Layer-wise Relevance Propagation (LRP), has been developed in order to better comprehend the inherent structured reasoning of complex nonlinear classification models such as Bag of Feature models or DNNs. In this paper we (1) extend the LRP framework also for Fisher Vector classifiers and then use it as analysis tool to (2) quantify the importance of context for classification, (3) qualitatively compare DNNs against FV classifiers in terms of important image regions and (4) detect potential flaws and biases in data. All experiments are performed on the PASCAL VOC 2007 data set.},
-  urldate = {2018-01-07},
-  date = {2015-12-01},
-  keywords = {Computer Science - Computer Vision and Pattern Recognition},
-  author = {Bach, Sebastian and Binder, Alexander and Montavon, Gr{\'e}goire and M{\"u}ller, Klaus-Robert and Samek, Wojciech},
-  file = {/Users/heytitle/Zotero/storage/THNBMRDD/Bach et al. - 2015 - Analyzing Classifiers Fisher Vectors and Deep Neu.pdf;/Users/heytitle/Zotero/storage/QCG7GMKG/1512.html},
-  year = {2015}
-}
-
 @article{GuntukuUnderstandingDeepRepresentations2016,
   title = {Understanding {{Deep Representations Learned}} in {{Modeling Users Likes}}},
   volume = {25},
@@ -279,18 +162,12 @@ number of challening real-world examples.},
   journaltitle = {IEEE Transactions on Image Processing},
   shortjournal = {IEEE Trans. Image Process.},
   date = {2016-08},
-  pages = {3762--3774},
+  pages = {3762-3774},
   keywords = {learning (artificial intelligence),automatic user liking discriminating,automatic user liking understanding,Clutter,Context,Context modeling,deep bimodal image knowledge representation,deep representation learning,Deep representations,Deep Representations,feature extraction,Feature extraction,feature representations,feature selection,image features,image recommendation,Image Recommendation,image representation,image retrieval,knowledge representation,semantic knowledge transfer,semantic structures,Semantic Structures,Semantics,tags,textual representations,user likes,User Likes,user liking modeling,visual content,visual representations,Visualization},
   author = {Guntuku, S. C. and Zhou, J. T. and Roy, S. and Lin, W. and Tsang, I. W.},
   file = {/Users/heytitle/Zotero/storage/R427XJJ2/7484658.html},
   journal = {IEEE Transactions on Image Processing},
   year = {August 2016}
-}
-
-@online{UnderstandingRepresentationsLearned,
-  title = {Understanding {{Representations Learned}} in {{Deep Architectures}} - {{LISA}} - {{Publications}} - {{Aigaion}} 2.0},
-  url = {http://www.iro.umontreal.ca/~lisa/publications2/index.php/publications/show/473},
-  urldate = {2018-01-07}
 }
 
 @report{ErhanUnderstandingRepresentationsLearned2010,
@@ -301,39 +178,6 @@ number of challening real-world examples.},
   date = {2010-10},
   author = {Erhan, Dumitru and Courville, Aaron and Bengio, Yoshua},
   year = {October 2010}
-}
-
-@article{SzegedyGoingDeeperConvolutions2014,
-  archivePrefix = {arXiv},
-  eprinttype = {arxiv},
-  eprint = {1409.4842},
-  primaryClass = {cs},
-  title = {Going {{Deeper}} with {{Convolutions}}},
-  url = {http://arxiv.org/abs/1409.4842},
-  abstract = {We propose a deep convolutional neural network architecture codenamed "Inception", which was responsible for setting the new state of the art for classification and detection in the ImageNet Large-Scale Visual Recognition Challenge 2014 (ILSVRC 2014). The main hallmark of this architecture is the improved utilization of the computing resources inside the network. This was achieved by a carefully crafted design that allows for increasing the depth and width of the network while keeping the computational budget constant. To optimize quality, the architectural decisions were based on the Hebbian principle and the intuition of multi-scale processing. One particular incarnation used in our submission for ILSVRC 2014 is called GoogLeNet, a 22 layers deep network, the quality of which is assessed in the context of classification and detection.},
-  urldate = {2018-01-07},
-  date = {2014-09-16},
-  keywords = {Computer Science - Computer Vision and Pattern Recognition},
-  author = {Szegedy, Christian and Liu, Wei and Jia, Yangqing and Sermanet, Pierre and Reed, Scott and Anguelov, Dragomir and Erhan, Dumitru and Vanhoucke, Vincent and Rabinovich, Andrew},
-  file = {/Users/heytitle/Zotero/storage/IWNR9Z5N/1409.html},
-  year = {2014}
-}
-
-@article{JiaCaffeConvolutionalArchitecture2014,
-  archivePrefix = {arXiv},
-  eprinttype = {arxiv},
-  eprint = {1408.5093},
-  primaryClass = {cs},
-  title = {Caffe: {{Convolutional Architecture}} for {{Fast Feature Embedding}}},
-  url = {http://arxiv.org/abs/1408.5093},
-  shorttitle = {Caffe},
-  abstract = {Caffe provides multimedia scientists and practitioners with a clean and modifiable framework for state-of-the-art deep learning algorithms and a collection of reference models. The framework is a BSD-licensed C++ library with Python and MATLAB bindings for training and deploying general-purpose convolutional neural networks and other deep models efficiently on commodity architectures. Caffe fits industry and internet-scale media needs by CUDA GPU computation, processing over 40 million images a day on a single K40 or Titan GPU (\$$\backslash$approx\$ 2.5 ms per image). By separating model representation from actual implementation, Caffe allows experimentation and seamless switching among platforms for ease of development and deployment from prototyping machines to cloud environments. Caffe is maintained and developed by the Berkeley Vision and Learning Center (BVLC) with the help of an active community of contributors on GitHub. It powers ongoing research projects, large-scale industrial applications, and startup prototypes in vision, speech, and multimedia.},
-  urldate = {2018-01-07},
-  date = {2014-06-20},
-  keywords = {Computer Science - Learning,Computer Science - Neural and Evolutionary Computing,Computer Science - Computer Vision and Pattern Recognition},
-  author = {Jia, Yangqing and Shelhamer, Evan and Donahue, Jeff and Karayev, Sergey and Long, Jonathan and Girshick, Ross and Guadarrama, Sergio and Darrell, Trevor},
-  file = {/Users/heytitle/Zotero/storage/I6BSYTS6/Jia et al. - 2014 - Caffe Convolutional Architecture for Fast Feature.pdf;/Users/heytitle/Zotero/storage/UA287H2W/1408.html},
-  year = {2014}
 }
 
 @inproceedings{BinderLayerWiseRelevancePropagation2016,
@@ -349,53 +193,11 @@ number of challening real-world examples.},
   publisher = {{Springer, Cham}},
   urldate = {2018-01-07},
   date = {2016},
-  pages = {63--71},
+  pages = {63-71},
   author = {Binder, Alexander and Montavon, Gr{\'e}goire and Lapuschkin, Sebastian and M{\"u}ller, Klaus-Robert and Samek, Wojciech},
   file = {/Users/heytitle/Zotero/storage/3ALFZF4Z/978-3-319-44781-0_8.html},
   journal = {Artificial Neural Networks and Machine Learning – ICANN 2016},
   year = {2016}
-}
-
-@article{GreffLSTMsearchspace2017,
-  title = {{{LSTM}}: {{A}} Search Space Odyssey},
-  journaltitle = {IEEE transactions on neural networks and learning systems},
-  shortjournal = {IEEE Trans. Neural Netw. Learn. Syst.},
-  date = {2017},
-  author = {Greff, Klaus and Srivastava, Rupesh K and Koutn{\'\i}k, Jan and Steunebrink, Bas R and Schmidhuber, J{\"u}rgen},
-  journal = {IEEE transactions on neural networks and learning systems},
-  year = {2017}
-}
-
-@article{SundararajanAxiomaticAttributionDeep2017,
-  archivePrefix = {arXiv},
-  eprinttype = {arxiv},
-  eprint = {1703.01365},
-  primaryClass = {cs},
-  title = {Axiomatic {{Attribution}} for {{Deep Networks}}},
-  url = {http://arxiv.org/abs/1703.01365},
-  abstract = {We study the problem of attributing the prediction of a deep network to its input features, a problem previously studied by several other works. We identify two fundamental axioms---Sensitivity and Implementation Invariance that attribution methods ought to satisfy. We show that they are not satisfied by most known attribution methods, which we consider to be a fundamental weakness of those methods. We use the axioms to guide the design of a new attribution method called Integrated Gradients. Our method requires no modification to the original network and is extremely simple to implement; it just needs a few calls to the standard gradient operator. We apply this method to a couple of image models, a couple of text models and a chemistry model, demonstrating its ability to debug networks, to extract rules from a network, and to enable users to engage with models better.},
-  urldate = {2018-01-17},
-  date = {2017-03-03},
-  keywords = {Computer Science - Learning},
-  author = {Sundararajan, Mukund and Taly, Ankur and Yan, Qiqi},
-  file = {/Users/heytitle/Zotero/storage/RDGU37H2/Sundararajan et al. - 2017 - Axiomatic Attribution for Deep Networks.pdf;/Users/heytitle/Zotero/storage/X4RHU78K/1703.html},
-  year = {2017}
-}
-
-@article{ArrasExplainingRecurrentNeural2017,
-  archivePrefix = {arXiv},
-  eprinttype = {arxiv},
-  eprint = {1706.07206},
-  primaryClass = {cs, stat},
-  title = {Explaining {{Recurrent Neural Network Predictions}} in {{Sentiment Analysis}}},
-  url = {http://arxiv.org/abs/1706.07206},
-  abstract = {Recently, a technique called Layer-wise Relevance Propagation (LRP) was shown to deliver insightful explanations in the form of input space relevances for understanding feed-forward neural network classification decisions. In the present work, we extend the usage of LRP to recurrent neural networks. We propose a specific propagation rule applicable to multiplicative connections as they arise in recurrent network architectures such as LSTMs and GRUs. We apply our technique to a word-based bi-directional LSTM model on a five-class sentiment prediction task, and evaluate the resulting LRP relevances both qualitatively and quantitatively, obtaining better results than a gradient-based related method which was used in previous work.},
-  urldate = {2018-02-11},
-  date = {2017-06-22},
-  keywords = {Computer Science - Computation and Language,Statistics - Machine Learning,Computer Science - Neural and Evolutionary Computing,Computer Science - Artificial Intelligence,for-1st-paper},
-  author = {Arras, Leila and Montavon, Gr{\'e}goire and M{\"u}ller, Klaus-Robert and Samek, Wojciech},
-  file = {/Users/heytitle/Zotero/storage/L79FLFIS/Arras et al. - 2017 - Explaining Recurrent Neural Network Predictions in.pdf;/Users/heytitle/Zotero/storage/AASM8MQA/1706.html},
-  year = {2017}
 }
 
 @article{SimonyanDeepConvolutionalNetworks2013,
@@ -409,27 +211,11 @@ number of challening real-world examples.},
   year = {2013}
 }
 
-@article{SpringenbergStrivingSimplicityAll2014e,
-  archivePrefix = {arXiv},
-  eprinttype = {arxiv},
-  eprint = {1412.6806},
-  title = {Striving for {{Simplicity}}: {{The All Convolutional Net}}},
-  volume = {abs/1412.6806},
-  url = {http://arxiv.org/abs/1412.6806},
-  journaltitle = {CoRR},
-  date = {2014},
-  author = {Springenberg, Jost Tobias and Dosovitskiy, Alexey and Brox, Thomas and Riedmiller, Martin A.},
-  biburl = {https://dblp.org/rec/bib/journals/corr/SpringenbergDBR14},
-  bibsource = {dblp computer science bibliography, https://dblp.org},
-  journal = {CoRR},
-  year = {2014}
-}
-
 @inproceedings{BachAnalyzingclassifiersFisher2016,
   title = {Analyzing Classifiers: {{Fisher}} Vectors and Deep Neural Networks},
   booktitle = {Proceedings of the {{IEEE Conference}} on {{Computer Vision}} and {{Pattern Recognition}}},
   date = {2016},
-  pages = {2912--2920},
+  pages = {2912-2920},
   author = {Bach, Sebastian and Binder, Alexander and Montavon, Gr{\'e}goire and Muller, Klaus-Robert and Samek, Wojciech},
   journal = {Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition},
   year = {2016}
@@ -441,32 +227,6 @@ number of challening real-world examples.},
   author = {Tieleman, T. and Hinton, G.},
   howpublished = {COURSERA: Neural Networks for Machine Learning},
   year = {2012}
-}
-
-@article{ZeilerADADELTAAdaptiveLearning2012,
-  title = {{{ADADELTA}}: {{An Adaptive Learning Rate Method}}},
-  volume = {abs/1212.5701},
-  journaltitle = {CoRR},
-  date = {2012},
-  author = {Zeiler, Matthew D.},
-  journal = {CoRR},
-  year = {2012}
-}
-
-@article{ZeilerVisualizingUnderstandingConvolutional2013,
-  archivePrefix = {arXiv},
-  eprinttype = {arxiv},
-  eprint = {1311.2901},
-  title = {Visualizing and {{Understanding Convolutional Networks}}},
-  volume = {abs/1311.2901},
-  url = {http://arxiv.org/abs/1311.2901},
-  journaltitle = {CoRR},
-  date = {2013},
-  author = {Zeiler, Matthew D. and Fergus, Rob},
-  biburl = {https://dblp.org/rec/bib/journals/corr/ZeilerF13},
-  bibsource = {dblp computer science bibliography, https://dblp.org},
-  journal = {CoRR},
-  year = {2013}
 }
 
 @article{SimonyanVeryDeepConvolutional2014,
@@ -485,28 +245,12 @@ number of challening real-world examples.},
   year = {2014}
 }
 
-@article{HeDeepResidualLearning2015,
-  archivePrefix = {arXiv},
-  eprinttype = {arxiv},
-  eprint = {1512.03385},
-  title = {Deep {{Residual Learning}} for {{Image Recognition}}},
-  volume = {abs/1512.03385},
-  url = {http://arxiv.org/abs/1512.03385},
-  journaltitle = {CoRR},
-  date = {2015},
-  author = {He, Kaiming and Zhang, Xiangyu and Ren, Shaoqing and Sun, Jian},
-  biburl = {https://dblp.org/rec/bib/journals/corr/HeZRS15},
-  bibsource = {dblp computer science bibliography, https://dblp.org},
-  journal = {CoRR},
-  year = {2015}
-}
-
 @inproceedings{LeCunGradientBasedLearningApplied2001,
   title = {Gradient-{{Based Learning Applied}} to {{Document Recognition}}},
   booktitle = {Intelligent {{Signal Processing}}},
   publisher = {{IEEE Press}},
   date = {2001},
-  pages = {306--351},
+  pages = {306-351},
   author = {LeCun, Y. and Bottou, L. and Bengio, Y. and Haffner, P.},
   original = {orig/lecun-01a.ps.gz},
   editors = {Haykin, S. and Kosko, B.},
@@ -520,41 +264,11 @@ number of challening real-world examples.},
   booktitle = {Advances in {{Neural Information Processing Systems}} 25},
   publisher = {{Curran Associates, Inc.}},
   date = {2012},
-  pages = {1097--1105},
+  pages = {1097-1105},
   author = {Krizhevsky, Alex and Sutskever, Ilya and Hinton, Geoffrey E},
   editor = {Pereira, F. and Burges, C. J. C. and Bottou, L. and Weinberger, K. Q.},
   journal = {Advances in Neural Information Processing Systems 25},
   year = {2012}
-}
-
-@article{PascanuUnderstandingexplodinggradient2012,
-  archivePrefix = {arXiv},
-  eprinttype = {arxiv},
-  eprint = {1211.5063},
-  title = {Understanding the Exploding Gradient Problem},
-  volume = {abs/1211.5063},
-  url = {http://arxiv.org/abs/1211.5063},
-  journaltitle = {CoRR},
-  date = {2012},
-  author = {Pascanu, Razvan and Mikolov, Tomas and Bengio, Yoshua},
-  biburl = {https://dblp.org/rec/bib/journals/corr/abs-1211-5063},
-  bibsource = {dblp computer science bibliography, https://dblp.org},
-  journal = {CoRR},
-  year = {2012}
-}
-
-@article{HochreiterLongshorttermmemory1997,
-  title = {Long Short-Term Memory},
-  volume = {9},
-  number = {8},
-  journaltitle = {Neural computation},
-  shortjournal = {Neural Comput.},
-  date = {1997},
-  pages = {1735--1780},
-  author = {Hochreiter, Sepp and Schmidhuber, J{\"u}rgen},
-  publisher = {{MIT Press}},
-  journal = {Neural computation},
-  year = {1997}
 }
 
 @inproceedings{ChoLearningPhraseRepresentations2014a,
@@ -564,34 +278,11 @@ number of challening real-world examples.},
   booktitle = {Proceedings of the 2014 {{Conference}} on {{Empirical Methods}} in {{Natural Language Processing}} ({{EMNLP}})},
   publisher = {{Association for Computational Linguistics}},
   date = {2014-10},
-  pages = {1724--1734},
+  pages = {1724-1734},
   author = {Cho, Kyunghyun and van Merri{\"e}nboer, Bart and G{\"u}l{\c c}ehre, {\c C}a{\u g}lar and Bahdanau, Dzmitry and Bougares, Fethi and Schwenk, Holger and Bengio, Yoshua},
   options = {useprefix=true},
   journal = {Proceedings of the 2014 Conference on Empirical Methods in Natural Language Processing (EMNLP)},
   year = {2014}
-}
-
-@article{Jozefowiczempiricalexplorationrecurrent2015a,
-  title = {An Empirical Exploration of Recurrent Network Architectures},
-  journaltitle = {Journal of Machine Learning Research},
-  shortjournal = {J. Mach. Learn. Res.},
-  date = {2015},
-  author = {Jozefowicz, Rafal and Zaremba, Wojciech and Sutskever, Ilya},
-  journal = {Journal of Machine Learning Research},
-  year = {2015}
-}
-
-@incollection{GalTheoreticallyGroundedApplication2016,
-  title = {A {{Theoretically Grounded Application}} of {{Dropout}} in {{Recurrent Neural Networks}}},
-  url = {http://papers.nips.cc/paper/6241-a-theoretically-grounded-application-of-dropout-in-recurrent-neural-networks.pdf},
-  booktitle = {Advances in {{Neural Information Processing Systems}} 29},
-  publisher = {{Curran Associates, Inc.}},
-  date = {2016},
-  pages = {1019--1027},
-  author = {Gal, Yarin and Ghahramani, Zoubin},
-  editor = {Lee, D. D. and Sugiyama, M. and Luxburg, U. V. and Guyon, I. and Garnett, R.},
-  journal = {Advances in Neural Information Processing Systems 29},
-  year = {2016}
 }
 
 @inproceedings{LeeConvolutionalDeepBelief2009,
@@ -604,25 +295,12 @@ number of challening real-world examples.},
   series = {ICML '09},
   publisher = {{ACM}},
   date = {2009},
-  pages = {609--616},
+  pages = {609-616},
   author = {Lee, Honglak and Grosse, Roger and Ranganath, Rajesh and Ng, Andrew Y.},
   numpages = {8},
   acmid = {1553453},
   journal = {Proceedings of the 26th Annual International Conference on Machine Learning},
   year = {2009}
-}
-
-@article{SrivastavaDropoutSimpleWay2014,
-  title = {Dropout: {{A Simple Way}} to {{Prevent Neural Networks}} from {{Overfitting}}},
-  volume = {15},
-  url = {http://jmlr.org/papers/v15/srivastava14a.html},
-  journaltitle = {Journal of Machine Learning Research},
-  shortjournal = {J. Mach. Learn. Res.},
-  date = {2014},
-  pages = {1929--1958},
-  author = {Srivastava, Nitish and Hinton, Geoffrey and Krizhevsky, Alex and Sutskever, Ilya and Salakhutdinov, Ruslan},
-  journal = {Journal of Machine Learning Research},
-  year = {2014}
 }
 
 @inproceedings{NguyenSynthesizingpreferredinputs2016a,
@@ -632,15 +310,6 @@ number of challening real-world examples.},
   date = {2016},
   author = {Nguyen, A. and Dosovitskiy, A. and Yosinski, J. and Brox, T. and Clune, J.},
   journal = {Advances in Neural Information Processing Systems (NIPS)},
-  year = {2016}
-}
-
-@inproceedings{RibeiroWhyShouldTrust2016,
-  title = {"{{Why Should I Trust You}}?": {{Explaining}} the {{Predictions}} of {{Any Classifier}}},
-  booktitle = {Knowledge {{Discovery}} and {{Data Mining}} ({{KDD}})},
-  date = {2016},
-  author = {Ribeiro, Marco Tulio and Singh, Sameer and Guestrin, Carlos},
-  journal = {Knowledge Discovery and Data Mining (KDD)},
   year = {2016}
 }
 
@@ -703,20 +372,427 @@ number of challening real-world examples.},
   year = {2017}
 }
 
-@article{DBLP:journals/corr/SundararajanTY17,
+@article{MontavonMethodsinterpretingunderstanding2018,
+  title = {Methods for Interpreting and Understanding Deep Neural Networks},
+  volume = {73},
+  issn = {1051-2004},
+  url = {http://www.sciencedirect.com/science/article/pii/S1051200417302385},
+  doi = {https://doi.org/10.1016/j.dsp.2017.10.011},
+  journaltitle = {Digital Signal Processing},
+  shortjournal = {Digit. Signal Process.},
+  date = {2018},
+  pages = {1-15},
+  keywords = {Deep neural networks,Taylor decomposition,Activation maximization,Layer-wise relevance propagation,Sensitivity analysis},
+  author = {Montavon, Gr{\'e}goire and Samek, Wojciech and M{\"u}ller, Klaus-Robert},
+  journal = {Digital Signal Processing},
+  year = {2018}
+}
+
+@inproceedings{ZeilerVisualizingUnderstandingConvolutional2014,
+  title = {Visualizing and {{Understanding Convolutional Networks}}},
+  url = {https://doi.org/10.1007/978-3-319-10590-1_53},
+  doi = {10.1007/978-3-319-10590-1_53},
+  booktitle = {Computer {{Vision}} - {{ECCV}} 2014 - 13th {{European Conference}}, {{Zurich}}, {{Switzerland}}, {{September}} 6-12, 2014, {{Proceedings}}, {{Part I}}},
+  date = {2014},
+  pages = {818-833},
+  author = {Zeiler, Matthew D. and Fergus, Rob},
+  crossref = {DBLP:conf/eccv/2014-1},
+  biburl = {https://dblp.org/rec/bib/conf/eccv/ZeilerF14},
+  bibsource = {dblp computer science bibliography, https://dblp.org},
+  journal = {Computer Vision - ECCV 2014 - 13th European Conference, Zurich, Switzerland, September 6-12, 2014, Proceedings, Part I},
+  year = {2014}
+}
+
+@inproceedings{JozefowiczEmpiricalExplorationRecurrent2015,
+  title = {An {{Empirical Exploration}} of {{Recurrent Network Architectures}}},
+  url = {http://jmlr.org/proceedings/papers/v37/jozefowicz15.html},
+  booktitle = {Proceedings of the 32nd {{International Conference}} on {{Machine Learning}}, {{ICML}} 2015, {{Lille}}, {{France}}, 6-11 {{July}} 2015},
+  date = {2015},
+  pages = {2342-2350},
+  author = {J{\'o}zefowicz, Rafal and Zaremba, Wojciech and Sutskever, Ilya},
+  crossref = {DBLP:conf/icml/2015},
+  biburl = {https://dblp.org/rec/bib/conf/icml/JozefowiczZS15},
+  bibsource = {dblp computer science bibliography, https://dblp.org},
+  journal = {Proceedings of the 32nd International Conference on Machine Learning, ICML 2015, Lille, France, 6-11 July 2015},
+  year = {2015}
+}
+
+@inproceedings{GalTheoreticallyGroundedApplication2016,
+  title = {A {{Theoretically Grounded Application}} of {{Dropout}} in {{Recurrent Neural Networks}}},
+  url = {http://papers.nips.cc/paper/6241-a-theoretically-grounded-application-of-dropout-in-recurrent-neural-networks},
+  booktitle = {Advances in {{Neural Information Processing Systems}} 29: {{Annual Conference}} on {{Neural Information Processing Systems}} 2016, {{December}} 5-10, 2016, {{Barcelona}}, {{Spain}}},
+  date = {2016},
+  pages = {1019-1027},
+  author = {Gal, Yarin and Ghahramani, Zoubin},
+  crossref = {DBLP:conf/nips/2016},
+  biburl = {https://dblp.org/rec/bib/conf/nips/GalG16},
+  bibsource = {dblp computer science bibliography, https://dblp.org},
+  journal = {Advances in Neural Information Processing Systems 29: Annual Conference on Neural Information Processing Systems 2016, December 5-10, 2016, Barcelona, Spain},
+  year = {2016}
+}
+
+@article{ZeilerADADELTAAdaptiveLearning2012,
   archivePrefix = {arXiv},
   eprinttype = {arxiv},
-  eprint = {1703.01365},
-  title = {Axiomatic {{Attribution}} for {{Deep Networks}}},
-  volume = {abs/1703.01365},
-  url = {http://arxiv.org/abs/1703.01365},
+  eprint = {1212.5701},
+  title = {{{ADADELTA}}: {{An Adaptive Learning Rate Method}}},
+  volume = {abs/1212.5701},
+  url = {http://arxiv.org/abs/1212.5701},
   journaltitle = {CoRR},
-  date = {2017},
-  author = {Sundararajan, Mukund and Taly, Ankur and Yan, Qiqi},
-  biburl = {https://dblp.org/rec/bib/journals/corr/SundararajanTY17},
+  date = {2012},
+  author = {Zeiler, Matthew D.},
+  biburl = {https://dblp.org/rec/bib/journals/corr/abs-1212-5701},
   bibsource = {dblp computer science bibliography, https://dblp.org},
   journal = {CoRR},
+  year = {2012}
+}
+
+@inproceedings{PhanAudioSceneClassification2017,
+  title = {Audio {{Scene Classification}} with {{Deep Recurrent Neural Networks}}},
+  url = {http://www.isca-speech.org/archive/Interspeech_2017/abstracts/0101.html},
+  booktitle = {Interspeech 2017, 18th {{Annual Conference}} of the {{International Speech Communication Association}}, {{Stockholm}}, {{Sweden}}, {{August}} 20-24, 2017},
+  date = {2017},
+  pages = {3043-3047},
+  author = {Phan, Huy and Koch, Philipp and Katzberg, Fabrice and Maa{\ss}, Marco and Mazur, Radoslaw and Mertins, Alfred},
+  crossref = {DBLP:conf/interspeech/2017},
+  biburl = {https://dblp.org/rec/bib/conf/interspeech/PhanKKMMM17},
+  bibsource = {dblp computer science bibliography, https://dblp.org},
+  journal = {Interspeech 2017, 18th Annual Conference of the International Speech Communication Association, Stockholm, Sweden, August 20-24, 2017},
   year = {2017}
+}
+
+@inproceedings{SundararajanAxiomaticAttributionDeep2017a,
+  title = {Axiomatic {{Attribution}} for {{Deep Networks}}},
+  volume = {70},
+  url = {http://proceedings.mlr.press/v70/sundararajan17a.html},
+  booktitle = {Proceedings of the 34th {{International Conference}} on {{Machine Learning}}, {{ICML}} 2017, {{Sydney}}, {{NSW}}, {{Australia}}, 6-11 {{August}} 2017},
+  series = {Proceedings of Machine Learning Research},
+  publisher = {{PMLR}},
+  urldate = {2018-04-13},
+  date = {2017},
+  pages = {3319--3328},
+  author = {Sundararajan, Mukund and Taly, Ankur and Yan, Qiqi},
+  editor = {Precup, Doina and Teh, Yee Whye},
+  journal = {Proceedings of the 34th International Conference on Machine Learning, ICML 2017, Sydney, NSW, Australia, 6-11 August 2017},
+  year = {2017}
+}
+
+@inproceedings{JiaCaffeConvolutionalArchitecture2014,
+  title = {Caffe: {{Convolutional Architecture}} for {{Fast Feature Embedding}}},
+  isbn = {978-1-4503-3063-3},
+  url = {http://doi.acm.org/10.1145/2647868.2654889},
+  doi = {10.1145/2647868.2654889},
+  shorttitle = {Caffe},
+  booktitle = {Proceedings of the {{ACM International Conference}} on {{Multimedia}}, {{MM}} '14, {{Orlando}}, {{FL}}, {{USA}}, {{November}} 03 - 07, 2014},
+  publisher = {{ACM}},
+  urldate = {2018-04-13},
+  date = {2014},
+  pages = {675--678},
+  author = {Jia, Yangqing and Shelhamer, Evan and Donahue, Jeff and Karayev, Sergey and Long, Jonathan and Girshick, Ross B. and Guadarrama, Sergio and Darrell, Trevor},
+  editor = {Hua, Kien A. and Rui, Yong and Steinmetz, Ralf and Hanjalic, Alan and Natsev, Apostol and Zhu, Wenwu},
+  journal = {Proceedings of the ACM International Conference on Multimedia, MM '14, Orlando, FL, USA, November 03 - 07, 2014},
+  year = {2014}
+}
+
+@inproceedings{HeDeepResidualLearning2016,
+  title = {Deep {{Residual Learning}} for {{Image Recognition}}},
+  isbn = {978-1-4673-8851-1},
+  doi = {10.1109/CVPR.2016.90},
+  booktitle = {2016 {{IEEE Conference}} on {{Computer Vision}} and {{Pattern Recognition}}, {{CVPR}} 2016, {{Las Vegas}}, {{NV}}, {{USA}}, {{June}} 27-30, 2016},
+  publisher = {{IEEE Computer Society}},
+  date = {2016},
+  pages = {770--778},
+  author = {He, Kaiming and Zhang, Xiangyu and Ren, Shaoqing and Sun, Jian},
+  journal = {2016 IEEE Conference on Computer Vision and Pattern Recognition, CVPR 2016, Las Vegas, NV, USA, June 27-30, 2016},
+  year = {2016}
+}
+
+@article{SrivastavaDropoutsimpleway2014,
+  title = {Dropout: A Simple Way to Prevent Neural Networks from Overfitting},
+  volume = {15},
+  url = {http://dl.acm.org/citation.cfm?id=2670313},
+  shorttitle = {Dropout},
+  number = {1},
+  journaltitle = {Journal of Machine Learning Research},
+  shortjournal = {J. Mach. Learn. Res.},
+  urldate = {2018-04-13},
+  date = {2014},
+  pages = {1929--1958},
+  author = {Srivastava, Nitish and Hinton, Geoffrey E. and Krizhevsky, Alex and Sutskever, Ilya and Salakhutdinov, Ruslan},
+  journal = {Journal of Machine Learning Research},
+  year = {2014}
+}
+
+@inproceedings{ArrasExplainingRecurrentNeural2017,
+  title = {Explaining {{Recurrent Neural Network Predictions}} in {{Sentiment Analysis}}},
+  isbn = {978-1-945626-95-1},
+  url = {https://aclanthology.info/papers/W17-5221/w17-5221},
+  booktitle = {Proceedings of the 8th {{Workshop}} on {{Computational Approaches}} to {{Subjectivity}}, {{Sentiment}} and {{Social Media Analysis}}, {{WASSA}}@{{EMNLP}} 2017, {{Copenhagen}}, {{Denmark}}, {{September}} 8, 2017},
+  publisher = {{Association for Computational Linguistics}},
+  urldate = {2018-04-13},
+  date = {2017},
+  pages = {159--168},
+  author = {Arras, Leila and Montavon, Gr{\'e}goire and M{\"u}ller, Klaus-Robert and Samek, Wojciech},
+  editor = {Balahur, Alexandra and Mohammad, Saif M. and van der Goot, Erik},
+  journal = {Proceedings of the 8th Workshop on Computational Approaches to Subjectivity, Sentiment and Social Media Analysis, WASSA@EMNLP 2017, Copenhagen, Denmark, September 8, 2017},
+  year = {2017}
+}
+
+@inproceedings{SzegedyGoingdeeperconvolutions2015,
+  title = {Going Deeper with Convolutions},
+  isbn = {978-1-4673-6964-0},
+  doi = {10.1109/CVPR.2015.7298594},
+  booktitle = {{{IEEE Conference}} on {{Computer Vision}} and {{Pattern Recognition}}, {{CVPR}} 2015, {{Boston}}, {{MA}}, {{USA}}, {{June}} 7-12, 2015},
+  publisher = {{IEEE Computer Society}},
+  date = {2015},
+  pages = {1--9},
+  author = {Szegedy, Christian and Liu, Wei and Jia, Yangqing and Sermanet, Pierre and Reed, Scott E. and Anguelov, Dragomir and Erhan, Dumitru and Vanhoucke, Vincent and Rabinovich, Andrew},
+  journal = {IEEE Conference on Computer Vision and Pattern Recognition, CVPR 2015, Boston, MA, USA, June 7-12, 2015},
+  year = {2015}
+}
+
+@inproceedings{WieschollekLearningBlindMotion2017,
+  title = {Learning {{Blind Motion Deblurring}}},
+  isbn = {978-1-5386-1032-9},
+  doi = {10.1109/ICCV.2017.34},
+  booktitle = {{{IEEE International Conference}} on {{Computer Vision}}, {{ICCV}} 2017, {{Venice}}, {{Italy}}, {{October}} 22-29, 2017},
+  publisher = {{IEEE Computer Society}},
+  date = {2017},
+  pages = {231--240},
+  author = {Wieschollek, Patrick and Hirsch, Michael and Sch{\"o}lkopf, Bernhard and Lensch, Hendrik P. A.},
+  journal = {IEEE International Conference on Computer Vision, ICCV 2017, Venice, Italy, October 22-29, 2017},
+  year = {2017}
+}
+
+@article{HochreiterLongShortTermMemory1997,
+  title = {Long {{Short}}-{{Term Memory}}},
+  volume = {9},
+  doi = {10.1162/neco.1997.9.8.1735},
+  number = {8},
+  journaltitle = {Neural Computation},
+  shortjournal = {Neural Comput.},
+  date = {1997},
+  pages = {1735--1780},
+  author = {Hochreiter, Sepp and Schmidhuber, J{\"u}rgen},
+  journal = {Neural Computation},
+  year = {1997}
+}
+
+@article{GreffLSTMSearchSpace2017,
+  title = {{{LSTM}}: {{A Search Space Odyssey}}},
+  volume = {28},
+  doi = {10.1109/TNNLS.2016.2582924},
+  shorttitle = {{{LSTM}}},
+  number = {10},
+  journaltitle = {IEEE Trans. Neural Netw. Learning Syst.},
+  shortjournal = {IEEE Trans Neural Netw Learn. Syst},
+  date = {2017},
+  pages = {2222--2232},
+  author = {Greff, Klaus and Srivastava, Rupesh Kumar and Koutn{\'\i}k, Jan and Steunebrink, Bas R. and Schmidhuber, J{\"u}rgen},
+  journal = {IEEE Trans. Neural Netw. Learning Syst.},
+  year = {2017}
+}
+
+@inproceedings{SpringenbergStrivingSimplicityAll2015a,
+  title = {Striving for {{Simplicity}}: {{The All Convolutional Net}}},
+  url = {http://lmb.informatik.uni-freiburg.de/Publications/2015/DB15a},
+  booktitle = {{{ICLR}} (Workshop Track)},
+  date = {2015},
+  author = {Springenberg, J.T. and Dosovitskiy, A. and Brox, T. and Riedmiller, M.},
+  journal = {ICLR (workshop track)},
+  year = {2015}
+}
+
+@report{ErhanVisualizingHigherLayerFeatures2009,
+  title = {Visualizing {{Higher}}-{{Layer Features}} of a {{Deep Network}}},
+  abstract = {Deep architectures have demonstrated state-of-the-art results in a variety of settings, especially with vision datasets. Beyond the model definitions and the quantitative analyses, there is a need for qualitative comparisons of the solutions learned by various deep architectures. The goal of this paper is to find good qualitative interpretations of high level features represented by such models. To this end, we contrast and compare several techniques applied on Stacked Denoising Autoencoders and Deep Belief Networks, trained on several vision datasets. We show that, perhaps counter-intuitively, such interpretation is possible at the unit level, that it is simple to accomplish and that the results are consistent across various techniques. We hope that such techniques will allow researchers in deep architectures to understand more of how and why deep architectures work},
+  number = {1341},
+  institution = {{University of Montreal}},
+  date = {2009-06},
+  author = {Erhan, Dumitru and Bengio, Yoshua and Courville, Aaron and Vincent, Pascal},
+  note = {Also presented at the ICML 2009 Workshop on Learning Feature Hierarchies, Montr{\'e}al, Canada.},
+  year = {2009}
+}
+
+@article{ArrasWhatrelevanttext2017,
+  title = {"{{What}} Is Relevant in a Text Document?": {{An}} Interpretable Machine Learning Approach},
+  volume = {12},
+  url = {https://doi.org/10.1371/journal.pone.0181142},
+  doi = {10.1371/journal.pone.0181142},
+  abstract = {Text documents can be described by a number of abstract concepts such as semantic category, writing style, or sentiment. Machine learning (ML) models have been trained to automatically map documents to these abstract concepts, allowing to annotate very large text collections, more than could be processed by a human in a lifetime. Besides predicting the text's category very accurately, it is also highly desirable to understand how and why the categorization process takes place. In this paper, we demonstrate that such understanding can be achieved by tracing the classification decision back to individual words using layer-wise relevance propagation (LRP), a recently developed technique for explaining predictions of complex non-linear classifiers. We train two word-based ML models, a convolutional neural network (CNN) and a bag-of-words SVM classifier, on a topic categorization task and adapt the LRP method to decompose the predictions of these models onto words. Resulting scores indicate how much individual words contribute to the overall classification decision. This enables one to distill relevant information from text documents without an explicit semantic information extraction step. We further use the word-wise relevance scores for generating novel vector-based document representations which capture semantic information. Based on these document vectors, we introduce a measure of model explanatory power and show that, although the SVM and CNN models perform similarly in terms of classification accuracy, the latter exhibits a higher level of explainability which makes it more comprehensible for humans and potentially more useful for other applications.},
+  number = {8},
+  journaltitle = {PLOS ONE},
+  date = {2017-08},
+  pages = {1-23},
+  author = {Arras, Leila and Horn, Franziska and Montavon, Gr{\'e}goire and M{\"u}ller, Klaus-Robert and Samek, Wojciech},
+  publisher = {{Public Library of Science}},
+  journal = {PLOS ONE},
+  year = {2017}
+}
+
+@inproceedings{RibeiroWhyShouldTrust2016,
+  title = {"{{Why Should I Trust You}}?": {{Explaining}} the {{Predictions}} of {{Any Classifier}}},
+  isbn = {978-1-4503-4232-2},
+  url = {http://doi.acm.org/10.1145/2939672.2939778},
+  doi = {10.1145/2939672.2939778},
+  shorttitle = {"{{Why Should I Trust You}}?},
+  booktitle = {Proceedings of the 22nd {{ACM SIGKDD International Conference}} on {{Knowledge Discovery}} and {{Data Mining}}, {{San Francisco}}, {{CA}}, {{USA}}, {{August}} 13-17, 2016},
+  publisher = {{ACM}},
+  urldate = {2018-04-13},
+  date = {2016},
+  pages = {1135--1144},
+  author = {Ribeiro, Marco T{\'u}lio and Singh, Sameer and Guestrin, Carlos},
+  editor = {Krishnapuram, Balaji and Shah, Mohak and Smola, Alexander J. and Aggarwal, Charu C. and Shen, Dou and Rastogi, Rajeev},
+  journal = {Proceedings of the 22nd ACM SIGKDD International Conference on Knowledge Discovery and Data Mining, San Francisco, CA, USA, August 13-17, 2016},
+  year = {2016}
+}
+
+@inproceedings{ZagoruykoWideResidualNetworks2016,
+  title = {Wide {{Residual Networks}}},
+  url = {http://www.bmva.org/bmvc/2016/papers/paper087/index.html},
+  booktitle = {Proceedings of the {{British Machine Vision Conference}} 2016, {{BMVC}} 2016, {{York}}, {{UK}}, {{September}} 19-22, 2016},
+  publisher = {{BMVA Press}},
+  urldate = {2018-04-13},
+  date = {2016},
+  author = {Zagoruyko, Sergey and Komodakis, Nikos},
+  editor = {Wilson, Richard C. and Hancock, Edwin R. and Smith, William A. P.},
+  journal = {Proceedings of the British Machine Vision Conference 2016, BMVC 2016, York, UK, September 19-22, 2016},
+  year = {2016}
+}
+
+@inproceedings{ZuradaSensitivityAnalysisMinimization1994,
+  title = {Sensitivity {{Analysis}} for {{Minimization}} of {{Input Data Dimension}} for {{Feedforward Neural Network}}},
+  isbn = {978-0-7803-1916-5},
+  doi = {10.1109/ISCAS.1994.409622},
+  booktitle = {1994 {{IEEE International Symposium}} on {{Circuits}} and {{Systems}}, {{ISCAS}} 1994, {{London}}, {{England}}, {{UK}}, {{May}} 30 - {{June}} 2, 1994},
+  publisher = {{IEEE}},
+  date = {1994},
+  pages = {447--450},
+  author = {Zurada, Jacek M. and Malinowski, Aleksander and Cloete, Ian},
+  journal = {1994 IEEE International Symposium on Circuits and Systems, ISCAS 1994, London, England, UK, May 30 - June 2, 1994},
+  year = {1994}
+}
+
+@article{KhanClassificationdiagnosticprediction2001,
+  title = {Classification and Diagnostic Prediction of Cancers Using Gene Expression Profiling and Artificial Neural Networks},
+  volume = {7},
+  issn = {1078-8956},
+  url = {https://www.ncbi.nlm.nih.gov/pmc/articles/PMC1282521/},
+  doi = {10.1038/89044},
+  abstract = {The purpose of this study was to develop a method of classifying cancers to specific diagnostic categories based on their gene expression signatures using artificial neural networks (ANNs). We trained the ANNs using the small, round blue-cell tumors (SRBCTs) as a model. These cancers belong to four distinct diagnostic categories and often present diagnostic dilemmas in clinical practice. The ANNs correctly classified all samples and identified the genes most relevant to the classification. Expression of several of these genes has been reported in SRBCTs, but most have not been associated with these cancers. To test the ability of the trained ANN models to recognize SRBCTs, we analyzed additional blinded samples that were not previously used for the training procedure, and correctly classified them in all cases. This study demonstrates the potential applications of these methods for tumor diagnosis and the identification of candidate targets for therapy.},
+  number = {6},
+  journaltitle = {Nature medicine},
+  shortjournal = {Nat Med},
+  urldate = {2018-04-14},
+  date = {2001-06},
+  pages = {673-679},
+  author = {Khan, Javed and Wei, Jun S. and Ringn{\'e}r, Markus and Saal, Lao H. and Ladanyi, Marc and Westermann, Frank and Berthold, Frank and Schwab, Manfred and Antonescu, Cristina R. and Peterson, Carsten and Meltzer, Paul S.},
+  file = {/Users/heytitle/Zotero/storage/76BWE74Q/Khan et al. - 2001 - Classification and diagnostic prediction of cancer.pdf},
+  eprinttype = {pmid},
+  eprint = {11385503},
+  pmcid = {PMC1282521},
+  journal = {Nature medicine},
+  year = {2001}
+}
+
+@inproceedings{LandeckerInterpretingindividualclassifications2013,
+  title = {Interpreting Individual Classifications of Hierarchical Networks},
+  isbn = {978-1-4673-5895-8},
+  doi = {10.1109/CIDM.2013.6597214},
+  booktitle = {{{IEEE Symposium}} on {{Computational Intelligence}} and {{Data Mining}}, {{CIDM}} 2013, {{Singapore}}, 16-19 {{April}}, 2013},
+  publisher = {{IEEE}},
+  date = {2013},
+  pages = {32--38},
+  author = {Landecker, Will and Thomure, Michael D. and Bettencourt, Lu{\'\i}s M. A. and Mitchell, Melanie and Kenyon, Garrett T. and Brumby, Steven P.},
+  journal = {IEEE Symposium on Computational Intelligence and Data Mining, CIDM 2013, Singapore, 16-19 April, 2013},
+  year = {2013}
+}
+
+@inproceedings{PoulinVisualExplanationEvidence2006,
+  title = {Visual {{Explanation}} of {{Evidence}} with {{Additive Classifiers}}},
+  url = {http://www.aaai.org/Library/AAAI/2006/aaai06-301.php},
+  booktitle = {Proceedings, {{The Twenty}}-{{First National Conference}} on {{Artificial Intelligence}} and the {{Eighteenth Innovative Applications}} of {{Artificial Intelligence Conference}}, {{July}} 16-20, 2006, {{Boston}}, {{Massachusetts}}, {{USA}}},
+  publisher = {{AAAI Press}},
+  urldate = {2018-04-14},
+  date = {2006},
+  pages = {1822--1829},
+  author = {Poulin, Brett and Eisner, Roman and Szafron, Duane and Lu, Paul and Greiner, Russell and Wishart, David S. and Fyshe, Alona and Pearcy, Brandon and Macdonell, Cam and Anvik, John},
+  journal = {Proceedings, The Twenty-First National Conference on Artificial Intelligence and the Eighteenth Innovative Applications of Artificial Intelligence Conference, July 16-20, 2006, Boston, Massachusetts, USA},
+  year = {2006}
+}
+
+@unpublished{BazenTaylorDecompositionUnified2013,
+  title = {The {{Taylor Decomposition}}: {{A Unified Generalization}} of the {{Oaxaca Method}} to {{Nonlinear Models}}},
+  url = {https://halshs.archives-ouvertes.fr/halshs-00828790},
+  date = {2013-05},
+  keywords = {nonlinear models,Oaxaca decomposition},
+  author = {Bazen, Stephen and Joutard, Xavier},
+  hal_id = {halshs-00828790},
+  hal_version = {v1},
+  note = {Ce Working Paper fait l'objet d'une publication inJournal of Economic and Social Measurement, IOS Press, 2017, 42 (2), pp.101 - 121. https://content.iospress.com/articles/journal-of-economic-and-social-measurement/jem439. 10.3233/JEM-170439. hal-01684635},
+  year = {2013}
+}
+
+@inproceedings{GlorotUnderstandingdifficultytraining2010,
+  title = {Understanding the Difficulty of Training Deep Feedforward Neural Networks},
+  volume = {9},
+  url = {http://www.jmlr.org/proceedings/papers/v9/glorot10a.html},
+  booktitle = {Proceedings of the {{Thirteenth International Conference}} on {{Artificial Intelligence}} and {{Statistics}}, {{AISTATS}} 2010, {{Chia Laguna Resort}}, {{Sardinia}}, {{Italy}}, {{May}} 13-15, 2010},
+  series = {JMLR Proceedings},
+  publisher = {{JMLR.org}},
+  urldate = {2018-04-16},
+  date = {2010},
+  pages = {249--256},
+  author = {Glorot, Xavier and Bengio, Yoshua},
+  editor = {Teh, Yee Whye and Titterington, D. Mike},
+  journal = {Proceedings of the Thirteenth International Conference on Artificial Intelligence and Statistics, AISTATS 2010, Chia Laguna Resort, Sardinia, Italy, May 13-15, 2010},
+  year = {2010}
+}
+
+@article{KarpathyVisualizingUnderstandingRecurrent2015,
+  title = {Visualizing and {{Understanding Recurrent Networks}}},
+  volume = {abs/1506.02078},
+  url = {http://arxiv.org/abs/1506.02078},
+  journaltitle = {CoRR},
+  urldate = {2018-04-21},
+  date = {2015},
+  author = {Karpathy, Andrej and Johnson, Justin and Li, Fei-Fei},
+  journal = {CoRR},
+  year = {2015}
+}
+
+@inproceedings{Pascanudifficultytrainingrecurrent2013,
+  location = {{Atlanta, Georgia, USA}},
+  title = {On the Difficulty of Training Recurrent Neural Networks},
+  volume = {28},
+  url = {http://proceedings.mlr.press/v28/pascanu13.html},
+  abstract = {There are two widely known issues with properly training recurrent neural networks, the vanishing and the exploding gradient problems detailed in Bengio et al. (1994). In this paper we attempt to improve the understanding of the underlying issues by exploring these problems from an analytical, a geometric and a dynamical systems perspective. Our analysis is used to justify a simple yet effective solution. We propose a gradient norm clipping strategy to deal with exploding gradients and a soft constraint for the vanishing gradients problem. We validate empirically our hypothesis and proposed solutions in the experimental section.},
+  booktitle = {Proceedings of the 30th {{International Conference}} on {{Machine Learning}}},
+  series = {Proceedings of Machine Learning Research},
+  publisher = {{PMLR}},
+  date = {2013},
+  pages = {1310-1318},
+  author = {Pascanu, Razvan and Mikolov, Tomas and Bengio, Yoshua},
+  editor = {Dasgupta, Sanjoy and McAllester, David},
+  number = {3},
+  journal = {Proceedings of the 30th International Conference on Machine Learning},
+  year = {2013}
+}
+
+@article{BengioLearninglongtermdependencies1994,
+  title = {Learning Long-Term Dependencies with Gradient Descent Is Difficult},
+  volume = {5},
+  issn = {1045-9227},
+  doi = {10.1109/72.279181},
+  number = {2},
+  journaltitle = {IEEE Transactions on Neural Networks},
+  shortjournal = {IEEE Trans. Neural Netw.},
+  date = {1994-03},
+  pages = {157-166},
+  keywords = {Neural networks,learning (artificial intelligence),Computer networks,Cost function,Delay effects,Discrete transforms,Displays,efficient learning,gradient descent,input/output sequence mapping,Intelligent networks,long-term dependencies,Neurofeedback,numerical analysis,prediction problems,Production,production problems,recognition,recurrent neural nets,recurrent neural network training,Recurrent neural networks,temporal contingencies},
+  author = {Bengio, Y. and Simard, P. and Frasconi, P.},
+  journal = {IEEE Transactions on Neural Networks},
+  year = {1994}
 }
 
 
