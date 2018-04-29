@@ -26,7 +26,8 @@ Given an objective task, the goal is to construct connections between these neur
     \begin{center}
 
 \includegraphics[width=0.8\textwidth]{sketch/typical_nn_structure}
-\caption[]{A general structure of neural networks and details of a neuron's connectivity and activity.}
+%\caption[]{Basic structure of a neural network. between neurons.}
+\patcaption{Basic structure of a neural network.}{}
 \label{fig:nn_typical_structure}
 
 \end{center}
@@ -197,7 +198,7 @@ Unlike typical neural networks (feedforward architectures), recurrent neural net
 
 \subsection{Unfolding a RNN and Backpropagation Through Time}
  
-\addfigure{\ref{fig:rnn_unfold}} illustrates the general setting of a RNN. Consider $\x$ a sequence of $\{ x_t \}_{t=1}^{T}$.  At step $t$, a RNN takes $r_{t-1}$ and $x_{t}$ to compute the recurrent state $r_{t}$ and the output $\hat{y}_t$. Noting that $\hat{y}_t$ might be omitted for some problems, such as classifying sequence, because we are only interested  the prediction at the last step $t=T$. Assume that it is the case here and $r_0 = 0$.  The forward pass is then
+\addfigure{\ref{fig:rnn_unfold}} illustrates the general setting of a RNN and its unfolded computational graph. Consider $\x$ a sequence of $\{ x_t \}_{t=1}^{T}$.  At step $t$, a RNN takes $r_{t-1}$ and $x_{t}$ to compute the recurrent state $r_{t}$ and the output $\hat{y}_t$. Noting that $\hat{y}_t$ might be omitted for some problems, such as classifying sequence, because we are only interested  the prediction at the last step $t=T$. Assume that it is the case here and $r_0 = 0$.  The forward pass is then
 
 \begin{align*}
 	h_1 &= w_{x} x_1 + w_{r} r_0 & r_1 &= \sigma(h_1)  \\
@@ -220,8 +221,7 @@ By unfolding the network,  we can see that RNNs are a special case of feedforwar
 \begin{figure}
 \centering
 \includegraphics[width=\textwidth]{sketch/rnn_unfold}
-\caption{General setting of a RNN and its unfolded computation.}
-\small{Inspired by a figure in \cite{OlahUnderstandingLSTMNetworks2015} }
+\patcaption{The unfolded computational graph of a RNN  transforming an input sequence $\{ x_t \}_{t=1}^{T}$ to a corresponding output sequence $\{ \hat{y}_t \}_{t=1}^T$.}{}
 \label{fig:rnn_unfold} 
 \end{figure}
 
@@ -283,7 +283,7 @@ Although a RNN can model sequences with any length, we typically fix the length 
 
 
 
-\subsection{Long Short-Term Memory and Gated RNN}
+\subsection{Long Short-Term Memory and Gated RNNs}
 The varnishing gradient is a significant problem that causes RNNs to learn long-term memories with slow progress. This is primarily because how the computation of recurrent connections is constructed. In particular, as described previously, standard RNNs compute those connections through a weighted sum at every step $t$ leading to the exponential term of the recurrent weights in the computation of the gradient.
 
 Alternatively, \citet{HochreiterLongshorttermmemory1997} proposed \textit{Long Short-Term Memory} (LSTM) architecture that employs gating mechanisms and an additive update in the computation of the recurrent connections. Using this approach  decreases the number of potential damping terms involved in the gradient computation, hence LSTM can learn long term memories much efficiently than standard RNNs. It should be noted that LSTM still suffers from the exploding gradient problem.
@@ -301,7 +301,7 @@ where $\otimes$ denotes an element-wise multiplication.
 \begin{figure}
 \centering
 \includegraphics[width=1\textwidth]{sketch/lstm}
-\caption{LSTM Structure} 
+\caption{LSTM Structure.} 
 
 \label{fig:lstm_structure} 
 \end{figure}

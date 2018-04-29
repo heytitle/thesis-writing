@@ -48,10 +48,7 @@ As illustrated in \addfigure{\ref{fig:comparision_between_global_and_local_analy
  \begin{figure}
 \centering
 \includegraphics[width=0.8\textwidth]{sketch/global_and_local_method}
-\caption{A comparison between the global and local explanations}
-\small{
-The images were taken from \citet{MontavonExplainingnonlinearclassification2017}.
-}
+\patcaption{Comparison between the global and local explanations.}{The images were taken from \citet{MontavonExplainingnonlinearclassification2017}.}
 \label{fig:comparision_between_global_and_local_analysis}
 \end{figure}
 
@@ -116,7 +113,7 @@ The methods introduced so far derive $R_i(\x)$ directly from $f(\patvector{x})$ 
  \begin{figure}
 	\begin{center}
 		\includegraphics[width=0.5\textwidth]{sketch/lrp_graph}
-		\caption{An illustration of relevance propagation in LRP.}
+		\patcaption{An illustration of the relevance propagation in LRP.}{The relevance propagation can be viewed as the the backpropagation of relevance quantities.}
 		\label{fig:lrp_graph}
 	\end{center}
 \end{figure}
@@ -307,7 +304,7 @@ The last step is to find $(v_j)_j$ such that $(\tilde{a}_j)_j$ is the closest po
        \includegraphics[width=0.4\textwidth]{sketch/zbeta_rule_case_1}
 }
 
-\patcaption{Function's view of $R_k$ and the DTD root point for each domain of $a_j$.}{The DTD root points are highlighted in red.}
+\patcaption{Two functional  views of $R_k$ for different domains of $a_j$.}{The DTD root points are the red circles, while the nearest roots in the euclidean space are the white ones. High  values of function are blues, while zero values are white. The grey area indicates invalid region.}
 \label{fig:dtd_rule_cases}
 \end{figure}
 
@@ -382,7 +379,7 @@ Applying these propagation rules accordingly with LRP Algorithm \ref{algo:lrp} y
 \begin{figure}[!htb]
 \centering
 \includegraphics[width=\textwidth]{sketch/lenet_heatmaps}
-\patcaption{Relevance heatmaps produced by different explanation methods explaining classification decisions of LeNet-5.}{\heatmapscaleexplain }
+\patcaption{Relevance heatmaps produced by different explanation methods explaining classification decisions of LeNet-5 on MNIST and FashionMNIST datasets.}{\heatmapscaleexplain }
 \label{fig:lenet_heatmaps}
 \end{figure}
 
