@@ -46,7 +46,7 @@ Given an objective task, the goal is to construct connections between these neur
 
 
 
- Mathematically, a NN can be viewed as a function $f$ with parameters $\patvector{\theta} = \{\forall i,j,k : w_{ij}, w_{jk}, w_{kl}, b_j, b_k, b_l \}$  nonlinearly transforming an input $\x \in \mathbb{R}^d $ to some output $f(\x)$. For supervised tasks, such as classification, we hope that $f(\x)$ will be close to the true label $y$.
+ Mathematically, a NN can be viewed as a function $f$ with parameters $\patvector{\theta} = \{\forall i,j,k : w_{ij}, w_{jk}, w_{kl}, b_j, b_k, b_l \}$  non-linearly transforming an input $\x \in \mathbb{R}^d $ to some output $f(\x)$. For supervised tasks, such as classification or regression, we hope that $f(\x)$ will be close to the true label $y$.
 %
 %Consider a given set of $p$ training samples $\mathcal{D} = \{ \xa, \ya) \}_{\alpha=1}^{p}$,  there are 3 primary components to build a NN, namely  
 %
@@ -58,11 +58,11 @@ Given an objective task, the goal is to construct connections between these neur
 
 \subsection{Loss functions}
 A \textit{loss function} $L$  is a measurement that quantifies whether the predicted output $f(\x)$ is close to the true target $y$. Hence, 
-choosing the loss function depends on the objective that the network is being trained to solve. For classification problems where the goal is to categorize $\x$ into a class $C_k \in \{ C_k\}_{k=1}^K$, \textit{cross entropy} is the loss function for this purpose:
+choosing the loss function depends on the objective that the network is being trained to solve. For classification problems where the goal is to categorize a input sample $\x$ into a class $C_k \in \{ C_k\}_{k=1}^K$, \textit{cross entropy} is the loss function for this purpose:
 $$
 L_{\text{CE}} = - \sum_{k} y_k \log \hat{y}_k,
 $$
-where $y_k$ are indicator variables indicating the true label of $\x$, $\hat{y}_k \in [0, 1]$ are the predicted probability that $\x$ belongs to $C_k$, and computed via the \textit{softmax} function:
+where $y_k$ are indicator variables indicating the true class of $\x$, $\hat{y}_k \in [0, 1]$ are the predicted probability that $\x$ belongs to $C_k$, and computed via the \textit{softmax} function:
 \begin{align*}
 \patvector{z} &= f(\x) \in \mathbb{R}^{K} \\
 \hat{y}_k &= \frac{e^{z_k}}{ \sum_{k=1}^K{e^{z_k}} }
@@ -77,7 +77,7 @@ $$
 L_{\text{MSE}} = (f(\x) - y)^2
 $$
 
-This is a brief introduction to loss functions that are widely used in machine learning. In this thesis, we will use only the cross entropy loss.
+This is a brief introduction to the loss functions that are widely used in machine learning. In this thesis, we will use only the cross entropy loss.
 
 \subsection{Gradient Descent and Backpropagation Algorithm} 
 Training a NN is an optimization problem in which we try to find suitable values of parameters $\hat{\boldsymbol{\theta}}$ such that the NN can perform the given objective at the desired level. Formally, the optimization problem is minimizing the empirical cost $J_{emp}$ (\textit{Empirical Error}) of the training data $D=\{ (\xa, \ya) \}_{\alpha=1}^{p}$:
@@ -85,7 +85,7 @@ Training a NN is an optimization problem in which we try to find suitable values
 	\patvector{\hat{\theta}} = \patarg{min}{\boldsymbol{\theta}} \underbrace{\frac{1}{p}  \sum_{\alpha=1}^p L( f(\xa), \ya) }_{J_{emp}}
 \end{align}
 
-The empirical cost $J_{emp}$ is the proxy to optimizing the cost of the ground truth distribution (\textit{Generalization Error}) that we do not know. Because of a substantial number of  variables in $\patvector{\theta}$ to be found,  the problem is instead solved by the \textit{gradient descent} approach where we gradually adjust $\patvector{\theta}$ in the opposite direction of the gradient $\nabla_{\boldsymbol{\theta}} J_{emp}$. With a proper step size $\lambda$  (\textit{learning rate}), we will eventually find $\hat{\patvector{\theta}}$ such that $J_{emp}$ is at one of local minimum values. (\ref{eq:gradient_update}) summarizes the update step.
+The empirical cost $J_{emp}$ is the proxy to optimizing the cost of the ground truth data distribution (\textit{Generalization Error}) that we do not know. Because of a substantial number of  variables in $\patvector{\theta}$ to be found,  the problem is instead solved by the \textit{gradient descent} approach where we gradually adjust $\patvector{\theta}$ in the opposite direction of the gradient, $-\nabla_{\boldsymbol{\theta}} J_{emp}$. With a proper step size $\lambda$  (\textit{learning rate}), we will eventually find $\hat{\patvector{\theta}}$ such that $J_{emp}$ is at one of local minimum values. (\ref{eq:gradient_update}) summarizes the update step.
 
 
 %
@@ -123,14 +123,14 @@ The empirical cost $J_{emp}$ is the proxy to optimizing the cost of the ground t
 \label{eq:gradient_update}
 \end{align}
 
-To evaluate $\nabla_{\boldsymbol{\theta}} J_{emp}$, 
-consider again the NN shown in \addfigure{\ref{fig:nn_typical_structure}} with a loss function $L$. Assume that the network uses activation functions $\sigma$ and has $\btheta = \{ \forall i,j,k,l : w^{(1)}_{ij}, w^{(2)}_{jk}, w^{(3)}_{kl}  \}$ with biases omitted. Given a pair of a sample and its true target $(\x, y)$, the forward pass computations are
+To evaluate $\nabla_{\boldsymbol{\theta}} J_{emp}$, let's 
+consider again the NN shown in \addfigure{\ref{fig:nn_typical_structure}} with a loss function $L$ and assume that the network uses activation functions $\sigma$ and has $\btheta = \{ \forall i,j,k,l : w^{(1)}_{ij}, w^{(2)}_{jk}, w^{(3)}_{kl}  \}$ with biases omitted. Given a pair of a sample and its true target $(\x, y)$, the forward pass computations are
 
 \begin{align*}
 		h_j^{(1)} &= \sum_i w_{ij}^{(1)} x_i & a_j^{(1)} &= \sigma (h_j^{(1)})	\\
 		h_k^{(2)} &= \sum_j w_{jk}^{(2)} a_j^{(1)}  & a_k^{(2)} &= \sigma (h_k^{(2)})	 \\
 		h_l^{(3)} &= \sum_k w_{kl}^{(3)} a_k^{(2)} & a_l^{(3)} &= \sigma (h_l^{(3)})	 \\
-		f(\xa) &= \boldsymbol{a}^{(3)}
+		f(\x) &= \boldsymbol{a}^{(3)}
 \end{align*}
 
 %todo Akash suggests to refer to book that explains this basic concept, reference to backprop
@@ -152,7 +152,7 @@ As shown in the derivations above, computing the gradient backward allows us to 
 %
 %As shown in the derivations above, backpropagation allows us to efficiently compute the gradients by reusing previously calculated gradients from the later layer, for example $\delta_l^{(3)}, 	\delta_{k}^{(2)}$. Moreover, these reused quantities can be also interpreted as error propagated to responsible neurons.
 
-In practice, because the training set $D$ usually contains several thousand samples, an execution of  (\ref{eq:gradient_update}) would require significant amount of memory. Therefore, the training data $D$ is equally divided into batches  $\widetilde{D}_i$  and updates are performed for every $\widetilde{D}_i$. Practically,  the size of $\widetilde{D}_i$ is chosen between 32 and 512 samples. This is referred to as \textit{mini-batch gradient descent}.
+In practice, because the training set $D$ usually contains several thousand samples, an execution of  (\ref{eq:gradient_update}) would require significant amount of memory to store the gradient information. Therefore, the training data $D$ is equally divided into batches  $\widetilde{D}_i$  and a gradient update is  performed for every $\widetilde{D}_i$. Practically,  the size of $\widetilde{D}_i$ is chosen between 32 and 512 samples. This is referred to as the \textit{mini-batch gradient descent} approach.
 
 
 
@@ -194,28 +194,20 @@ In practice, because the training set $D$ usually contains several thousand samp
 %
 
 \section{Recurrent Neural Networks}
-Unlike typical neural networks (feedforward architectures), recurrent neural networks (RNNs) are a type of neural networks whose outputs are repeatedly incorporated back into next computations of the network. Having recurrent connections allows RNNs to build suitable representations (\textit{states}) to solve problems dealing with sequential data,  such as machine translation and natural language processing (NLP).
+Unlike typical neural networks (feedforward architectures), recurrent neural networks (RNNs) are a type of neural networks whose outputs are repeatedly incorporated back into next computations of the network. Having a recurrent mechanism allows RNNs to build suitable representations (\textit{states}) to solve problems dealing with sequential data,  such as machine translation and natural language processing (NLP).
 
 \subsection{Unfolding a RNN and Backpropagation Through Time}
  
-\addfigure{\ref{fig:rnn_unfold}} illustrates the general setting of a RNN and its unfolded computational graph. Consider $\x$ a sequence of $\{ x_t \}_{t=1}^{T}$.  At step $t$, a RNN takes $r_{t-1}$ and $x_{t}$ to compute the recurrent state $r_{t}$ and the output $\hat{y}_t$. Noting that $\hat{y}_t$ might be omitted for some problems, such as classifying sequence, because we are only interested  the prediction at the last step $t=T$. Assume that it is the case here and $r_0 = 0$.  The forward pass is then
+\addfigure{\ref{fig:rnn_unfold}} illustrates the general setting of a RNN and its unfolded computational graph. Let's consider a sequence $\x= \{ x_t \}_{t=1}^{T}$ and $r_0 = 0$.  At step $t$, the RNN takes  the corresponding input $x_{t}$ and the previous recurrent state $r_{t-1}$ to compute the new recurrent state $r_{t}$ and the output $\hat{y}_t$. For problems, such as classification, that we are only interested the prediction at the last step $t=T$, $\hat{y}_t$ can be omitted. Let's assume that it is the case here and $w_x$ and $w_r$ are parameters of the network.  The forward pass is then
 
 \begin{align*}
 	h_1 &= w_{x} x_1 + w_{r} r_0 & r_1 &= \sigma(h_1)  \\
 	h_2 &= w_{x} x_2 + w_{r} r_1 &  r_2 &= \sigma(h_2) \\
 	& \vdots & \vdots \\
-	h_{T-1} &= w_{x} x_{T-1} + w_{r} r_{T-2} &  r_{T-1} &= \sigma(h_{T-1}) \\
-	\hat{y}_T &= w_{x} x_T   + w_{r} r_{T-1}
+	h_{T} &= w_{x} x_{T} + w_{r} r_{T-1} &  r_{T} &= \sigma(h_{T}) \\
+	\hat{y}_T &= r_T
 \end{align*}
-By unfolding the network,  we can see that RNNs are a special case of feedforward architectures where some layers share the same parameters. Hence, RNNs can be trained by the backpropagation algorithm and also be explained by techniques developed for feedforward architectures.
-
-
-% that only $\hat{y}_T$ determines the value of the loss function.
-%
-%%Consider again RNN in \addfigure{\ref{fig:rnn_unfold}} with $\x = \{x_1, \dots, x_T \}$ and $r_0 = 0$.
-%reuse weighted
-
-%This recurrent connections can be interpreted as accumulating information from the past, hence RNN are well suit to process sequential data, with no limitation in length . Natural Language Processing(NLP) and Machine Translation(MT) are some of the fields that RNN are widely applied to.
+By unfolding the network,  we can see that RNNs are a special case of feedforward architectures where layers share the same parameters. Hence, RNNs can be trained by the backpropagation algorithm and their predictions can also be interpreted by the explanation techniques developed for feedforward architectures.
 
 
 \begin{figure}
@@ -225,48 +217,20 @@ By unfolding the network,  we can see that RNNs are a special case of feedforwar
 \label{fig:rnn_unfold} 
 \end{figure}
 
-Because some weights and biases are shared between layers applied in each time step, the gradient needs to be accumulated from every corresponding computation step. We refer this as \textit{backpropagation through time} (BPTT). The derivations below illustrate the gradient computation of \addfigure{\ref{fig:rnn_unfold}}.
-
-%
-%Consider again RNN in \addfigure{\ref{fig:rnn_unfold}} with $\x = \{x_1, \dots, x_T \}$ and $r_0 = 0$. Assume that only $\hat{y}_T$ determines the value of the loss function. The computations are also defined as follows 
-%\begin{align*}
-%	h_1 &= w_{rx} x_1 + w_{rr} r_0 & r_1 &= \sigma(h_1)  \\
-%	h_2 &= w_{rx} x_2 + w_{rr} r_1 &  r_2 &= \sigma(h_2) \\
-%	& \vdots & \vdots \\
-%	h_{T-1} &= w_{rx} x_{T-1} + w_{rr} r_{T-2} &  r_{T-1} &= \sigma(h_{T-1}) \\
-%	\hat{y} &= \sigma(w_{yx} x_T   + w_{yr} r_{T-1})
-%\end{align*}
-%
-%Therefore, the gradients can be computed by 
-%\begin{subequations}
-
-%\begin{align}
-%%	\frac{\partial l}{\partial w_{yr}} &= \sigma'(w_{yx} x_T   + w_{yr} r_{T-1}) r_{T-1} \nonumber  \\
-%%	\frac{\partial l}{\partial w_{yx}} &= \sigma'(w_{yx} x_T   + w_{yr} r_{T-1}) x_T \nonumber \\
-%%	\frac{\partial l}{\partial w_{rr}} &= w_{yr} \sigma'(w_{yx} x_T   + w_{yr} r_{T-1})  \frac{\partial r_{T-1}}{\partial w_{rr}} \nonumber  \\
-%%	&= w_{yr} \sigma'(w_{yx} x_T   + w_{yr} r_{T-1})  \Bigg[ \sigma'(h_{T-1}) \bigg( \frac{\partial r_{T-2}}{\partial w_{rr}} \bigg) \Bigg] \nonumber \\
-%%	x &= 	w_{yr} \sigma'(w_{yx} x_T   + w_{yr} r_{T-1}) \frac{\partial r_{T-1}}{\partial w_{rx}}  \nonumber \\
-%%	y &= w_{yr} \sigma'(w_{yx} x_T   + w_{yr} r_{T-1})  \Bigg[ \sigma'(h_{T-1}) \bigg( x_{T-1} + w_{rr}  \frac{\partial r_{T-2}}{\partial w_{rx}} \bigg) \Bigg] 		 \label{eq:gradient_wrr} 
-%%x &= 6 \\
-% b = 7   
-%% \label{eq:gradient_wrr} 
-%\end{align}
-%\end{subequations}
+Because weights in RNNs are shared between layers used at  each time step, the gradient needs to be backpropagated from every corresponding computation step. We refer this as \textit{backpropagation through time} (BPTT). For \addfigure{\ref{fig:rnn_unfold}}, the gradient can be calculated as follows:
 
 \begin{align*}
-%	\frac{\partial L(f(\x), y) }{\partial w_{yr}} &= \frac{\partial L(f(\x), y) }{ \partial \hat{y}_T } \frac{ \partial \hat{y}_T  }{ \partial w_{yr}  } \nonumber \\
-%	&= \frac{\partial L(f(\x), y) }{ \partial \hat{y}_T }  \sigma'(w_{yx} x_T   + w_{yr} r_{T-1}) r_{T-1} \nonumber  \\ 
-%	\frac{\partial L(f(\x), y)}{\partial w_{yx}} &= &= \frac{\partial L(f(\x), y) }{ \partial \hat{y}_T }  \sigma'(w_{yx} x_T   + w_{yr} r_{T-1}) r_{T-1} \nonumber  \\ 
-	\frac{\partial L(f(\x), y)}{\partial w_x} &= \patpartial{L(f(\x), y)}{ \hat{y}_T } \sum_{t=1} ^{T-1} \patpartial{\hat{y}_T}{ r_{T-1} } \patpartial{r_{T-1}}{r_t} \patpartial{r_t}{w_x}  \\
-&= \patpartial{L(f(\x), y)}{ \hat{y}_T } \patpartial{\hat{y}_T}{ r_{T-1} }  \sum_{t=1} ^{T-1} \patpartial{r_{T-1}}{r_t}  \sigma'(h_t)x_t  \\
-&= \patpartial{L(f(\x), y)}{ \hat{y}_T } \patpartial{\hat{y}_T}{ r_{T-1} }  \sum_{t=1} ^{T-1} \sigma'(h_t)x_t  \Bigg( \prod_{T-1 \ge i > t} \patpartial{r_i}{r_{i-1}} \Bigg)   \\
-&= \patpartial{L(f(\x), y)}{ \hat{y}_T } \patpartial{\hat{y}_T}{ r_{T-1} }  \sum_{t=1} ^{T-1} \sigma'(h_t)x_t  \Bigg( \prod_{T-1 \ge i > t} \sigma'(h_i) w_r \Bigg)   \\
-&= \patpartial{L(f(\x), y)}{ \hat{y}_T } \patpartial{\hat{y}_T}{ r_{T-1} }  \sum_{t=1} ^{T-1} \sigma'(h_t)x_t \Bigg ( w_r^{T-1-t} \Bigg )\Bigg( \prod_{T-1 \ge i > t} \sigma'(h_i) \Bigg)  \\
-\frac{\partial L(f(\x), y)}{\partial w_{r}} &= 	 \patpartial{L(f(\x), y)}{ \hat{y}_T } \sum_{t=1} ^{T-1} \patpartial{\hat{y}_T}{ r_{T-1} } \patpartial{r_{T-1}}{r_t} \patpartial{r_t}{w_r}  \\
-	 &= \patpartial{L(f(\x), y)}{ \hat{y}_T } \patpartial{\hat{y}_T}{ r_{T-1} }  \sum_{t=1} ^{T-1} \sigma'(h_t) r_{t-1} \Bigg( w_r^{T-1-t} \Bigg )\Bigg( \prod_{T-1 \ge i > t} \sigma'(h_i) \Bigg) 
+	\patpartial{L(f(\x), y)}{w_x} &= \sum_{t=1} ^{T} 	\patpartial{L(f(\x), y)}{r_T} \patpartial{r_T}{r_t} \frac{\partial_+r_t}{ \partial w_x} \\ 
+				&= \sum_{t=1} ^{T} 	\patpartial{L(f(\x), y)}{r_T} \patpartial{r_T}{r_t} \sigma'(h_t)x_t \\
+				&= \sum_{t=1} ^{T} 	\patpartial{L(f(\x), y)}{r_T} \sigma'(h_t)x_t \Bigg( \prod_{T \ge i > t} \patpartial{r_i}{r_{i-1}} \Bigg) \\
+				&= \sum_{t=1} ^{T} 	\patpartial{L(f(\x), y)}{r_T} \sigma'(h_t)x_t \Bigg( \prod_{T \ge i > t} w_r \sigma'(h_i) \Bigg) \\
+				&= \sum_{t=1} ^{T} 	\patpartial{L(f(\x), y)}{r_T}  x_t \Bigg( w_r^{T-t} \Bigg) \Bigg( \prod_{T \ge i \ge t} \sigma'(h_i) \Bigg) \\
+\frac{\partial L(f(\x), y)}{\partial w_{r}} &=  \sum_{t=1} ^{T} 	\patpartial{L(f(\x), y)}{r_T} \patpartial{r_T}{r_t} \frac{\partial_+r_t}{ \partial w_r} \\
+				&= \sum_{t=1} ^{T} 	\patpartial{L(f(\x), y)}{r_T}  r_{t-1} \Bigg( w_r^{T-t} \Bigg) \Bigg( \prod_{T \ge i \ge t} \sigma'(h_i) \Bigg),
 \end{align*}
+where $\frac{\partial_+r_t}{ \partial w_x}$ and  $\frac{\partial_+r_t}{ \partial w_r}$ are the \textit{immediate} partial derivatives  of the recurrent state $r_t$ with respect to $w_x$ and $w_r$, where $r_{t-1}$ is treated as a constant with respect to the weights \citep{Pascanudifficultytrainingrecurrent2013}.
 
-Although a RNN can model sequences with any length, we typically fix the length of training sequences before applying BPTT. This makes the implementation more straightforward and also allows us to control memory usage during the training. However, RNNs still need to be trained on long-enough sequences to learn long-term dependencies properly. As can be seen from the derivations above, this requirement can negatively impact the learning efficiency. In particular, \citet{BengioLearninglongtermdependencies1994} and \citet{ Pascanudifficultytrainingrecurrent2013} analytically discussed two potential problems that might happen to the gradients, namely
+Although RNNs can model sequences with any length, we typically fix the length of training sequences before applying BPTT. This makes the implementation more straightforward and also allows us to control memory usage during the training. However, RNNs still need to be trained on long-enough sequences to learn long-term dependencies properly. As can be seen from the derivations above, this requirement can negatively impact the learning efficiency. In particular, \citet{BengioLearninglongtermdependencies1994} and \citet{ Pascanudifficultytrainingrecurrent2013} analytically discussed two potential problems that might happen to the gradient, namely
 
 %
 %improves learning efficiency. dd
@@ -277,36 +241,36 @@ Although a RNN can model sequences with any length, we typically fix the length 
 %However, as the computations unfolded, we can see that there are 2 problems that might happen to the gradients of the shared parameters $w_{rx}$ and $ w_{rr}$, namely
 \begin{itemize}
    %todo unclear exploding gradient
-	\item \textit{Exploding gradient} happens when the spectral radius of the recurrent weight matrix is greater than 1. This radius is the largest of absolute eigenvalues of the matrix. In this example, the radius is simply $|w_r|$. As can be seen from the derivations above, when $|w_r|$ is larger than 1, its exponential term will result in a gradient with a considerable large norm leading to an unreliable training. \citet{Pascanudifficultytrainingrecurrent2013} proposed \textit{gradient clipping} to alleviate the problem.
-	\item \textit{Varnishing gradient}, in contrast, occurs when the radius is smaller than one yielding a gradient with near-zero norm. This issue leads to slow learning; hence RNN would require enormous of time to learn long-term dependencies. The next section discusses techniques proposed to mitigate this problem.
+	\item \textit{Exploding gradient} happens when the spectral radius of the recurrent weight matrix is greater than 1. This radius is the largest of absolute eigenvalues of the matrix. In this example, the radius is simply $|w_r|$. As can be seen from the derivations above, when $|w_r|$ is larger than 1, the exponential term will quickly result in a gradient with a considerable large norm leading to an unreliable training. \citet{Pascanudifficultytrainingrecurrent2013} proposed the \textit{gradient clipping} technique to alleviate the problem.
+	\item \textit{Varnishing gradient} in contrast occurs when the radius is smaller than one. This yields a gradient with near-zero norm. This issue leads to slow learning; hence RNN would require enormous amount of time to learn long-term dependencies. The next section discusses approaches proposed to mitigate this problem.
 \end{itemize}
 
 
 
 \subsection{Long Short-Term Memory and Gated RNNs}
-The varnishing gradient is a significant problem that causes RNNs to learn long-term memories with slow progress. This is primarily because how the computation of recurrent connections is constructed. In particular, as described previously, standard RNNs compute those connections through a weighted sum at every step $t$ leading to the exponential term of the recurrent weights in the computation of the gradient.
+The varnishing gradient is a significant problem that causes RNNs to learn long-term memories with a slow progress. The issue is primarily due to  how the computation of the recurrent state  is constructed. In particular, as described previously, standard RNNs compute the state through a weighted sum at every step $t$ leading to the exponential term of the recurrent weights in the computation of the gradient.
 
-Alternatively, \citet{HochreiterLongshorttermmemory1997} proposed \textit{Long Short-Term Memory} (LSTM) architecture that employs gating mechanisms and an additive update in the computation of the recurrent connections. Using this approach  decreases the number of potential damping terms involved in the gradient computation, hence LSTM can learn long term memories much efficiently than standard RNNs. It should be noted that LSTM still suffers from the exploding gradient problem.
+Alternatively, \citet{HochreiterLongshorttermmemory1997} proposed the \textit{Long Short-Term Memory} (LSTM) architecture that employs gating mechanisms and an additive update in the computation of the recurrent state. Using this approach  decreases the number of potential damping terms involved in the gradient computation, hence LSTM can learn long term memories much efficiently than standard RNNs. It should be noted that LSTM still suffers from the exploding gradient problem.
 
-As shown in \addfigure{\ref{fig:lstm_structure}}, LSTM utilizes three gates, namely input $i_g$, forget $f_g$ and output $o_g$ gate, to control  information flow through the LSTM cell. More precisely, $i_g$ and $f_g$ decide how to accumulate information from the previous cell state $C_{t-1}$ and the input cell state $\widetilde{C}_t$ computed from previous output $h_{t-1}$ and current input $x_t$. On the other hand, $o_g$ determines leakage of the information from the current cell state $C_t$ to outside $h_t$. Mathematically, 
+As shown in \addfigure{\ref{fig:lstm_structure}}, LSTM utilizes three gates, namely input $i_g$, forget $f_g$ and output $o_g$, to control  information flow through the LSTM cell. More precisely, the $f_g$ gate decides how much the information from the previous cell state $C_{t-1}$ is kept, while the $i_g$ gate decides the amount of information from the previous out $h_{t-1}$ and the current input $x_t$ that will be considered.  The combination of the results from this two gates is the new cell state $C_{t}$. On the other hand, the $o_g$ gate determines leakage of the information from the current cell state $C_t$ to outside $h_t$. Mathematically, 
 \begin{align*}
-	i_g &= \sigma( w_{ix} x_t + w_{ih} h_{t-1} )  &  	f_g &= \sigma( w_{fx} x_t + w_{fh} h_{t-1} )\\
-	o_g &= \sigma( w_{ox} x_t + w_{oh} h_{t-1} ) & \widetilde{C}_t &= \tanh(w_{cx} x_t + w_{ch} h_t) \\
+	i_g &= \sigmoid( w_{ix} x_t + w_{ih} h_{t-1} )  &  	f_g &= \sigmoid( w_{fx} x_t + w_{fh} h_{t-1} )\\
+	o_g &= \sigmoid( w_{ox} x_t + w_{oh} h_{t-1} ) & \widetilde{C}_t &= \tanh(w_{cx} x_t + w_{ch} h_t) \\
 	C_t &= f_g \otimes C_{t-1} + i_g  \otimes  \widetilde{C}_t & h_{t} &= o_g \otimes \tanh(C_t),
 \end{align*}
 
-where $\otimes$ denotes an element-wise multiplication.
+where $\otimes$ the element-wise multiplication.
 
 
 \begin{figure}
 \centering
 \includegraphics[width=1\textwidth]{sketch/lstm}
-\caption{LSTM Structure.} 
+\caption{LSTM structure.} 
 
 \label{fig:lstm_structure} 
 \end{figure}
 
-Despite the fact that  LSTM has become a core component of state-of-the-art in sequence modeling applications, such as machine translation \citep{MelisStateArtEvaluation2018}, it is still obscure whether we need that many gates in the LSTM cell. In particular, \citet{GreffLSTMsearchspace2017} demonstrated that the forget and output gate are the crucial parts of LSTM.  \citet{ChoLearningPhraseRepresentations2014a} proposed \textit{Gated Recurrent Unit} (GRU) that employs only two	 gates; however, \citet{JozefowiczEmpiricalExplorationRecurrent2015} conducted several benchmarking tasks and found no significant difference in performance between LSTM and GRU. 
+Despite the fact that  LSTM has become a core component of many state-of-the-art sequence modeling applications, such as machine translation \citep{MelisStateArtEvaluation2018}, it is still obscure whether we need that many gates in the LSTM cell. In particular, \citet{GreffLSTMsearchspace2017} demonstrated that the forget and output gates are the crucial parts of the LSTM architecture.  \citet{ChoLearningPhraseRepresentations2014a} proposed the \textit{Gated Recurrent Unit} (GRU) architecture that employs only two	 gates; however, \citet{JozefowiczEmpiricalExplorationRecurrent2015} conducted several benchmarking tasks and found no significant difference in performance between LSTM and GRU. 
 
 % todo
 %- viable length
