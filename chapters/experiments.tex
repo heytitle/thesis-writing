@@ -2,7 +2,7 @@
 
 \section{General Setting}\label{sec:setup}
  
- We use the state-of-the-art \textit{Adaptive Moment Estimation(Adam)} \citep{KingmaAdamMethodStochastic2014} to train models. For a neuron $j$ connecting to a neuron $i$ in the previous layer, its activity $a_j$ is computed using
+ We use the state-of-the-art \textit{Adaptive Moment Estimation(Adam)} \citep{KingmaAdamMethodStochastic2014} to train models. For a neuron $j$, its activity $a_j$ is computed via ReLU as follows:
 %The activations of neurons in each layer $j$, denoted as $\patvector{a}^{(j)}$, are computed using 
 \begin{align*}
 h_j &= \sum_{i} w_{ij} a_i - \varsigma(b_j)
@@ -12,15 +12,14 @@ a_j &= \max(0, h_j),
 %	\patvector{a}^{(j)}  &=  	\sigma_{r} (	\patvector{h}^{(j)} )
 \end{align*}
 
-where $\varsigma(\cdot)$ is the \textit{softplus} function. We initialize weights $w_{ij}$ and biases $b_{j}$ as follows
+where $a_i$ are activities of neurons from the lower-layer and $\varsigma(\cdot)$ is the \textit{softplus} function. We initialize weights $w_{ij}$ and biases $b_{j}$ as follows
 \begin{align*}
-	w_{ij} &\sim \Psi( \mu, \sigma, [-2\sigma, 2\sigma]) \\
+	w_{ij} &\sim \Psi( \mu, \sigma^2, [-2\sigma, 2\sigma]) \\
 	b_{j} &= \ln(e^{0.01} - 1),
 \end{align*}
-where $\Psi(\cdot)$ denotes the \textit{truncated normal distribution} with $\mathbb{P}(|w_{ij}| > 2\sigma) = 0$. More precisely, we use $\mu=0$ and $\sigma = 1/\sqrt{N_{in}}$, where $N_{in}$ is the number of neurons in the previous layer that the neuron $j$ connects  \citep{GlorotUnderstandingdifficultytraining2010}.
+where  $\Psi(\cdot)$ denotes the \textit{truncated normal distribution} with $\mathbb{P}(|w_{ij}| > 2\sigma) = 0$, and $\mu$ and $\sigma^2$ are the mean and the variance of the distribution respectively. More precisely, we use $\mu=0$ and $\sigma^2 = 1/N_{in}$, where $N_{in}$ is the number of neurons in the lower-layer that connect to the neuron $j$  \citep{GlorotUnderstandingdifficultytraining2010}.
 
-
-The reason for using the softplus function for the bias term is due to the non-positive bias assumption of DTD. Secondly, the continuity of the softplus function allows the bias term to be more flexibly adjusted through the backpropagation than using ReLU. With this setting, the initial value of the bias term  $\varsigma(b_j)$ is 0.01.
+The reason for using the softplus function for the bias term is due to the strictly non-positive bias assumption of the DTD method. Secondly, the continuity of the softplus function allows the bias term to be more flexibly adjusted through the backpropagation than using ReLU. With this setting, the initial value of the bias term  $\varsigma(b_j)$ is 0.01.
 
 We use the dropout technique \citep{SrivastavaDropoutSimpleWay2014} to regularize the models, with dropout probability 0.2.  We apply it to activations of every fully-connected layer. We train models with batch size 50 for 100 epochs. Table \ref{tab:hyper_summary} summarizes the setting of hyperparameters. The learning rate is not globally fixed and left adjustable per architecture: we use the value between 0.0001 and 0.0005.
 
@@ -41,18 +40,18 @@ Batch size              & 50
 
 
 
-  Based on literature surveys, we train models to reach accuracy at least  98\% for MNIST and 85\% for FashionMNIST.  We assume that models achieving this level of accuracy have good representations, hence their explanations can be fairly compared. Numbers of neurons in each layer are also carefully chosen such that every architecture has a similar number of trainable variables and predictive power.  A more precise configuration will be discussed separately in each experiment. 
+  Based on literature surveys, we train models to reach accuracy at least  98\% for MNIST and 85\% for FashionMNIST.  We assume that models achieving this level of accuracy have good representations, hence their explanations can be fairly compared. Numbers of neurons in each layer are also carefully chosen such that every architecture has a similar number of trainable variables and predictive power. We normalize pixel intensities to $[-1,1]$. A more precise configuration will be discussed separately in each experiment. 
 
-The problems considered in the following experiments are classifying sequence $\x= \{ \x_t \}_{t=1}^T$ into a class $C_k \in \{ C_k \}_{k=1}^K$. Let's consider a RNN with parameters $\boldsymbol{\theta}$ and assume that $g_r$ and $g_{f}$ are functions that the network derives the recurrent state $\patvector{r}_{t+1}$ and $f(\x)$ respectively. The feedforward computation can be roughly summarized as follows
- \begin{align}
+The problems considered in the following experiments are sequence classification problems of $K$ classes. Let's consider a RNN with parameters $\boldsymbol{\theta}$ and assume that $g_r$ and $g_{f}$ are functions that the network derives the recurrent state $\patvector{r}_{t+1}$ and the output $f(\x) \in \mathbb{R}^K$ respectively. Given a sequence $\x= \{ \x_t \}_{t=1}^T$, the feedforward computation can be roughly summarized as follows
+ \begin{align*}
   	\patvector{r}_{1} &= g_r(\patvector{\theta}, \patvector{x}_1, \patvector{r}_0) \\
   	&\ \ \vdots\\
  	\patvector{r}_{t+1} &= g_r(\patvector{\theta}, \patvector{x}_t, \patvector{r}_{t-1}) \\
  	 &\ \ \vdots\\
 f(\x) &= g_{f}(\patvector{\theta}, \patvector{x}_{T},  \patvector{r}_{T-1}) \\
  	\patvector{\hat{y}} &= \text{softmax}(f(\x)),
- \end{align}
- where $\patvector{r}_0 = \patvector{0}$, and $\patvector{\hat{y}} \in \mathbb{R}^K$ are the vector of the class probabilities. To compute the explanation or relevance heatmap of $\x$, denoted as $R(\x)$, we take $z^* \in f(\x)$ corresponding to the true target class, instead of the one from the predicted class (i.e. $\patarg{max}{} f(\x)$).  
+ \end{align*}
+ where $\patvector{r}_0 = \patvector{0}$, and $\patvector{\hat{y}}$ are the vector of the class probabilities. To compute the explanation or relevance heatmap of $\x$, denoted as $R(\x)$, we take $z^* \in f(\x)$ corresponding to the true target class, instead of the one from the predicted class (i.e. $\patarg{max}{} f(\x)$).  
  
  Because the DTD and LRP methods are primarily  based on distributing positive relevance, we introduce a constant input with value zero to the softmax function to force the network building positive relevance for the target class (i.e.  $z^* \ge 1$). Theoretically, this constant does not affect the training procedure.
 
@@ -117,7 +116,7 @@ Our implementation is written in Python using TensorFlow \citep{AbadiTensorFlowL
 \subsection{Problem Formulation}
 We consider this experiment as a preliminary study. Here, we construct an artificial classification problem using MNIST and FashionMNIST datasets. Each image sample $\x$ is column-wise split into a sequence of non-overlapping $\{ \x_t \}_{t=1}^{T}$. These sequences are used to train RNN classifiers. The RNN classifiers need to summarize information from $\{ \x_t \}_{t=1}^{T}$ to determine the class of $\x$.  Using image samples allows us to inspect the produced explanations conveniently.
 
-\addfigure{\ref{fig:artificial_problem}} illustrates the setting where an MNIST sample $ \patvector{x} \in \mathbb{R}^{28 \times 28}$ is divided to a sequence of $\{ \patvector{x}_t \in   \mathbb{R}^{28 \times 7} \}_{t=1} ^ 4$. At  a time step $t$, the RNN classifier takes the corresponding input $\patvector{x}_t$ and prepares its new recurrent state $\patvector{r}_{t+1}$. For the last step $T = 4$, the RNN classifier computes $f(\x) \in \mathbb{R}^{10}$ and the class probabilities accordingly.
+\addfigure{\ref{fig:artificial_problem}} illustrates the setting where a MNIST sample $ \patvector{x} \in \mathbb{R}^{28 \times 28}$ is divided to a sequence of $\{ \patvector{x}_t \in   \mathbb{R}^{28 \times 7} \}_{t=1} ^ 4$. At  a time step $t$, the RNN classifier takes the corresponding input $\patvector{x}_t$ and prepares a new recurrent state $\patvector{r}_{t+1}$. For the last step $T = 4$, the RNN classifier computes $f(\x) \in \mathbb{R}^{10}$ and the class probabilities accordingly.
 
 
  \begin{figure}[!hbt]
@@ -146,7 +145,7 @@ In this experiment, we are considering two RNN architectures, namely
 \begin{enumerate}
 	\item \textbf{Shallow architecture}  \ \ \ as shown in \addfigure{\ref{fig:shallow_arch}}, for a time step $t$, the \rnncell{Shallow} architecture first concatenates the input $\patvector{x}_t$  and the recurrent state $\patvector{r}_t$ at Layer 3 as one vector before computing activations of Layer 4 , denoted as $\patvector{a}_t^{(4)}$. Then,  the new recurrent state $\patvector{r}_{t+1}$  is derived from $\patvector{a}_t^{(4)}$ at Layer 5. In the last step $T$, $f(\x)$ is computed from $\patvector{a}^{(4)}_{T}$ and supplied to the softmax function to calculate the class probabilities $\patvector{\hat{y}}$. 
 		
-Because the activations coming to  Layer 4 are from different domains: more precisely, $x_{t,i} \in [-1, 1]$ and $r_{t,j} \in [0, \infty) $, a special propagation rule is required in order to apply DTD. Particularly, the relevance score of a neuron $k$ at Layer 4 is needed to be propagated to those sources as follows
+Because the activations coming to  Layer 4 are from different domains: more precisely, $x_{t,i} \in [-1, 1]$ and $r_{t,j} \in [0, \infty) $, a special propagation rule is required in order to apply the DTD. Particularly, the relevance score of a neuron $k$ at Layer 4 is needed to be propagated to those sources as follows
 % For neuron $i$ in $\x_t$ and neuron $j$ in $\patvector{r}_t$ respectively that connect to neuron $k$ in \circled{4}, their relevance are calculated as follow
 		
 \begin{align*}
@@ -158,7 +157,7 @@ where $z_{t,k} =  \sum_i x_{t,i} w_{ik} - l_i w_{ik}^+ - h_i w_{ik}^- + \sum_j r
 	\item \textbf{Deep architecture} \ \ \ \addfigure{\ref{fig:deep_arch}} illustrates the configuration of this architecture. Unlike the Shallow architecture, the Deep cell has 2 more layers, namely Layer 1' and Layer 4'.  The improvement would allow the model to better learn representations from the input and utilize the recurrent information more effectively.
 \end{enumerate}
 
-We experiment this sequence classification using sequence lengths $T = \{1, 4, 7\}$.  Table \ref{tab:seq-length} shows the dimensions of $\patvector{x}_t$ for different sequence lengths as well as the numbers of trainable variables in each architecture. To simplify the writing, we are going to use a convention \textit{\rnncellseq{ARCHITECTURE}{T}} to denote the \textit{ARCHITECTURE} model trained on the sequence length \textit{T}. For example, \rnncellseq{Deep}{7} refers to the Deep architecture trained on $\{ \x_t \in \mathbb{R}^{28 \times 4} \}_{t=1}^{7}$.
+We experiment this sequence classification using sequence lengths $T = \{1, 4, 7\}$.  Table \ref{tab:seq-length} shows the dimensions of $\patvector{x}_t$ for different sequence lengths as well as the numbers of trainable variables in each architecture. To simplify the writing, we are going to use the convention \textit{\rnncellseq{ARCHITECTURE}{T}} to denote the \textit{ARCHITECTURE} model trained on the sequence length \textit{T}. For example, \rnncellseq{Deep}{7} refers to the Deep architecture trained on $\{ \x_t \in \mathbb{R}^{28 \times 4} \}_{t=1}^{7}$.
 
 
 \renewcommand{\arraystretch}{1.5}
@@ -225,7 +224,7 @@ Table \ref{tab:mnist_model_acc} summarizes the accuracies of the trained models.
 \label{fig:fashion_mnist_experiment}
 \end{figure}
 
-Relevance heatmaps of the Shallow and Deep architectures trained on  FashionMNIST  are shown on \addfigure{\ref{fig:fashion_mnist_experiment}}. Similar to the ones from MNIST. We do not see any remarkable difference on SA and GB heatmaps between the two architectures although \rnncellseq{Deep}{4,7} produces slightly more sparse heatmaps than \rnncellseq{Shallow}{4,7}. However, the wrong concentration issue of DTD and LRP seems to appear on the heatmaps from both \rnncellseq{Shallow}{4,7} and \rnncellseq{Deep}{4,7}. Nevertheless, we can still observe appropriately allocated relevance from \rnncellseq{Deep}{4,7} on some samples. For example, we can see  that \rnncellseq{Deep}{4,7} manage to distribute high relevance scores to the area of the trouser.  We suspect that the Deep architecture is not capable enough to learn proper representations from FashionMNIST samples where many visual features are shared between classes. Hence, the architecture can not well isolate the recurrent mechanism from data representation parts. Let's consider \textit{Sneaker} and \textit{Ankle Boot} samples in \addfigure{\ref{fig:fmnist_similar_samples}}. One can see that  their front parts are similar and only the heel part that determines the difference between the two categories. This evidence suggests that it is preferable to employ more robust feature extractor layers, such as convolution and pooling layers, instead of relying only the fully-connected ones.
+Relevance heatmaps of the Shallow and Deep architectures trained on  FashionMNIST  are shown on \addfigure{\ref{fig:fashion_mnist_experiment}}. Similar to the ones from MNIST. We do not see any remarkable difference on SA and GB heatmaps between the two architectures although \rnncellseq{Deep}{4,7} produces slightly more sparse heatmaps than \rnncellseq{Shallow}{4,7} on this dataset. However, the wrong concentration issue of DTD and LRP seems to appear on the heatmaps from both \rnncellseq{Shallow}{4,7} and \rnncellseq{Deep}{4,7}. Nevertheless, we can still observe appropriately allocated relevance from \rnncellseq{Deep}{4,7} on some samples. For example, we can see  that \rnncellseq{Deep}{4,7} manage to distribute high relevance scores to the area of the trouser.  We suspect that the Deep architecture is not capable enough to learn proper representations from FashionMNIST samples where many visual features are shared between classes. Hence, the architecture can not well isolate the recurrent mechanism from data representation parts. Let's consider \textit{Sneaker} and \textit{Ankle Boot} samples in \addfigure{\ref{fig:fmnist_similar_samples}}. One can see that  their front parts are similar and only the heel part that determines the difference between the two categories. This evidence suggests that it is preferable to employ more robust feature extractor layers, such as convolution and pooling layers, instead of relying only the fully-connected ones.
 
  \begin{figure}[!htb]
 \centering
@@ -237,11 +236,11 @@ Relevance heatmaps of the Shallow and Deep architectures trained on  FashionMNIS
  \begin{figure}[!htb]
 \centering
 \includegraphics[width=0.8\textwidth]{sketch/class_1_comparison}
-\patcaption{Relevance heatmaps of MNIST \textit{Digit 1} and FashionMNIST \textit{Trouser} samples from \rnncellseq{Shallow}{7} and \rnncellseq{Deep}{7} explained by DTD and $\lrpp$ methods.}{\heatmapscaleexplain }
+\patcaption{Relevance heatmaps of MNIST \textit{Digit 1} and FashionMNIST \textit{Trouser} samples from \rnncellseq{Shallow}{7} and \rnncellseq{Deep}{7} explained by the DTD and $\lrpp$ methods.}{\heatmapscaleexplain }
 \label{fig:class_1_comparison}
 \end{figure}
 
-\addfigure{\ref{fig:class_1_comparison}} presents the explanations of MNIST \textit{Digit 1} and FashionMNIST \textit{Trouser} samples from \rnncellseq{Shallow}{7} and \rnncellseq{Deep}{7}. These samples are chosen to emphasize the impact of RNN architectures on DTD and LRP explanations. As can be seen from the figure, these samples have $\x_{t'}$ containing the actual content primarily locating around the middle of the sequence. Hence, suitable relevance heatmaps should be highlighted at $\x_{t'}$ and possibly its neighbors.  As expected, we can see that \rnncellseq{Deep}{7} produces sound explanations in which the heatmaps have high-intensity values where $\x_{t'}$ approximately locates, while \rnncellseq{Shallow}{7} mainly assigns relevance quantities to $\x_{t}$ for $t \approx T$. 
+\addfigure{\ref{fig:class_1_comparison}} presents the explanations of MNIST \textit{Digit 1} and FashionMNIST \textit{Trouser} samples from \rnncellseq{Shallow}{7} and \rnncellseq{Deep}{7}. These samples are chosen to emphasize the impact of the RNN architecture on DTD and LRP explanations. As can be seen from the figure, these samples have $\x_{t'}$ containing the actual content primarily locating around the middle of the sequence. Hence, suitable relevance heatmaps should be highlighted at $\x_{t'}$ and possibly its neighbors.  As expected, we can see that \rnncellseq{Deep}{7} produces sound explanations in which the heatmaps have high-intensity values where $\x_{t'}$ approximately locates, while \rnncellseq{Shallow}{7} mainly assigns relevance quantities to $\x_{t}$ for $t \approx T$. 
 
 \addfigure{\ref{fig:exp1_dist_plot}} further shows quantitive evidence of this improper relevance propagation issue. Here, distributions of relevance scores derived from the DTD and LRP methods on \rnncellseq{Shallow}{7} and \rnncellseq{Deep}{7} are plotted across time step $t = \{ 1, \dots, 7 \}$. The distributions are computed from all test samples in MNIST \textit{Digit 1} and FashionMNIST \textit{Trouser} respectively. The distributions of pixel values are included as the baselines, which are plotted in blue.  We can see that the distributions of relevance scores from \rnncellseq{Deep}{7} align with the distributions of pixel values, while  the ones from \rnncellseq{Shallow}{7}  diverge by a significant margin. Approximately, \rnncellseq{Shallow}{7} distributes more than 90\% of relevance scores to the last three steps, namely $\x_5$, $\x_6$ and $\x_7$.
 
@@ -254,7 +253,7 @@ Relevance heatmaps of the Shallow and Deep architectures trained on  FashionMNIS
 \end{figure}
 
 \subsection{Summary}
-The results of this preliminary experiment strongly support our hypothesis that the structure of RNNs could have a considerable impact on the quality of  explanation.  In particular,  as presented in \addfigure{\ref{fig:class_1_comparison}} and \addfigure{\ref{fig:exp1_dist_plot}}, the quality of DTD and $\lrpp$ explanations is significantly influenced by the architecture. In contrast, we do not see such notable effect on the SA and GB methods.  In the following, we are going to discuss a similar experiment that is designed in a more constructive way such that we can methodologically evaluate the impact of RNN architecture on explanation.
+The results of this preliminary experiment strongly support our hypothesis that the structure of RNNs could have a considerable impact on the quality of explanations.  In particular,  as presented in \addfigure{\ref{fig:class_1_comparison}} and \addfigure{\ref{fig:exp1_dist_plot}}, the quality of DTD and $\lrpp$ explanations is significantly influenced by the architecture. In contrast, we do not see such notable effect from the SA and GB methods.  In the following, we are going to discuss a similar experiment that is designed in a more constructive way such that we can methodologically evaluate the impact of RNN architecture on explanation.
 
 
 \section{Experiment 2 : Majority Sample Sequence Classification} \label{sec:exp2}
@@ -267,11 +266,11 @@ The results of this preliminary experiment strongly support our hypothesis that 
 \end{figure}
 
 \subsection{Problem Formulation} \label{sec:exp2_prob_formulate}
-When a neural network (NN) is trained, one can apply explantation techniques to the model to get explanations of the outputs.  The explanation of a sample $\x$ indicates the contribution of features in $\x$ that the trained network relies on to perform the objective task.  Therefore, one needs to know the ground truth knowledge where these latent features are to methodologically evaluate the quality of the explanation.  However, this knowledge is not trivially available because we do not explicitly tell the NN which features of $\x$ to use when marking the prediction.
+When a neural network (NN) is trained, one can apply explanation techniques to the model to get an explanation of the output respect to the input.  The explanation of a sample $\x$ indicates the contribution of features in $\x$ that the trained network relies on to perform the objective task.  Therefore, one needs to know the ground truth knowledge where these latent features are to methodologically evaluate the quality of the explanation.  However, this knowledge is not trivially available because we do not explicitly tell the NN which features of $\x$ to use when making the prediction.
 
 % in is a result from the training process that we, in fact, seek to understand in the first place.
 
-To alleviate this challenge, we propose another artificial sequence classification problem where a RNN is trained to classify  the majority group in a sequence $\x = \{ \x_t \}_{t=1}^{T}$. Consider  the MNIST dataset, the input $\x$ is constructed as follows: for each original MNIST sample $\widetilde{\x} \in \mathbb{R}^{28 \times 28}$, we randomly select two additional samples: one from the same class of $\widetilde{\x}$ and the other one from a different class. Then, these three samples are concatenated in a random order yielding a sample $\x \in \mathbb{R}^{28 \times 84}$.  \addfigure{\ref{fig:artificial_problem_3digits}} illustrates the data construction and the classification objective. Given $\x = \{ 8, 7, 8\}$, the classification target is ``8".  We call this problem MNIST-MAJ when $\x$ is constructed from MNIST samples and the same for FashionMNIST-MAJ. With this construction, we can perform quantitative evaluations by measuring relevance scores allocated to $28\times28$ blocks belonging to the majority group.
+To alleviate this challenge, we propose another artificial sequence classification problem where a RNN is trained to classify  the majority group of digits or items in a sequence $\x = \{ \x_t \}_{t=1}^{T}$. Consider  the MNIST dataset, the input $\x$ is constructed as follows: for each original MNIST sample $\widetilde{\x} \in \mathbb{R}^{28 \times 28}$, we randomly select two additional samples: one from the same class of $\widetilde{\x}$ and the other one from a different class. Then, these three samples are concatenated in a random order yielding a sample $\x \in \mathbb{R}^{28 \times 84}$.  \addfigure{\ref{fig:artificial_problem_3digits}} illustrates the data construction and the classification objective. Given $\x = \{ 8, 7, 8\}$, the classification target is ``8".  We call this problem MNIST-MAJ when $\x$ is constructed from MNIST samples and the same for FashionMNIST-MAJ. With this construction, we can perform quantitative evaluations by measuring relevance scores allocated to $28\times28$ blocks belonging to the majority group.
 %
 %Because we already know blocks of digit/item that belong to the majority group from the construction,  we can then use this information to  quantitively evaluate  explanation quality  of each RNN.
 
@@ -303,17 +302,18 @@ Lastly, despite the fact that  our implementation is ready to apply on different
 
 \subsection{Evaluation Methodology}
 \label{sec:evaluation_med}
-By the problem construction, we know that relevance quantities should  be primarily assigned to $28\times28$ blocks associating to the majority group. This construction directly enables us to visually examine the quality of explanations as well as performing quantitative evaluations.  In particular, for qualitative evaluations (i.e. visual inspections), we constructed the training and testing sets based on the original training and testing splits that the authors of MNIST \citep{LeCunMNISThandwrittendigit2010} and FashionMNIST \citep{XiaoFashionMNISTNovelImage2017} provided.
+By the problem construction, we know that relevance quantities should  be primarily assigned to $28\times28$ blocks associating to the majority group. This construction directly enables us to visually examine the quality of explanations as well as performing quantitative evaluations.  
+
+For qualitative evaluations (i.e. visual inspections), we construct the training and testing sets based on the original training and testing splits that the authors of MNIST \citep{LeCunMNISThandwrittendigit2010} and FashionMNIST \citep{XiaoFashionMNISTNovelImage2017} provided.
 
 \subsubsection{Quantitative Evaluation}
-A straightforward way to quantify the explanation quality is to calculate the percentage of relevance scores propagated to the blocks of the majority group. However, this measurement has a shortcoming where an architecture can achieve a high percentage if it simply distributes all relevance scores to only one of the correct blocks. Hence, we instead propose to use the \textit{cosine similarity},
+A straightforward way to quantify the explanation quality is to calculate the percentage of relevance scores propagated to the blocks of the majority group. However, this measurement has a shortcoming where a RNN architecture can achieve a high percentage if it simply distributes all relevance scores to only one of the correct blocks. Hence, we instead propose to use the \textit{cosine similarity}:
 
 
 \begin{align*}
-\cos (\patvector{m}, \patvector{\upsilon}) = \frac{ \patvector{m}^T \patvector{\upsilon}}{ \| \patvector{m}  \| \|\patvector{\upsilon}   \|}	
+\cos (\patvector{m}, \patvector{\upsilon}) = \frac{ \patvector{m}^T \patvector{\upsilon}}{ \| \patvector{m}  \| \|\patvector{\upsilon}   \|},	
 \end{align*}
-
-The cosine similarity is computed from  a  binary  vector $\patvector{m} \in \{(1,1,0), (1,0,1), (0, 1, 1) \} $  whose entries indicate whether the corresponding $28\times28$ block belongs to the majority group, and a vector $\patvector{\upsilon} \in \mathbb{R}^3$ containing the percentage of  relevance scores distributed to each block. 
+where $\patvector{m} \in \{(1,1,0), (1,0,1), (0, 1, 1) \} $ is a binary vector whose entries indicate whether the corresponding $28\times28$ block belongs to the majority group, and $\patvector{\upsilon} \in \mathbb{R}^3$ is a vector containing the percentage of  relevance scores distributed to each block. 
 
 
 As illustrated in \addfigure{\ref{fig:quantitative_evaluation}}, the percentage of correctly distributed relevance scores can be significantly high although the relevance heatmap does not show any highlight at the leftmost block of ``0". Therefore, using cosine similarity is more reasonable. In fact, the propagation needs to be equally balanced between the two blocks in order to achieve the highest score ``1". 
@@ -375,27 +375,27 @@ We conduct quantitative evaluations using a $k$-fold cross-validation process. T
 
 Table \ref{tab:maj_rnn_model_acc} shows the numbers of trainable variables and accuracies of the trained models for qualitative inspections. These trained models have an equivalent number of variables and accuracy, except the ConvDeep architecture that has a slightly higher accuracy. 
 
-\addfigure{\ref{fig:heatmap_msc_mix_for_thesis}} shows that deeper architectures provide higher quality explanations, in other words, their predictions are more explainable. In particular, we can see that the portion of relevant scores distributed to irrelevant region is gradually reduced from the Shallow to ConvDeep architectures. This improvement can be observed on all the explanation methods. This result further supports the evidence discussed in Section \ref{sec:exp1}.  
+\addfigure{\ref{fig:heatmap_msc_mix_for_thesis}} shows that deeper architectures provide higher quality explanations, in other words, their predictions are more explainable. In particular, we can see that the portion of relevant scores distributed to irrelevant region is gradually reduced from the Shallow to ConvDeep architectures. This improvement can be observed from all the explanation methods. This result further supports the evidence discussed in Section \ref{sec:exp1}.  
 
-Although the explanation heatmaps from the \rnncell{Shallow}, \rnncell{Deep}, and \rnncell{DeepV2} architectures look noisy, increasing the depth of the architecture seems to reduce the noise in the heatmaps.   On the other hand, the \rnncell{ConvDeep} architecture adequately manages to propagate relevance quantities to the proper $\x_t$. The architecture produces visually sound heatmaps that well present features of $\x$ that are hardly observed in the explanations from the other architectures.  The GB, DTD, and $\lrpp$ heatmaps of Digit 1 and Sandal samples are such examples.
+Although the explanation heatmaps from the \rnncell{Shallow}, \rnncell{Deep}, and \rnncell{DeepV2} architectures look noisy in general, increasing the depth of the architecture seems to reduce the noise in the heatmaps.   On the other hand, the \rnncell{ConvDeep} architecture adequately manages to propagate relevance quantities to the proper $\x_t$. The architecture produces visually sound heatmaps well presenting features of $\x$ that are hardly observed in the explanations from the other architectures.  The GB, DTD, and $\lrpp$ heatmaps of Digit 1 and Sandal samples are such examples.
 
  \begin{figure}[!hbt]
 \centering
 \includegraphics[width=\textwidth]{sketch/rel_dist_maj_3_samples_thesis}
 
-\patcaption{Cosine similarity measurement from different explanation techniques applied to the Shallow, Deep, DeepV2, and ConvDeep architectures \trainon.}{The baseline is the Shallow architecture presented in blue. \quantitativeplotexplain}
+\patcaption{Cosine similarity measurements from different explanation techniques applied to the Shallow, Deep, DeepV2, and ConvDeep architectures \trainon.}{The baseline is the Shallow architecture presented in blue. \quantitativeplotexplain}
 
 
 \label{fig:rel_dist_maj_3_samples_thesis}
 \end{figure}
 
-\addfigure{\ref{fig:rel_dist_maj_3_samples_thesis}} presents quantitative evaluations of the impact from the depth of the architecture on the quality of the explanation. As a reminder, the measurement is the cosine similarity between the binary vector $\boldsymbol{m} \in \mathbb{R}^3$ and the vector of aggregated relevance scores of $28\times28$ blocks $\boldsymbol{\upsilon} \in \mathbb{R}^3$. The cosine similarity is averaged from test sets of the $7$-fold cross-validation procedure described in Section \ref{sec:evaluation_med}. The results from \addfigure{\ref{fig:rel_dist_maj_3_samples_thesis}} indicate that increasing the architecture depth indeed improves the quality of explanations. In particular, the averaged cosine similarity of each explanation technique systematically increases when introducing  more layers. This effect can be seen clearly from the results of FashionMNIST-MAJ. Additionally, we can also observe that the difference of the similarity between the baseline architecture, \rnncell{Shallow}, and the other  architectures changes with different proposition across the methods. More precisely, we see that the proportional improvement of  DTD and $\lrpp$ are much more substantial than the other methods. This implies that some explanation methods are more sensitive to RNN architectures than the others.
+\addfigure{\ref{fig:rel_dist_maj_3_samples_thesis}} presents quantitative evaluations of the impact from the depth of the architecture on the quality of explanations. As a reminder, the measurement is the cosine similarity between the binary vector $\boldsymbol{m} \in \mathbb{R}^3$ and the vector $\boldsymbol{\upsilon} \in \mathbb{R}^3$ of aggregated relevance scores of $28\times28$ blocks. The cosine similarity is averaged from test sets of the $7$-fold cross-validation procedure described in Section \ref{sec:evaluation_med}. The results from \addfigure{\ref{fig:rel_dist_maj_3_samples_thesis}} indicate that increasing the architecture depth indeed improves the quality of explanations. In particular, the averaged cosine similarity of each explanation technique systematically increases when introducing  more layers. This effect can be seen clearly from the results of FashionMNIST-MAJ. Additionally, we can also observe that the difference of the similarity between the baseline architecture, \rnncell{Shallow}, and the other  architectures changes with different proposition across the methods. More precisely, we see that the proportional improvement of  the DTD and $\lrpp$ methods are much more substantial than the other methods. This implies that some explanation methods are more sensitive to the RNN architecture than the others.
 
 
 % todo hypo : pair wise statistical testing
 
 \subsection{Summary}
-The results of this experiment quantitively confirm that the architecture of RNNs is indeed an essential factor to the explainability of RNN models, especially in the aspect of propagating relevance quantities to the corresponding input steps.  The results also reveal that the impact affects the quality of explanation in a different level on different  methods. More precisely, DTD and LRP techniques are more sensitive to the architecture of the explained models than SA and GB methods.
+The results of this experiment quantitively confirm that the architecture of RNNs is indeed an essential factor influencing the explainability of RNN models, especially in the aspect of propagating relevance quantities to the corresponding input steps.  The results also reveal that the impact affects the quality of explanations in a different level on different  methods. More precisely, DTD and LRP techniques are more sensitive to the architecture of the explained models than SA and GB methods.
 
 Nonetheless, we  still observe that there are some samples whose a significant number of relevance scores are distributed to irrelevant regions even using the ConvDeep architecture. The DTD and $\lrpp$ explanations of Digit ``9" in \addfigure{\ref{fig:heatmap_msc_mix_for_thesis}} are such examples. For those heatmaps, relevance scores should not be allocated to the block of ``5".   Therefore,  we are going to propose several improvements in the following experiment to mitigate the issue.
 
