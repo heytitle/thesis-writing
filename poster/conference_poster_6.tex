@@ -49,18 +49,22 @@
 % The second is 25% wide and houses a logo for your university/organization or a photo of you
 % The widths of these boxes can be easily edited to accommodate your content as you see fit
 
-\begin{minipage}[b]{0.75\linewidth}
-\veryHuge \textbf{Designing RNN for Explainability} \\ % Title
-\large \textit{This work is part of master thesis.}\\[2cm] % Subtitle
-\huge \textbf{Pattarawat Chormai} \\ [0.5cm]
-\huge \textbf{Supervised by Dr. Gr\'{e}goire Montavon, Prof. Klaus-Robert M\"{u}ller} \\[0.5cm] % Author(s)
-\huge Technical University Berlin, Department of Machine Learning \\[0.4cm] % University/organization
-\Large \texttt{p.chormai@campus.tu-berlin.de} \\
-\end{minipage}
-%
-\begin{minipage}[b]{0.25\linewidth}
-\includegraphics[width=10cm]{tub-logo}\\
-\end{minipage}
+
+
+	\begin{minipage}[b]{0.75\linewidth}
+	
+	\veryHuge \textbf{Designing RNN for Explainability} \\ % Title
+	\large \textit{This work is a part of master's thesis.}\\[2cm] % Subtitle
+	\huge \textbf{Pattarawat Chormai} \\ [0.5cm]
+	\huge \textbf{Supervised by Dr. Gr\'{e}goire Montavon, Prof. Klaus-Robert M\"{u}ller} \\[0.5cm] % Author(s)
+	\huge Technical University Berlin, Department of Machine Learning \\[0.4cm] % University/organization
+	\Large \texttt{p.chormai@campus.tu-berlin.de} \\
+	\end{minipage}
+	%
+	\begin{minipage}[b]{0.25\linewidth}
+	\includegraphics[width=10cm]{tub-logo}\\
+	\end{minipage}
+
 
 \vspace{1cm} % A bit of extra whitespace between the header and poster content
 
@@ -99,10 +103,10 @@ Aliquam non lacus dolor, \textit{a aliquam quam} \cite{Smith:2012qr}. Cum sociis
 %	OBJECTIVES
 %----------------------------------------------------------------------------------------
 
-\section*{Setting}
+\section*{Experimental Setup}
 Dataset, problem training ... procedures ... 
 \begin{center}\vspace{0.5cm}
-\includegraphics[width=0.6\linewidth]{artificial_problem_with_rel_poster}
+\includegraphics[width=0.8\linewidth]{artificial_problem_with_rel_poster}
 \captionof{figure}{\color{Green} Figure caption}
 \end{center}\vspace{0.5cm}
 
@@ -110,6 +114,7 @@ Dataset, problem training ... procedures ...
 %	MATERIALS AND METHODS
 %----------------------------------------------------------------------------------------
 
+\subsection*{Evaluation methodology}
 Our quantitative evaluation is based on \textit{cosine similarity} between a binary vector $\boldsymbol{m} \in \mathbb{R}^3$, whose entry indicates whether the item belongs to the majority group, and a vector $\boldsymbol{v} \in \mathbb{R}^3$ representing percentage of relevance distributed to the corresponding  item.
 
 $$
@@ -125,12 +130,14 @@ $$
 %------------------------------------------------
 
 \subsection*{Architectures}
-Figure X shows RNN architectures considered in this study.
+Figure X shows RNN architectures considered in this study. Standard RNN
 
 \begin{center}\vspace{0.5cm}
 \includegraphics[width=0.7\linewidth]{architecture_with_number_neurons}
 \captionof{figure}{\color{Green} Figure caption}
 \end{center}\vspace{0.5cm}
+
+LSTM ...
 
 %----------------------------------------------------------------------------------------
 %	RESULTS 
